@@ -1,14 +1,16 @@
-*{
-  background-color: rgb(14, 14, 120);
+.App {
+  height: 100vh; /* Az oldal kitöltése a teljes ablakmagasságban */
+  background: #02172c; /* Alapszín (sötétkék) */
+  background: linear-gradient(to bottom, #01162c, #0074d9); /* Átmenet modern böngészőkhöz */
+  color: white; /* A szöveg jól látható legyen */
 }
-
 
 .App-header {
   min-height: 10vh;
   display: flex;
-  flex-direction: column;
-  padding:20px;
-  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: lightblue;
   font-family: 'Times New Roman', Times, serif;
@@ -17,4 +19,9 @@
 .App-header h1{
   text-align: left;
   font-size: 50px ;
+}
+
+.App-header img {
+  width: 40px;
+  height: auto;
 }
