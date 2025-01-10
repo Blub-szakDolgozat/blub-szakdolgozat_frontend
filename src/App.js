@@ -5,6 +5,7 @@ import Admin from './pages/Admin/Admin';
 import Public from './pages/Public';
 import Layout from './pages/Layout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ViziLenyekUrlap from './components/admin/ViziLenyekUrlap';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           alt="ikon"
         />
           </div>
-
+          
+    <ViziLenyekUrlap/>
       </header>
         <BrowserRouter>
               <Routes>

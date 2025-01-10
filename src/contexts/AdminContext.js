@@ -19,26 +19,23 @@ export const FileProvider = ({ children }) => {
 
   const postAdat = async ({ ...adat }, vegpont) => {
     try {
-      await myAxios
-        .post(vegpont, adat, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((resp) => {
-          console.log(resp);
-          setKepekLista(resp.data);
-        });
+      const response = await myAxios.post(vegpont, adat, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+      setKepekLista(response.data);
     } catch (error) {
       console.log(error);
-      if (error.response.status === 422) {
+      if (error.response && error.response.status === 422) {
         setErrors(error.response.data.errors);
       }
     }
   };
 
   useEffect(() => {
-    getLista("/file-upload", setKepekLista);
+    getLista("/vizilenyek", setKepekLista);
   }, []);
 
   return (
