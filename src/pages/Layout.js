@@ -1,36 +1,30 @@
-import { Nav } from "react-bootstrap";
-import '../App.css';
+import React from 'react';
+import { Nav } from 'react-bootstrap'; 
+import { Link, Outlet } from 'react-router-dom';  
 
 const Layout = () => {
-    return (
-        <>
-            <Nav>
-                <Nav.Item> {/* Középre igazítás támogatása */}
-                    <Nav.Link
-                        href="/admin"
-                        className="nav-link-black"
-                        style={{
-                            color: "white",
-                        }}
-                    >
-                        Admin
-                    </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link
-                        href="/"
-                        className="nav-link-black"
-                        style={{
-                            color: "white",
-                        }}
-                    >
-                        Public
-                    </Nav.Link>
-                </Nav.Item>
-            </Nav>
+  return (
+    <div>
+      {}
+      <Nav className="navbar">
+        <Nav.Item>
+          <Link to="/" className="nav-link-black">
+            Public
+          </Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Link to="/admin" className="nav-link-black">
+            Admin
+          </Link>
+        </Nav.Item>
+      </Nav>
 
-        </>
-    );
+      {}
+      <div className="content">
+        <Outlet />  {}
+      </div>
+    </div>
+  );
 };
 
 export default Layout;
