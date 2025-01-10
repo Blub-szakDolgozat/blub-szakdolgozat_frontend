@@ -1,5 +1,11 @@
 import React from 'react';
 import './App.css';
+import NoPage from './pages/NoPage';
+import Admin from './pages/Admin/Admin';
+import Public from './pages/Public';
+import Layout from './pages/Layout';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -15,6 +21,15 @@ function App() {
           </div>
 
       </header>
+        <BrowserRouter>
+              <Routes>
+                  <Route path="/" element={<Layout />}>
+                      <Route index element={<Public />} />
+                      <Route path="admin" element={<Admin />} />
+                      <Route path="*" element={<NoPage />} />
+                  </Route>
+              </Routes>
+          </BrowserRouter>
     </div>
 
   );
