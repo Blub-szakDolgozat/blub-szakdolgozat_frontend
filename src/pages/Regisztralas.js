@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-
 export default function Regisztralas() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,11 +15,11 @@ export default function Regisztralas() {
       return;
     }
     console.log("Regisztrációs adatok:", { email, password });
-    navigate("/bejelentkezes"); 
+    navigate("/bejelentkezes");
   }
 
   const handleClick = () => {
-    navigate("/bejelentkezes"); 
+    navigate("/bejelentkezes");
   };
 
   return (

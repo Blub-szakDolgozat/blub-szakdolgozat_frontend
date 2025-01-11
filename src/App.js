@@ -19,7 +19,7 @@ function App() {
         <Routes>
           {/* Layout és Public komponensek */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Public />} />
+          <Route path="/*" element={<Public />} />
             <Route path="admin" element={<Admin />} />
             <Route path="*" element={<NoPage />} />
           </Route>

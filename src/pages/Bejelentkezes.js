@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-export default function Bejelentkezes() {
+export default function Bejelentkezes({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log("Bejelentkezési adatok:", { email, password });
-    navigate("/dashboard"); // Példa, hogy bejelentkezés után átirányítjuk a dashboard oldalra
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Bejelentkezés sikeres:", { email, password });
+    onLogin(); // Bejelentkezés után állapot frissítése
+  };
 
-  const handleGoToRegister = () => {
-    navigate("/regisztralas"); // Regisztrációs oldalra navigálás
+  const handleClick = () => {
+    navigate("/regisztralas");
   };
 
   return (
@@ -50,8 +50,8 @@ export default function Bejelentkezes() {
           <div className="text-center mt-3">
             <p>
               Nincs még fiókod?{" "}
-              <button onClick={handleGoToRegister} className="btn btn-link">
-                Új fiók létrehozása
+              <button onClick={handleClick} className="btn btn-link">
+                Regisztráció
               </button>
             </p>
           </div>
