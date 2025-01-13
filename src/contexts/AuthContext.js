@@ -1,44 +1,71 @@
 import { createContext, useState } from "react";
-import { myAxios } from "../api/MyAxios";
+import axios from "axios";
 import { useNavigate } from "react-router";
 
-export const AuthContext=createContext("");
+export const AuthContext = createContext("");
+
 export const AuthProvider = ({ children }) => {
-  
-    const [user, setUser] = useState("");
-    const navigacio =useNavigate();
-    const csrf = () => myAxios.get("/sanctum/csrf-cookie")
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
 
-    const regisztacio = async({...adat})=>{
-      await csrf();
-      try{
-        await myAxios.post("/regisztracio", adat)
-        getUser();
-        navigacio("/bejelentkezes") //Bejelentkezéshez vezet
-      }catch(error){
-        console.log(error)
-      }
+  // CSRF cookie megszerzése
+  const csrf = async () => {
+    await axios.get("/sanctum/csrf-cookie"); // Lekéri a CSRF cookie-t
+  };
+
+  // Regisztráció
+  const regisztacio = async ({ ...adat }) => {
+    await csrf(); // CSRF token beállítása
+    try {
+      await axios.post("/api/register", adat); 
+      getUser();
+      navigate("/bejelentkezes"); // Bejelentkezéshez vezet
+    } catch (error) {
+      console.log("Regisztrációs hiba:", error.response ? error.response.data : error.message);
     }
+  };
 
-    const logout =  async({...adat})=>{
-        await csrf();
-        try{
-          await myAxios.post("/logout", adat)
-          navigacio("/bejelentkezes") //Bejelentkezéshez vezet
-        }catch(error){
-          console.log(error)
-        }
-      }
-  
-    const getUser = async () => {
-      const { data } = await myAxios.get("/user");
-      console.log(data);
+  // Bejelentkezés
+  const login = async ({ email, password }) => {
+    await csrf(); // CSRF token beállítása
+    try {
+      // Bejelentkezési kérés küldése
+      const { data } = await axios.post("/api/login", { email, password });
+      // Ha sikeres, beállítjuk a felhasználói adatokat és a tokent
+      setUser(data.user);
+      localStorage.setItem("access_token", data.access_token); // Mentse el a token-t (pl. localStorage-ba)
+      navigate("/dashboard"); // Átirányítás a főoldalra vagy más oldalra
+    } catch (error) {
+      console.log("Bejelentkezési hiba:", error.response ? error.response.data : error.message);
+    }
+  };
+
+  // Felhasználó adatainak lekérése
+  const getUser = async () => {
+    try {
+      const { data } = await axios.get("/user");
       setUser(data);
+    } catch (error) {
+      console.log("Felhasználó lekérdezési hiba:", error.response ? error.response.data : error.message);
     }
+  };
 
-    return (
-        <AuthContext.Provider value={{ regisztacio, user, logout}}>
-          {children}
-        </AuthContext.Provider>
-      );
-}
+  // Kijelentkezés
+  const logout = async () => {
+    await csrf(); // CSRF token beállítása
+    try {
+      await axios.post("/logout");
+      setUser(""); // Töröljük a felhasználó adatokat
+      localStorage.removeItem("access_token"); // Töröljük a tárolt tokent
+      navigate("/bejelentkezes"); // Bejelentkezéshez vezet
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ regisztacio, login, user, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

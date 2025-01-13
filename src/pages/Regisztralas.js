@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function Regisztralas() {
+  const [name, setName] = useState(""); // Az új name állapot
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -14,7 +15,12 @@ export default function Regisztralas() {
       alert("A jelszavak nem egyeznek!");
       return;
     }
-    console.log("Regisztrációs adatok:", { email, password });
+    const adat = {
+      name, 
+      email,
+      password
+    };
+    console.log("Regisztrációs adatok:", adat);
     navigate("/bejelentkezes");
   }
 
@@ -28,6 +34,16 @@ export default function Regisztralas() {
         <Col md={6}>
           <h2 className="text-center">Regisztráció</h2>
           <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Teljes Név</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Add meg a teljes neved"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
