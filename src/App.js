@@ -15,7 +15,6 @@ function App() {
           <img src="/kepek/Fiokikon.png" alt="ikon" />
         </div>
       </header>
-      <BrowserRouter>
         <Routes>
           {/* Layout és Public komponensek */}
           <Route path="/" element={<Layout />}>
@@ -24,7 +23,6 @@ function App() {
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

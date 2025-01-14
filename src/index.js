@@ -5,13 +5,21 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { FileProvider } from './contexts/AdminContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { BrowserRouter } from 'react-router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+        <BrowserRouter>
+       
+    <AuthProvider>
     <FileProvider>
     <App />
     </FileProvider>
+    </AuthProvider>
+    </BrowserRouter>
+  
   </React.StrictMode>
 );
 

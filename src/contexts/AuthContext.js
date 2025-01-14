@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
-import axios from "axios";
+
 import { useNavigate } from "react-router";
+import { myAxios } from "./MyAxios";
 
 export const AuthContext = createContext("");
 
@@ -10,14 +11,14 @@ export const AuthProvider = ({ children }) => {
 
   // CSRF cookie megszerzése
   const csrf = async () => {
-    await axios.get("/sanctum/csrf-cookie"); // Lekéri a CSRF cookie-t
+    await myAxios.get("/sanctum/csrf-cookie"); // Lekéri a CSRF cookie-t
   };
 
   // Regisztráció
-  const regisztacio = async ({ ...adat }) => {
+  const regisztracio = async ({ ...adat }) => {
     await csrf(); // CSRF token beállítása
     try {
-      await axios.post("/api/register", adat); 
+      await myAxios.post("/register", adat); 
       getUser();
       navigate("/bejelentkezes"); // Bejelentkezéshez vezet
     } catch (error) {
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     await csrf(); // CSRF token beállítása
     try {
       // Bejelentkezési kérés küldése
-      const { data } = await axios.post("/api/login", { email, password });
+      const { data } = await myAxios.post("/login", { email, password });
       // Ha sikeres, beállítjuk a felhasználói adatokat és a tokent
       setUser(data.user);
       localStorage.setItem("access_token", data.access_token); // Mentse el a token-t (pl. localStorage-ba)
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   // Felhasználó adatainak lekérése
   const getUser = async () => {
     try {
-      const { data } = await axios.get("/user");
+      const { data } = await myAxios.get("/user");
       setUser(data);
     } catch (error) {
       console.log("Felhasználó lekérdezési hiba:", error.response ? error.response.data : error.message);
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await csrf(); // CSRF token beállítása
     try {
-      await axios.post("/logout");
+      await myAxios.post("/logout");
       setUser(""); // Töröljük a felhasználó adatokat
       localStorage.removeItem("access_token"); // Töröljük a tárolt tokent
       navigate("/bejelentkezes"); // Bejelentkezéshez vezet
@@ -64,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ regisztacio, login, user, logout }}>
+    <AuthContext.Provider value={{ regisztracio, login, user, logout }}>
       {children}
     </AuthContext.Provider>
   );

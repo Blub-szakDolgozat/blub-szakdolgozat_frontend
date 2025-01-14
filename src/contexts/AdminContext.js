@@ -35,7 +35,7 @@ export const FileProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getLista("/vizilenyek", setKepekLista);
+    getLista("/api/vizilenyek", setKepekLista);
   }, []);
 
   return (

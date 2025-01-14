@@ -1,29 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, {useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { AuthContext } from "../contexts/AuthContext";
 
 
 export default function Regisztralas() {
   const [felhasznalonev, setFelhasznalonev] = useState(""); 
   const [email, setEmail] = useState("");
-  const [regi_jelszo, setPassword] = useState("");
+  const [jelszo, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+  const {regisztracio} =useContext(AuthContext);
  
   
   function handleSubmit(event) {
     event.preventDefault();
-    if (regi_jelszo !== confirmPassword) {
+    if (jelszo !== confirmPassword) {
       alert("A jelszavak nem egyeznek!");
       return;
     }
     const adat = {
       felhasznalonev: felhasznalonev,
       email: email,
-      regi_jelszo:regi_jelszo,
+      jelszo:regi_jelszo,
       confirmPassword: confirmPassword
     };
     console.log("Regisztrációs adatok:", adat);
+    regisztracio(adat);
     navigate("/bejelentkezes");
   }
 
@@ -57,12 +60,12 @@ export default function Regisztralas() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="regi_jelszo">
+            <Form.Group className="mb-3" controlId="jelszo">
               <Form.Label>Jelszó</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Add meg a jelszavad"
-                value={regi_jelszo}
+                value={jelszo}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
