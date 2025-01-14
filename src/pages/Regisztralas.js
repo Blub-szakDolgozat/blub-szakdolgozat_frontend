@@ -22,7 +22,7 @@ export default function Regisztralas() {
     const adat = {
       felhasznalonev: felhasznalonev,
       email: email,
-      jelszo:regi_jelszo,
+      jelszo:jelszo,
       confirmPassword: confirmPassword
     };
     console.log("Regisztrációs adatok:", adat);
