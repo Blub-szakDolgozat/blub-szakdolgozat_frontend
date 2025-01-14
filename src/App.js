@@ -4,16 +4,24 @@ import NoPage from './pages/NoPage';
 import Admin from './pages/Admin/Admin';
 import Public from './pages/Public';
 import Layout from './pages/Layout';
-import {Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AkvariumPublic from './components/public/AkvariumPublic';
+import ProfileKep from './components/ProfilKep';
 
 function App() {
+
+  
+
+  const handleProfileClick = () => {
+    alert('Profilképre kattintottál!');
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Blub</h1>
         <div>
-          <img src="/kepek/Fiokikon.png" alt="ikon" />
+          <ProfileKep onClick={handleProfileClick} />
         </div>
       </header>
         <Routes>
