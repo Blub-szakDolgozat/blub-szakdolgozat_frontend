@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       // Ha sikeres, beállítjuk a felhasználói adatokat és a tokent
       setUser(data.user);
       localStorage.setItem("access_token", data.access_token); // Mentse el a token-t (pl. localStorage-ba)
-      navigate("/dashboard"); // Átirányítás a főoldalra vagy más oldalra
+      navigate("/akvarium"); // Átirányítás a főoldalra vagy más oldalra
     } catch (error) {
       console.log("Bejelentkezési hiba:", error.response ? error.response.data : error.message);
     }

@@ -20,7 +20,6 @@ export default function Bejelentkezes({ onLogin }) {
     };
     console.log("Bejelentkezés sikeres:", adat);
     login(adat);
-    navigate("/akvarium");
   }
 
   const handleClick = () => {
