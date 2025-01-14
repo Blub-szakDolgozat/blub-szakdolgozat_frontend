@@ -8,11 +8,6 @@ const Layout = () => {
       {}
       <Nav className="navbar">
         <Nav.Item>
-          <Link to="/*" className="nav-link-black">
-            Public
-          </Link>
-        </Nav.Item>
-        <Nav.Item>
           <Link to="/admin" className="nav-link-black">
             Admin
           </Link>
