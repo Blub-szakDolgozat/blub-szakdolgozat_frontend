@@ -5,9 +5,9 @@ import { AuthContext } from "../contexts/AuthContext";
 
 
 export default function Regisztralas() {
-  const [felhasznalonev, setFelhasznalonev] = useState(""); 
+  const [name, setFelhasznalonev] = useState(""); 
   const [email, setEmail] = useState("");
-  const [jelszo, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const {regisztracio} =useContext(AuthContext);
@@ -15,14 +15,14 @@ export default function Regisztralas() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    if (jelszo !== confirmPassword) {
+    if (password !== confirmPassword) {
       alert("A jelszavak nem egyeznek!");
       return;
     }
     const adat = {
-      felhasznalonev: felhasznalonev,
+      name: name,
       email: email,
-      jelszo:jelszo,
+      password:password,
       confirmPassword: confirmPassword
     };
     console.log("Regisztrációs adatok:", adat);
@@ -45,7 +45,7 @@ export default function Regisztralas() {
               <Form.Control
                 type="text"
                 placeholder="Add meg a teljes neved"
-                value={felhasznalonev}
+                value={name}
                 onChange={(e) => setFelhasznalonev(e.target.value)}
                 required
               />
@@ -60,12 +60,12 @@ export default function Regisztralas() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="jelszo">
+            <Form.Group className="mb-3" controlId="password">
               <Form.Label>Jelszó</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Add meg a jelszavad"
-                value={jelszo}
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
