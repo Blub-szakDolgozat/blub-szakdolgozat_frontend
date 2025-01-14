@@ -1,7 +1,7 @@
 import { myAxios } from "./MyAxios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const FileContext = createContext();
+const AdminContext = createContext();
 export const FileProvider = ({ children }) => {
   const [kepekLista, setKepekLista] = useState([]);
   const [errors, setErrors] = useState({});
@@ -19,16 +19,18 @@ export const FileProvider = ({ children }) => {
 
   const postAdat = async ({ ...adat }, vegpont) => {
     try {
-      const response = await myAxios.post(vegpont, adat, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response.data);
-      setKepekLista(response.data);
+      await myAxios.post(vegpont, adat, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((resp) => {
+          console.log(resp);
+          setKepekLista(resp.data);
+        });
     } catch (error) {
       console.log(error);
-      if (error.response && error.response.status === 422) {
+      if (error.response.status === 422) {
         setErrors(error.response.data.errors);
       }
     }
@@ -39,12 +41,12 @@ export const FileProvider = ({ children }) => {
   }, []);
 
   return (
-    <FileContext.Provider value={{ kepekLista, postAdat, errors }}>
+    <AdminContext.Provider value={{ kepekLista, postAdat, errors }}>
       {children}
-    </FileContext.Provider>
+    </AdminContext.Provider>
   );
 };
 
-export default function useFileContext() {
-  return useContext(FileContext);
+export default function useAdminContext() {
+  return useContext(AdminContext);
 }

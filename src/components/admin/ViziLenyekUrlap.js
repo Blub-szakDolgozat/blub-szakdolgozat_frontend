@@ -21,7 +21,7 @@ export default function ViziLenyekUrlap() {
     };
     console.log(adat);
 
-    postAdat(adat, "/vizilenyekadd");
+    postAdat(adat, "/api/vizilenyek-add");
   }
 
   return (
