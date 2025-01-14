@@ -1,9 +1,10 @@
 import React from 'react'
+import ViziLenyekUrlap from '../../components/admin/ViziLenyekUrlap'
 
 export default function Admin() {
   return (
     <div>
-
+      <ViziLenyekUrlap />
     </div>
   )
 }
