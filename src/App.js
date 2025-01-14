@@ -7,9 +7,12 @@ import Layout from './pages/Layout';
 import { Routes, Route } from 'react-router-dom';
 import AkvariumPublic from './components/public/AkvariumPublic';
 import ProfileKep from './components/ProfilKep';
+import NapiSorsolas from './components/public/NapiSorsolas';
+
+
 
 function App() {
-
+  
   
 
   const handleProfileClick = () => {
@@ -31,6 +34,7 @@ function App() {
             <Route path="admin" element={<Admin />} />
             <Route path="*" element={<NoPage />} />
             <Route path="/akvarium" element={<AkvariumPublic />} />
+            <Route path="/sorsolas" element={<NapiSorsolas />} />
           </Route>
         </Routes>
     </div>

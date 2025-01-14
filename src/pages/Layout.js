@@ -65,6 +65,9 @@ const Layout = () => {
         <Link to="/akvarium" className="nav-link">
           Akvárium
         </Link>
+        <Link to="/sorsolas" className="nav-link">
+          Napi Sorsolás
+        </Link>
       </nav>
       
 
