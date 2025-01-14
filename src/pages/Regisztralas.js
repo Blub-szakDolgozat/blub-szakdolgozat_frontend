@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
+
 export default function Regisztralas() {
-  const [felhasznalonev, setFelhasznalonev] = useState(""); // Az új name állapot
+  const [felhasznalonev, setFelhasznalonev] = useState(""); 
   const [email, setEmail] = useState("");
   const [regi_jelszo, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-
+ 
   
   function handleSubmit(event) {
     event.preventDefault();
@@ -17,9 +18,10 @@ export default function Regisztralas() {
       return;
     }
     const adat = {
-      felhasznalonev, 
-      email,
-      regi_jelszo
+      felhasznalonev: felhasznalonev,
+      email: email,
+      regi_jelszo:regi_jelszo,
+      confirmPassword: confirmPassword
     };
     console.log("Regisztrációs adatok:", adat);
     navigate("/bejelentkezes");
