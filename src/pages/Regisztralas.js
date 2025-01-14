@@ -15,15 +15,15 @@ export default function Regisztralas() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== password_confirmation) {
       alert("A jelszavak nem egyeznek!");
       return;
     }
     const adat = {
       name: name,
-      email: email,
-      password:password,
-      confirmPassword: confirmPassword
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
     };
     console.log("Regisztrációs adatok:", adat);
     regisztracio(adat);
@@ -70,7 +70,7 @@ export default function Regisztralas() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="confirmPassword">
+            <Form.Group className="mb-3" controlId="password_confirmation">
               <Form.Label>Jelszó megerősítése</Form.Label>
               <Form.Control
                 type="password"
