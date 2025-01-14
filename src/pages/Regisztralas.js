@@ -20,10 +20,10 @@ export default function Regisztralas() {
       return;
     }
     const adat = {
-      felhasznalonev: felhasznalonev,
-      email: email,
-      jelszo:jelszo,
-      confirmPassword: confirmPassword
+        felhasznalonev: felhasznalonev,
+        email: email,
+        jelszo: jelszo,
+        password_confirmation: confirmPassword,
     };
     console.log("Regisztrációs adatok:", adat);
     regisztracio(adat);
