@@ -8,7 +8,7 @@ export default function Regisztralas() {
   const [name, setFelhasznalonev] = useState(""); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password_confirmation, setConfirmPassword] = useState("");
   const navigate = useNavigate();
   const {regisztracio} =useContext(AuthContext);
  
@@ -75,7 +75,7 @@ export default function Regisztralas() {
               <Form.Control
                 type="password"
                 placeholder="Add meg újra a jelszavad"
-                value={confirmPassword}
+                value={password_confirmation}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
