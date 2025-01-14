@@ -8,7 +8,7 @@ const ProfileKep = () => {
   // Kattintás kezelése
   const handleProfileClick = () => {
     if (Login) {
-      navigate('/akvarium'); // Ha be van jelentkezve, navigálunk
+      navigate('/profil'); // Ha be van jelentkezve, navigálunk
     } else {
       alert('Kérlek jelentkezz be!'); // Ha nincs bejelentkezve, figyelmeztetés
     }

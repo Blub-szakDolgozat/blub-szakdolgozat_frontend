@@ -7,6 +7,7 @@ import Layout from './pages/Layout';
 import { Routes, Route } from 'react-router-dom';
 import AkvariumPublic from './components/public/AkvariumPublic';
 import ProfileKep from './components/ProfilKep';
+import Profil from './pages/Profil';
 
 function App() {
 
@@ -31,8 +32,10 @@ function App() {
             <Route path="admin" element={<Admin />} />
             <Route path="*" element={<NoPage />} />
             <Route path="/akvarium" element={<AkvariumPublic />} />
+            <Route path="/profil" element={<Profil />} />
           </Route>
         </Routes>
+        
     </div>
   );
 }
