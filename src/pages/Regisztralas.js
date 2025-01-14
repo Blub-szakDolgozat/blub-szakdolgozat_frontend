@@ -9,6 +9,7 @@ export default function Regisztralas() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
+  
   function handleSubmit(event) {
     event.preventDefault();
     if (regi_jelszo !== confirmPassword) {
