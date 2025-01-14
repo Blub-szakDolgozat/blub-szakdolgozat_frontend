@@ -1,0 +1,10 @@
+.nav-link-black {
+  padding: 5px 10px; /* Egy kis belső térköz a linkek körül */
+  color: rgb(248, 246, 246); /* Link színe */
+  text-decoration: none; /* Alapértelmezett nincs aláhúzva */
+  font-size: 24px; /* Betűméret */
+}
+
+.nav-link-black:hover {
+  text-decoration: underline; /* Aláhúzás hoverkor */
+}

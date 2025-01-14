@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Bejelentkezes({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const navigate = useNavigate();
   const {login} =useContext(AuthContext);
 

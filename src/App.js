@@ -4,7 +4,7 @@ import NoPage from './pages/NoPage';
 import Admin from './pages/Admin/Admin';
 import Public from './pages/Public';
 import Layout from './pages/Layout';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import AkvariumPublic from './components/public/AkvariumPublic';
 
 function App() {
