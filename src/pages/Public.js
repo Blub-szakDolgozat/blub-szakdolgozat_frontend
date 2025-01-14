@@ -15,20 +15,12 @@ export default function Public() {
 
   return (
     <div>
-      {isLoggedIn ? (
-        <div>
-          {/* Főoldal tartalom */}
-          <h1>Üdvözöllek a főoldalon!</h1>
-          <p>Ez a tartalom csak bejelentkezés után érhető el.</p>
-        </div>
-      ) : (
         <Routes>
           {/* Bejelentkezés és regisztráció */}
           <Route path="/bejelentkezes" element={<Bejelentkezes onLogin={handleLogin} />} />
           <Route path="/regisztralas" element={<Regisztralas />} />
           <Route path="*" element={<Bejelentkezes onLogin={handleLogin} />} />
         </Routes>
-      )}
     </div>
   );
 }
