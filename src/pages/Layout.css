@@ -1,10 +1,53 @@
-.nav-link-black {
-  padding: 5px 10px; /* Egy kis belső térköz a linkek körül */
-  color: rgb(248, 246, 246); /* Link színe */
-  text-decoration: none; /* Alapértelmezett nincs aláhúzva */
-  font-size: 24px; /* Betűméret */
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  margin-left: 30px;
 }
 
-.nav-link-black:hover {
-  text-decoration: underline; /* Aláhúzás hoverkor */
+.hamburger .line {
+  background-color: rgb(255, 255, 255);
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu {
+  transition: all 2s;
+  display: none; 
+  flex-direction: column;
+  gap: 10px;
+  top: 100px;
+  left: 25px; 
+  background-color: #f8f9fa;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+
+}
+
+/* Nyitott menü megjelenítése */
+.dropdown-menu.open {
+  display: flex;
+}
+
+/* Menüelemek stílusai */
+.nav-link {
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  background-color: #e9ecef;
+  border-radius: 4px;
 }
