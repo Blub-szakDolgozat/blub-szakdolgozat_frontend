@@ -5,7 +5,7 @@ import { myAxios } from "../contexts/MyAxios";
 
 export default function Bejelentkezes({ onLogin }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [regi_jelszo, setPassword] = useState("");
   const [error, setError] = useState(null); // Hibakezeléshez
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ export default function Bejelentkezes({ onLogin }) {
     e.preventDefault();
 
     try {
-      const { data } = await myAxios.post("/login", { email, password });
+      const { data } = await myAxios.post("/login", { email, regi_jelszo });
       console.log("Bejelentkezés sikeres:", data);
 
       localStorage.setItem("authToken", data.token); 
@@ -47,12 +47,12 @@ export default function Bejelentkezes({ onLogin }) {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
+            <Form.Group className="mb-3" controlId="regi_jelszo">
               <Form.Label>Jelszó</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Add meg a jelszavad"
-                value={password}
+                value={regi_jelszo}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />

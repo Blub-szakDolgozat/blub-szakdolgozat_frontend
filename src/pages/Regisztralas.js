@@ -3,22 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export default function Regisztralas() {
-  const [name, setName] = useState(""); // Az új name állapot
+  const [felhasznalonev, setFelhasznalonev] = useState(""); // Az új name állapot
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [regi_jelszo, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (password !== confirmPassword) {
+    if (regi_jelszo !== confirmPassword) {
       alert("A jelszavak nem egyeznek!");
       return;
     }
     const adat = {
-      name, 
+      felhasznalonev, 
       email,
-      password
+      regi_jelszo
     };
     console.log("Regisztrációs adatok:", adat);
     navigate("/bejelentkezes");
@@ -34,13 +34,13 @@ export default function Regisztralas() {
         <Col md={6}>
           <h2 className="text-center">Regisztráció</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="name">
+            <Form.Group className="mb-3" controlId="felhasznalonev">
               <Form.Label>Teljes Név</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Add meg a teljes neved"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={felhasznalonev}
+                onChange={(e) => setFelhasznalonev(e.target.value)}
                 required
               />
             </Form.Group>
@@ -54,12 +54,12 @@ export default function Regisztralas() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="password">
+            <Form.Group className="mb-3" controlId="regi_jelszo">
               <Form.Label>Jelszó</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Add meg a jelszavad"
-                value={password}
+                value={regi_jelszo}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
