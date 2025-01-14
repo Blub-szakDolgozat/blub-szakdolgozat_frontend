@@ -1,8 +1,9 @@
 .App {
-  height: 100vh; /* Az oldal kitöltése a teljes ablakmagasságban */
-  background: #02172c; /* Alapszín (sötétkék) */
-  background: linear-gradient(to bottom, #01162c, #0074d9); /* Átmenet modern böngészőkhöz */
-  color: white; /* A szöveg jól látható legyen */
+  height: 100vh;
+  color: white;
+  background: linear-gradient(to bottom, #87ceeb 0%, #1b5483 20%, #052d4d 60%, #8b4513 75%);
+  position: relative;
+  overflow: hidden;
 }
 
 .App-header {
@@ -14,10 +15,114 @@
   font-size: calc(10px + 2vmin);
   color: lightblue;
   font-family: 'Times New Roman', Times, serif;
+  z-index: 2; /* UI elemek a halak felett */
 }
 
-.App-header h1{
+.App-header h1 {
   text-align: left;
-  font-size: 50px ;
+  font-size: 50px;
 }
 
+.app {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Halak stílusa */
+.fish {
+  position: absolute;
+  z-index: 0; /* A halak a háttérben maradnak */
+  width: 100px;
+  height: 50px;
+  background: #FFA500;
+  border-radius: 50%;
+  top: 30%; /* A halak nem ússzanak túl közel a tetejéhez */
+  left: -100px;
+  transform: translateY(-50%);
+  animation: swim 8s infinite ease-in-out, bodyMove 1s infinite alternate;
+}
+
+.fish .head {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.fish .eye {
+  position: absolute;
+  top: 5px;
+  left: 12px;
+  width: 6px;
+  height: 6px;
+  background: black;
+  border-radius: 50%;
+}
+
+.fish .tail {
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  width: 40px;
+  height: 30px;
+  background: #FF6347;
+  clip-path: polygon(100% 50%, 0 0%, 100% 100%);
+  transform: rotate(30deg);
+}
+
+/* Másik hal stílusa */
+.fish2 {
+  background: red;
+  animation: swim 10s infinite ease-in-out reverse, bodyMove 1s infinite alternate;
+}
+
+.fish2 .tail {
+  background: #FF4500;
+}
+
+/* Halak mozgása (random irányú úszás) */
+@keyframes swim {
+  0% {
+    left: -100px;
+    top: 30%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  25% {
+    left: 20vw;
+    top: 25%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  50% {
+    left: 50vw;
+    top: 60%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  75% {
+    left: 80vw;
+    top: 40%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  100% {
+    left: 100vw;
+    top: 30%;
+    transform: translateY(-50%) rotate(90deg);
+  }
+}
+
+/* Test mozgása (finom rángatás) */
+@keyframes bodyMove {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
