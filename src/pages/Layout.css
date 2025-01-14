@@ -1,3 +1,11 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+}
 
 .hamburger {
   display: flex;
@@ -18,27 +26,21 @@
 }
 
 .dropdown-menu {
-  transition: all 2s;
   display: none; 
   flex-direction: column;
   gap: 10px;
   top: 100px;
   left: 25px; 
   background-color: #f8f9fa;
-  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  
-
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
 }
 
-/* Nyitott menü megjelenítése */
 .dropdown-menu.open {
   display: flex;
 }
 
-/* Menüelemek stílusai */
 .nav-link {
   color: black;
   text-decoration: none;
@@ -50,4 +52,30 @@
   text-decoration: underline;
   background-color: #e9ecef;
   border-radius: 4px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
 }
