@@ -8,14 +8,14 @@ export default function Regisztralas() {
   const [felhasznalonev, setFelhasznalonev] = useState(""); 
   const [email, setEmail] = useState("");
   const [jelszo, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password_confirmation, setPassword_confirmation] = useState("");
   const navigate = useNavigate();
   const {regisztracio} =useContext(AuthContext);
  
   
   function handleSubmit(event) {
     event.preventDefault();
-    if (jelszo !== confirmPassword) {
+    if (jelszo !== password_confirmation) {
       alert("A jelszavak nem egyeznek!");
       return;
     }
@@ -23,7 +23,7 @@ export default function Regisztralas() {
         felhasznalonev: felhasznalonev,
         email: email,
         jelszo: jelszo,
-        password_confirmation: confirmPassword,
+        password_confirmation: password_confirmation
     };
     console.log("Regisztrációs adatok:", adat);
     regisztracio(adat);
@@ -70,13 +70,13 @@ export default function Regisztralas() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="confirmPassword">
+            <Form.Group className="mb-3" controlId="password_confirmation">
               <Form.Label>Jelszó megerősítése</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Add meg újra a jelszavad"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={password_confirmation}
+                onChange={(e) => setPassword_confirmation(e.target.value)}
                 required
               />
             </Form.Group>
