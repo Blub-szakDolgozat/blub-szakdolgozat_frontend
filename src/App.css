@@ -1,7 +1,8 @@
 .App {
   height: 100vh;
+  width: 100%;
   color: white;
-  background: linear-gradient(to bottom, #87ceeb 0%, #1b5483 20%, #052d4d 60%, #8b4513 75%);
+  background-color: #007BFF;
   position: relative;
   overflow: hidden;
 }
@@ -15,7 +16,8 @@
   font-size: calc(10px + 2vmin);
   color: lightblue;
   font-family: 'Times New Roman', Times, serif;
-  z-index: 2; /* UI elemek a halak felett */
+  z-index: 2;
+  position: relative;
 }
 
 .App-header h1 {
@@ -23,21 +25,104 @@
   font-size: 50px;
 }
 
-.app {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+
+.App-content {
+  background-color: rgba(255, 255, 255, 0.8); 
+  height: calc(100vh - 10vh); 
+  position: relative;
+  z-index: 2;
+  padding: 20px;
 }
 
-/* Halak stílusa */
+form {
+  position: relative;
+  z-index: 3;
+}
+
+.body-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #007BFF, #003366 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.plants-container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.plant {
+  width: 10%;
+  max-height: 100px;
+  object-fit: contain; 
+}
+
+.bottom-section {
+  background-color: #deb887; 
+  height: 25vh;
+}
+
+
 .fish {
   position: absolute;
-  z-index: 0; /* A halak a háttérben maradnak */
+  z-index: 1;
+}
+
+.plants-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  background-color: transparent;
+}
+
+.plant {
+  width: 10%; 
+  max-height: 150px;
+  object-fit: contain;
+  left: 10%;
+}
+
+.plant, .plant2 {
+  position: absolute;
+  bottom: -50px; 
+  z-index: 0;
+  animation: sway 6s ease-in-out infinite;
+}
+
+.plant2 {
+  left: 60%;
+  width: 20px;
+  height: 250px;
+  animation: sway 7s ease-in-out infinite;
+}
+
+.ocean {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.fish {
+  position: absolute;
+  z-index: 0;
   width: 100px;
   height: 50px;
   background: #FFA500;
   border-radius: 50%;
-  top: 30%; /* A halak nem ússzanak túl közel a tetejéhez */
+  top: 30%;
   left: -100px;
   transform: translateY(-50%);
   animation: swim 8s infinite ease-in-out, bodyMove 1s infinite alternate;
@@ -75,9 +160,9 @@
   transform: rotate(30deg);
 }
 
-/* Másik hal stílusa */
 .fish2 {
   background: red;
+  z-index: 0;
   animation: swim 10s infinite ease-in-out reverse, bodyMove 1s infinite alternate;
 }
 
@@ -85,26 +170,15 @@
   background: #FF4500;
 }
 
-/* Halak mozgása (random irányú úszás) */
 @keyframes swim {
   0% {
     left: -100px;
     top: 30%;
     transform: translateY(-50%) rotate(90deg);
   }
-  25% {
-    left: 20vw;
-    top: 25%;
-    transform: translateY(-50%) rotate(90deg);
-  }
   50% {
     left: 50vw;
     top: 60%;
-    transform: translateY(-50%) rotate(90deg);
-  }
-  75% {
-    left: 80vw;
-    top: 40%;
     transform: translateY(-50%) rotate(90deg);
   }
   100% {
@@ -114,7 +188,6 @@
   }
 }
 
-/* Test mozgása (finom rángatás) */
 @keyframes bodyMove {
   0% {
     transform: scale(1);
@@ -125,4 +198,38 @@
   100% {
     transform: scale(1);
   }
+}
+
+@keyframes sway {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+
+input, textarea {
+  background-color: white;
+  pointer-events: auto;
+  color: black;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  z-index: 3;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4caf50; 
+}
+
+.ocean, .fish, .fish2, .plant, .plant2 {
+  z-index: 0;
+  pointer-events: none;
 }

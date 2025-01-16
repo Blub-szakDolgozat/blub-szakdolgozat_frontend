@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import useAdminContext from "../../contexts/AdminContext";
+import '../../App.css';
+
 
 export default function ViziLenyekUrlap() {
   const { postAdat, errors } = useAdminContext();
