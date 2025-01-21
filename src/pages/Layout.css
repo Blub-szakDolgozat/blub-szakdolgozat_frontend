@@ -15,6 +15,7 @@
   height: 25px;
   cursor: pointer;
   margin-left: 30px;
+
 }
 
 .hamburger .line {
@@ -27,19 +28,19 @@
 
 .dropdown-menu {
   display: none; 
-  flex-direction: column;
-  gap: 10px;
-  top: 100px;
-  left: 25px; 
-  background-color: #f8f9fa;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+  flex-direction: row; /* Gombok egymás mellé rendezése */
+  gap: 10px; /* Gombok közötti távolság */
+  position: absolute;
+  top: 50%; /* A menü vertikálisan középen lesz a hamburgerhez képest */
+  right: 60px; /* Távolság a jobb oldaltól */
+  transform: translateY(-50%); /* Vertikális középre igazítás */
+  background-color: transparent; /* Átlátszó háttér a jobb megjelenés érdekében */
 }
 
 .dropdown-menu.open {
-  display: flex;
+  display: flex; /* Menüt megjeleníti, amikor a hamburger nyitva van */
 }
+
 
 .nav-link {
   color: black;

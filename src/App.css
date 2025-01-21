@@ -1,235 +1,122 @@
+/* Általános oldalbeállítások */
 .App {
+  position: relative;
   height: 100vh;
   width: 100%;
-  color: white;
-  background-color: #007BFF;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   overflow: hidden;
 }
 
-.App-header {
-  min-height: 10vh;
-  display: flex;
-  align-items: center;
-  padding: 20px 30px;
-  justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: lightblue;
-  font-family: 'Times New Roman', Times, serif;
-  z-index: 2;
-  position: relative;
-}
-
-.App-header h1 {
-  text-align: left;
-  font-size: 50px;
-}
-
-
-.App-content {
-  background-color: rgba(255, 255, 255, 0.8); 
-  height: calc(100vh - 10vh); 
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-}
-
-form {
-  position: relative;
-  z-index: 3;
-}
-
-.body-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #007BFF, #003366 50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.plants-container {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.plant {
-  width: 10%;
-  max-height: 100px;
-  object-fit: contain; 
-}
-
-.bottom-section {
-  background-color: #deb887; 
-  height: 25vh;
-}
-
-
-.fish {
-  position: absolute;
-  z-index: 1;
-}
-
-.plants-container {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  background-color: transparent;
-}
-
-.plant {
-  width: 10%; 
-  max-height: 150px;
-  object-fit: contain;
-  left: 10%;
-}
-
-.plant, .plant2 {
-  position: absolute;
-  bottom: -50px; 
-  z-index: 0;
-  animation: sway 6s ease-in-out infinite;
-}
-
-.plant2 {
-  left: 60%;
-  width: 20px;
-  height: 250px;
-  animation: sway 7s ease-in-out infinite;
-}
-
+/* Óceán háttér */
 .ocean {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-}
-
-.fish {
-  position: absolute;
   z-index: 0;
-  width: 100px;
-  height: 50px;
-  background: #FFA500;
-  border-radius: 50%;
-  top: 30%;
-  left: -100px;
-  transform: translateY(-50%);
-  animation: swim 8s infinite ease-in-out, bodyMove 1s infinite alternate;
+  background: linear-gradient(to bottom, #0077be, #001f3f 90%);
+  overflow: hidden;
 }
 
-.fish .head {
+/* Buborék animáció */
+.bubbles {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
   width: 20px;
   height: 20px;
-  background: white;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
-  border: 2px solid black;
+  animation: rise 10s infinite ease-in;
+  opacity: 0.7;
 }
 
-.fish .eye {
+.bubble:nth-child(odd) {
+  background-color: rgba(173, 216, 230, 0.8);
+}
+
+.bubble:nth-child(1) { left: 20%; animation-duration: 8s; }
+.bubble:nth-child(2) { left: 40%; animation-duration: 6s; }
+.bubble:nth-child(3) { left: 60%; animation-duration: 10s; }
+.bubble:nth-child(4) { left: 80%; animation-duration: 12s; }
+
+@keyframes rise {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-50vh) scale(1.2); }
+  100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+}
+
+/* Halak */
+.fish {
   position: absolute;
-  top: 5px;
-  left: 12px;
-  width: 6px;
-  height: 6px;
+  z-index: 1;
+  width: 120px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  animation: swim 8s infinite ease-in-out;
+}
+
+.fish-body {
+  background: linear-gradient(45deg, #ffa500, #ff4500);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  width: 80px;
+  height: 50px;
+  position: relative;
+}
+
+.fish-tail {
+  width: 30px;
+  height: 40px;
+  background: #ff4500;
+  clip-path: polygon(100% 50%, 25% 0, 0 50%, 25% 100%);
+  position: absolute;
+  left: -20px;
+  top: 10px;
+  animation: tailMove 0.6s infinite alternate;
+}
+
+.fish-eye {
+  position: absolute;
+  width: 8px;
+  height: 8px;
   background: black;
   border-radius: 50%;
-}
-
-.fish .tail {
-  position: absolute;
-  right: -30px;
-  top: 50%;
-  width: 40px;
-  height: 30px;
-  background: #FF6347;
-  clip-path: polygon(100% 50%, 0 0%, 100% 100%);
-  transform: rotate(30deg);
-}
-
-.fish2 {
-  background: red;
-  z-index: 0;
-  animation: swim 10s infinite ease-in-out reverse, bodyMove 1s infinite alternate;
-}
-
-.fish2 .tail {
-  background: #FF4500;
+  top: 20px;
+  left: 60px;
 }
 
 @keyframes swim {
-  0% {
-    left: -100px;
-    top: 30%;
-    transform: translateY(-50%) rotate(90deg);
-  }
-  50% {
-    left: 50vw;
-    top: 60%;
-    transform: translateY(-50%) rotate(90deg);
-  }
-  100% {
-    left: 100vw;
-    top: 30%;
-    transform: translateY(-50%) rotate(90deg);
-  }
+  0% { transform: translateX(-120px); top: 30%; }
+  50% { transform: translateX(50vw); top: 50%; }
+  100% { transform: translateX(100vw); top: 30%; }
 }
 
-@keyframes bodyMove {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+@keyframes tailMove {
+  0% { transform: rotate(20deg); }
+  100% { transform: rotate(-20deg); }
 }
 
-@keyframes sway {
-  0% {
-    transform: rotate(5deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-
-input, textarea {
-  background-color: white;
-  pointer-events: auto;
-  color: black;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  z-index: 3;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #4caf50; 
-}
-
-.ocean, .fish, .fish2, .plant, .plant2 {
-  z-index: 0;
-  pointer-events: none;
+/* Tartalom doboz */
+.App-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.8);
+  width: 90%;
+  padding: 20px;
+  margin-top: 10vh;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
