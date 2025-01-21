@@ -31,10 +31,10 @@
   flex-direction: row; /* Gombok egymás mellé rendezése */
   gap: 10px; /* Gombok közötti távolság */
   position: absolute;
-  top: 50%; /* A menü vertikálisan középen lesz a hamburgerhez képest */
-  right: 60px; /* Távolság a jobb oldaltól */
-  transform: translateY(-50%); /* Vertikális középre igazítás */
-  background-color: transparent; /* Átlátszó háttér a jobb megjelenés érdekében */
+  left: 100px;
+  top: 40px;
+  transform: translateY(-50%); 
+  background-color: transparent; 
 }
 
 .dropdown-menu.open {
