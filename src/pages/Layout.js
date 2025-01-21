@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import './Layout.css';
-import ProfileKep from '../components/ProfilKep';
-import './Ocean.css';
+import React, { useState, useEffect } from "react";
+import { Link, Outlet } from "react-router-dom";
+import "./Layout.css";
+import ProfileKep from "../components/ProfilKep";
+import "./Ocean.css";
 
 function Buborekok() {
   const bubbles = Array.from({ length: 20 }, (_, index) => (
@@ -22,14 +22,14 @@ function Halak() {
         </div>
       </div>
 
-      <div className="fish2" style={{ animationDelay: '4s' }}>
+      <div className="fish2" style={{ animationDelay: "4s" }}>
         <div className="fish-body2">
           <div className="fish-eye"></div>
           <div className="fish-tail2"></div>
           <div className="fish-oldaluszo2"></div>
         </div>
       </div>
-      <div className="fish" style={{ animationDelay: '5s' }}>
+      <div className="fish" style={{ animationDelay: "5s" }}>
         <div className="fish-body3">
           <div className="fish-eye"></div>
           <div className="fish-tail3"></div>
@@ -41,7 +41,7 @@ function Halak() {
 }
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -57,74 +57,78 @@ const Layout = () => {
 
   const closeMenu = (e) => {
     // Csak akkor zárja be a menüt, ha a kattintás nem a menü vagy a hamburger ikon területén történt
-    if (!e.target.closest('.dropdown-menu') && !e.target.closest('.hamburger')) {
+    if (
+      !e.target.closest(".dropdown-menu") &&
+      !e.target.closest(".hamburger")
+    ) {
       setIsMenuOpen(false);
     }
   };
   const handleProfileClick = () => {
-    alert('Profilképre kattintottál!');
+    alert("Profilképre kattintottál!");
   };
   useEffect(() => {
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
     return () => {
-      document.removeEventListener('click', closeMenu);
+      document.removeEventListener("click", closeMenu);
     };
   }, []);
 
   return (
     <div className="App">
-    <div className="ocean">
-      <Buborekok />
-      <Halak />
-    </div>
-    <header className="App-header">
-      <ProfileKep onClick={handleProfileClick} />
-      <h1>Blub</h1>
-    </header>
-    <div className="App-content">
-    <div>
-       <nav className="navbar">
-      <div className="hamburger" onClick={toggleMenu}>
-        <div className="line"></div>
-        <div className="line"></div>
-        <div className="line"></div>
+      <div className="ocean">
+        <Buborekok />
+        <Halak />
       </div>
-      <div className="search-container">
-          <form onSubmit={handleSearchSubmit}>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Keresés..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <button type="submit" className="search-button">Keresés</button>
-          </form>
+      <header className="App-header">
+        <ProfileKep onClick={handleProfileClick} />
+        <h1>Blub</h1>
+      </header>
+      <div className="App-content">
+        <div>
+          <nav className="navbar">
+            <div className="hamburger" onClick={toggleMenu}>
+              <div className="line"></div>
+              <div className="line"></div>
+              <div className="line"></div>
+            </div>
+            <div className="search-container">
+              <form onSubmit={handleSearchSubmit}>
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Keresés..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+                <button type="submit" className="search-button">
+                  Keresés
+                </button>
+              </form>
+            </div>
+          </nav>
+          {/* Hamburger ikon */}
+          {/* Menü (legördülős) */}
+          <nav className={`dropdown-menu ${isMenuOpen ? "open" : ""}`}>
+            <Link to="/admin" className="nav-link">
+              Admin
+            </Link>
+            <Link to="/bejelentkezes" className="nav-link">
+              Bejelentkezés
+            </Link>
+            <Link to="/akvarium" className="nav-link">
+              Akvárium
+            </Link>
+            <Link to="/sorsolas" className="nav-link">
+              Napi Sorsolás
+            </Link>
+          </nav>
+
+          {/* Tartalom */}
+          <div className="content">
+            <Outlet />
+          </div>
         </div>
-        </nav>
-        {/* Hamburger ikon */}
-      {/* Menü (legördülős) */}
-      <nav className={`dropdown-menu ${isMenuOpen ? 'open' : ''}`}>
-        <Link to="/admin" className="nav-link">
-          Admin
-        </Link>
-        <Link to="/bejelentkezes" className="nav-link">
-          Bejelentkezés
-        </Link>
-        <Link to="/akvarium" className="nav-link">
-          Akvárium
-        </Link>
-        <Link to="/sorsolas" className="nav-link">
-          Napi Sorsolás
-        </Link>
-      </nav>
-
-
-      {/* Tartalom */}
-      <div className="content">
-        <Outlet />
-      </div>
-      </div>
       </div>
     </div>
   );

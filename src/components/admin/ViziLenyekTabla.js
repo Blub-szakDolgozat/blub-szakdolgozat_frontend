@@ -41,7 +41,7 @@ export default function ViziLenyekTabla(props) {
   };
   return (
     <tr>
-        <td>
+      <td>
         {szerkesztes ? (
           <input
             type="text"

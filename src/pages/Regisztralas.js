@@ -1,18 +1,16 @@
-import React, {useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 
-
 export default function Regisztralas() {
-  const [name, setFelhasznalonev] = useState(""); 
+  const [name, setFelhasznalonev] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setConfirmPassword] = useState("");
   const navigate = useNavigate();
-  const {regisztracio} =useContext(AuthContext);
- 
-  
+  const { regisztracio } = useContext(AuthContext);
+
   function handleSubmit(event) {
     event.preventDefault();
     if (password !== password_confirmation) {
@@ -21,9 +19,9 @@ export default function Regisztralas() {
     }
     const adat = {
       name: name,
-        email: email,
-        password: password,
-        password_confirmation: password_confirmation
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
     };
     console.log("Regisztrációs adatok:", adat);
     regisztracio(adat);
