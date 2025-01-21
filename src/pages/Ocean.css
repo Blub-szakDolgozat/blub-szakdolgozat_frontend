@@ -82,6 +82,26 @@
   .fish-tail {
     width: 30px;
     height: 40px;
+    background: #02f7ff;
+    clip-path: polygon(100% 50%, 25% 0, 0 50%, 25% 100%);
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    animation: tailMove 0.6s infinite alternate;
+  }
+  .fish-tail2 {
+    width: 30px;
+    height: 40px;
+    background: #ff7300;
+    clip-path: polygon(100% 50%, 25% 0, 0 50%, 25% 100%);
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    animation: tailMove 0.6s infinite alternate;
+  }
+  .fish-tail3 {
+    width: 30px;
+    height: 40px;
     background: #ff7300;
     clip-path: polygon(100% 50%, 25% 0, 0 50%, 25% 100%);
     position: absolute;
@@ -99,6 +119,39 @@
     top: 20px;
     left: 60px;
   }
+  .fish-oldaluszo {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    background: rgba(0, 255, 255, 0.8);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    top: 15px;
+    left: 30%;
+    transform: translateX(-50%);
+    animation: oldalMove 1s infinite alternate ease-in-out;
+}
+.fish-oldaluszo2 {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    background: rgba(0, 255, 255, 0.8);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    top: 15px;
+    left: 30%;
+    transform: translateX(-50%);
+    animation: oldalMove 1s infinite alternate ease-in-out;
+}  
+.fish-oldaluszo3 {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    background: rgba(0, 255, 255, 0.8);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    top: 15px;
+    left: 30%;
+    transform: translateX(-50%);
+    animation: oldalMove 1s infinite alternate ease-in-out;
+}
   
   @keyframes swim {
     0% { transform: translateX(-120px); top: 30%; }
@@ -110,6 +163,10 @@
     0% { transform: rotate(20deg); }
     100% { transform: rotate(-20deg); }
   }
+  @keyframes oldalMove {
+    0% { transform: translateY(0) rotate(5deg); }
+    100% { transform: translateY(5px) rotate(-5deg); }
+}
   
   /* Tartalom doboz */
   .App-content {

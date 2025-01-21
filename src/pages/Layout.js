@@ -18,19 +18,22 @@ function Halak() {
         <div className="fish-body">
           <div className="fish-eye"></div>
           <div className="fish-tail"></div>
+          <div className="fish-oldaluszo"></div>
         </div>
       </div>
 
       <div className="fish" style={{ animationDelay: '3s' }}>
         <div className="fish-body2">
           <div className="fish-eye"></div>
-          <div className="fish-tail"></div>
+          <div className="fish-tail2"></div>
+          <div className="fish-oldaluszo2"></div>
         </div>
       </div>
-      <div className="fish" style={{ animationDelay: '6s' }}>
+      <div className="fish" style={{ animationDelay: '5s' }}>
         <div className="fish-body3">
           <div className="fish-eye"></div>
-          <div className="fish-tail"></div>
+          <div className="fish-tail3"></div>
+          <div className="fish-oldaluszo3"></div>
         </div>
       </div>
     </div>
