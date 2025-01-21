@@ -44,7 +44,7 @@ export default function ViziLenyekTabla(props) {
         <td>
         {szerkesztes ? (
           <input
-            type="file"
+            type="text"
             name="kep"
             value={szerkesztVizileny.kep}
             onChange={szerkesztesValtoztatasa}
