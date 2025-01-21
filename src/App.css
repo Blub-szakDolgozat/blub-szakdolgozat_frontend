@@ -13,12 +13,11 @@
   min-height: 10vh;
   display: flex;
   align-items: center;
-  padding: 20px 30px;
-  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: lightblue;
   font-family: 'Times New Roman', Times, serif;
   z-index: 2;
-  position: relative;
 }
-
+.App-header>h1{
+  margin: 10px;
+}
