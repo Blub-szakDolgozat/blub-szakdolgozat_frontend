@@ -1,27 +1,22 @@
-import { Link, Routes, Route } from 'react-router-dom';
-import { Navbar, Container } from 'react-bootstrap';
-import CikkekUrlap from '../../components/admin/CikkekUrlap';
-import ViziLenyekUrlap from '../../components/admin/ViziLenyekUrlap';
+import { Link, Outlet } from 'react-router-dom';
 
 
 export default function Admin() {
   return (
     <div>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand as={Link} to="/vizilenyekurlap">Vízilények</Navbar.Brand>
-        </Container>
-        <Container>
-          <Navbar.Brand as={Link} to="/cikkekurlap">Cikkek</Navbar.Brand>
-        </Container>
-      </Navbar>
-      <Container>
-        <Routes>
-          <Route path="/vizilenyekurlap" element={<ViziLenyekUrlap />} />
-          <Route path="/cikkekurlap" element={<CikkekUrlap />} />
-        </Routes>
-      </Container>
+      
+      <nav>
+        <Link to="/admin/vizilenyekurlap">
+        Vízilények
+        </Link>
+        <Link to="/admin/cikkekurlap">
+        Cikkek
+        </Link>
+      </nav>
+      {}
+      <div className="content">
+        <Outlet />
+      </div>
     </div>
   );
 }
-// Itt navok-ban külön jelenitjük meg az admin-hoz szükséges űrlapokat, a kezdőoldala meg a felhasználók kezelése lenne. 

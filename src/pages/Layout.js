@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './Layout.css';
 import ProfileKep from '../components/ProfilKep';
-import '../App.css';
+import './Ocean.css';
 
 function Buborekok() {
   const bubbles = Array.from({ length: 20 }, (_, index) => (
@@ -18,12 +18,22 @@ function Halak() {
         <div className="fish-body">
           <div className="fish-eye"></div>
           <div className="fish-tail"></div>
+          <div className="fish-oldaluszo"></div>
         </div>
       </div>
+
       <div className="fish" style={{ animationDelay: '3s' }}>
-        <div className="fish-body">
+        <div className="fish-body2">
           <div className="fish-eye"></div>
-          <div className="fish-tail"></div>
+          <div className="fish-tail2"></div>
+          <div className="fish-oldaluszo2"></div>
+        </div>
+      </div>
+      <div className="fish" style={{ animationDelay: '5s' }}>
+        <div className="fish-body3">
+          <div className="fish-eye"></div>
+          <div className="fish-tail3"></div>
+          <div className="fish-oldaluszo3"></div>
         </div>
       </div>
     </div>
@@ -51,16 +61,16 @@ const Layout = () => {
       setIsMenuOpen(false);
     }
   };
-
+  const handleProfileClick = () => {
+    alert('Profilképre kattintottál!');
+  };
   useEffect(() => {
     document.addEventListener('click', closeMenu);
     return () => {
       document.removeEventListener('click', closeMenu);
     };
   }, []);
-  const handleProfileClick = () => {
-    alert('Profilképre kattintottál!');
-  };
+
   return (
     <div className="App">
     <div className="ocean">
@@ -108,7 +118,7 @@ const Layout = () => {
           Napi Sorsolás
         </Link>
       </nav>
-      
+
 
       {/* Tartalom */}
       <div className="content">
