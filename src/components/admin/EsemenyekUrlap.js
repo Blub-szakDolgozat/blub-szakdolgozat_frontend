@@ -14,9 +14,9 @@ function kuld(event) {
         let adat = {
         esemeny_neve: esemeny_neve,
         leiras:leiras,
-        datum: setDatum,
-        helyszin:setHelyszin,
-        letszam:setLetszam
+        datum: datum,
+        helyszin:helyszin,
+        letszam:letszam
     };
     console.log(adat);
     postAdat(adat, "/api/esemeny-add");
