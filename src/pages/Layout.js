@@ -51,16 +51,16 @@ const Layout = () => {
       setIsMenuOpen(false);
     }
   };
-
+  const handleProfileClick = () => {
+    alert('Profilképre kattintottál!');
+  };
   useEffect(() => {
     document.addEventListener('click', closeMenu);
     return () => {
       document.removeEventListener('click', closeMenu);
     };
   }, []);
-  const handleProfileClick = () => {
-    alert('Profilképre kattintottál!');
-  };
+
   return (
     <div className="App">
     <div className="ocean">
@@ -108,7 +108,7 @@ const Layout = () => {
           Napi Sorsolás
         </Link>
       </nav>
-      
+
 
       {/* Tartalom */}
       <div className="content">
