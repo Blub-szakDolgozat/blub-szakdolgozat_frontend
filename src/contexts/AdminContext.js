@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 export const AdminContext = createContext("");
 export const FileProvider = ({ children }) => {
   const [kepekLista, setKepekLista] = useState([]);
+  const [videokLista, setVideokLista]=useState([]);
+
   const [errors, setErrors] = useState({});
 
   const getLista = async (vegpont, callBack) => {
@@ -27,6 +29,7 @@ export const FileProvider = ({ children }) => {
         .then((resp) => {
           console.log(resp);
           setKepekLista(resp.data);
+          setVideokLista(resp.data);
         });
     } catch (error) {
       console.log(error);
@@ -62,6 +65,7 @@ const putAdat =async(vegpont, id, adat)=>{
 
   useEffect(() => {
     getLista("/api/vizilenyek", setKepekLista);
+    getLista("/api/videok", setVideokLista)
   }, []);
 
   return (
