@@ -78,8 +78,8 @@ const Layout = () => {
       <Halak />
     </div>
     <header className="App-header">
-      <h1>Blub</h1>
       <ProfileKep onClick={handleProfileClick} />
+      <h1>Blub</h1>
     </header>
     <div className="App-content">
     <div>
