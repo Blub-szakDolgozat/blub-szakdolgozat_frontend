@@ -1,7 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './Layout.css';
+import ProfileKep from '../components/ProfilKep';
+import '../App.css';
 
+function Buborekok() {
+  const bubbles = Array.from({ length: 20 }, (_, index) => (
+    <div key={index} className="bubble"></div>
+  ));
+  return <div className="bubbles">{bubbles}</div>;
+}
+
+function Halak() {
+  return (
+    <div>
+      <div className="fish">
+        <div className="fish-body">
+          <div className="fish-eye"></div>
+          <div className="fish-tail"></div>
+        </div>
+      </div>
+      <div className="fish" style={{ animationDelay: '3s' }}>
+        <div className="fish-body">
+          <div className="fish-eye"></div>
+          <div className="fish-tail"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
 const Layout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,8 +58,20 @@ const Layout = () => {
       document.removeEventListener('click', closeMenu);
     };
   }, []);
-
+  const handleProfileClick = () => {
+    alert('Profilképre kattintottál!');
+  };
   return (
+    <div className="App">
+    <div className="ocean">
+      <Buborekok />
+      <Halak />
+    </div>
+    <header className="App-header">
+      <h1>Blub</h1>
+      <ProfileKep onClick={handleProfileClick} />
+    </header>
+    <div className="App-content">
     <div>
        <nav className="navbar">
       <div className="hamburger" onClick={toggleMenu}>
@@ -74,6 +113,8 @@ const Layout = () => {
       {/* Tartalom */}
       <div className="content">
         <Outlet />
+      </div>
+      </div>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function NapiSorsolas() {
   };
   return (
     <div className="sorsolas-container">
-      <h1>Szoveg</h1>
+      <h2>Szoveg</h2>
       <p>Szoveg</p>
 
       <input

@@ -9,7 +9,21 @@
   align-items: center;
   overflow: hidden;
 }
-
+.App-header {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+  justify-content: space-between;
+  font-size: calc(10px + 2vmin);
+  color: lightblue;
+  font-family: 'Times New Roman', Times, serif;
+  z-index: 2;
+  position: relative;
+}
+h1{
+ background-color: #ff4500; 
+}
 /* Óceán háttér */
 .ocean {
   position: fixed;
