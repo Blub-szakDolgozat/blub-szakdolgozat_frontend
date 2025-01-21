@@ -9,6 +9,8 @@ import NapiSorsolas from './components/public/NapiSorsolas';
 import Profil from './pages/Profil';
 import ViziLenyekUrlap from './components/admin/ViziLenyekUrlap';
 import CikkekUrlap from './components/admin/CikkekUrlap';
+import EsemenyekUrlap from './components/admin/EsemenyekUrlap';
+import VideokUrlap from './components/admin/VideokUrlap';
 
 
 
@@ -24,6 +26,8 @@ function App() {
               <Route path="/admin" element={<Admin />}>       
               <Route path="/admin/vizilenyekurlap" element={<ViziLenyekUrlap />} />
               <Route path="/admin/cikkekurlap" element={<CikkekUrlap />} />
+              <Route path="/admin/esemenyekurlap" element={<EsemenyekUrlap />} />
+              <Route path="/admin/videokurlap" element={<VideokUrlap />} />
               </Route>
               <Route path="*" element={<NoPage />} />
               <Route path="/akvarium" element={<Akvarium/>} />

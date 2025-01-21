@@ -12,6 +12,12 @@ export default function Admin() {
         <Link to="/admin/cikkekurlap">
         Cikkek
         </Link>
+        <Link to="/admin/esemenyekurlap">
+        Események
+        </Link>
+        <Link to="/admin/videokurlap">
+        Videók
+        </Link>
       </nav>
       {}
       <div className="content">
