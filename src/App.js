@@ -5,10 +5,9 @@ import Admin from './pages/Admin/Admin';
 import Public from './pages/Public';
 import Layout from './pages/Layout';
 import AkvariumPublic from './components/public/AkvariumPublic';
-
 import NapiSorsolas from './components/public/NapiSorsolas';
 import Profil from './pages/Profil';
-import { BrowserRouter as Router } from 'react-router-dom';
+
 
 
 
