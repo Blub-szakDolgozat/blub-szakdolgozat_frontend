@@ -1,32 +1,32 @@
 import React, { useContext, useState } from "react";
-import { ApiContext } from "../contexts/ApiContext";
 import { Button } from "react-bootstrap";
+import useAdminContext from "../../contexts/AdminContext";
 
-export default function Doga(props) {
-  const { szakdogaLista, setSzakdogaLista, putAdat, deleteAdat } =
-    useContext(ApiContext);
+export default function ViziLenyekTabla(props) {
+  const { kepekLista, setKepekLista, putAdat, deleteAdat } =
+    useContext(useAdminContext);
 
   const torles = async (id) => {
     try {
       await deleteAdat("/api/vizilenyek-torol", id);
-      const frissSzakdogaLista = szakdogaLista.filter((item) => item.id !== id);
-      setSzakdogaLista(frissSzakdogaLista);
+      const frissKepekLista = kepekLista.filter((item) => item.id !== id);
+      setKepekLista(frissKepekLista);
     } catch (err) {
       console.error("Hiba történt a törlés során:", err);
     }
   };
   const [szerkesztes, setSzerkeszt] = useState(false);
-  const [szerkesztSzakdoga, setSzerkesztSzakdoga] = useState(props.adat);
+  const [szerkesztVizileny, setSzerkesztVizileny] = useState(props.adat);
   const szerkesztGomb = () => {
     setSzerkeszt(true);
   };
   const szerkesztesMentese = async () => {
     try {
-      await putAdat("/api/szakdogak", szerkesztSzakdoga.id, szerkesztSzakdoga);
-      const szerkesztettLista = szakdogaLista.map((item) =>
-        item.id === szerkesztSzakdoga.id ? szerkesztSzakdoga : item
+      await putAdat("/api/vizilenyek", szerkesztVizileny.id, szerkesztVizileny);
+      const szerkesztettLista = kepekLista.map((item) =>
+        item.id === szerkesztVizileny.id ? szerkesztVizileny : item
       );
-      setSzakdogaLista(szerkesztettLista);
+      setKepekLista(szerkesztettLista);
       setSzerkeszt(false);
     } catch (err) {
       console.error("Hiba történt módosítás mentésekor", err);
@@ -34,59 +34,71 @@ export default function Doga(props) {
   };
   const szerkesztesValtoztatasa = (elem) => {
     const { name, value } = elem.target;
-    setSzerkesztSzakdoga((elozo) => ({
+    setSzerkesztVizileny((elozo) => ({
       ...elozo,
       [name]: value,
     }));
   };
   return (
     <tr>
-      <td>
+        <td>
         {szerkesztes ? (
           <input
-            type="text"
-            name="szakdoga_neve"
-            value={szerkesztSzakdoga.szakdoga_neve}
+            type="file"
+            name="kep"
+            value={szerkesztVizileny.kep}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.szakdoga_neve
+          props.adat.kep
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="text"
-            name="githublink"
-            value={szerkesztSzakdoga.githublink}
+            name="nev"
+            value={szerkesztVizileny.nev}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.githublink
+          props.adat.nev
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="text"
-            name="oldallink"
-            value={szerkesztSzakdoga.oldallink}
+            name="fajta"
+            value={szerkesztVizileny.fajta}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.oldallink
+          props.adat.fajta
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="text"
-            name="tagokneve"
-            value={szerkesztSzakdoga.tagokneve}
+            name="ritkasagi_szint"
+            value={szerkesztVizileny.ritkasagi_szint}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.tagokneve
+          props.adat.ritkasagi_szint
+        )}
+      </td>
+      <td>
+        {szerkesztes ? (
+          <input
+            type="textarea"
+            name="leiras"
+            value={szerkesztVizileny.leiras}
+            onChange={szerkesztesValtoztatasa}
+          />
+        ) : (
+          props.adat.leiras
         )}
       </td>
       <td>
