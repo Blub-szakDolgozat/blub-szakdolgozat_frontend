@@ -204,7 +204,7 @@
 @keyframes swim {
   0% {
     transform: translateX(-120px);
-    top: 30%;
+    top: 40%;
   }
 
   50% {
@@ -214,7 +214,7 @@
 
   100% {
     transform: translateX(100vw);
-    top: 30%;
+    top: 40%;
   }
 }
 

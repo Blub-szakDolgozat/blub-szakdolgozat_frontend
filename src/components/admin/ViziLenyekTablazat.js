@@ -19,9 +19,10 @@ export default function ViziLenyekTablazat(props) {
             </tr>
           </thead>
           <tbody>
-            {props.kepekLista.map((element) => {
-              return <ViziLenyekTabla adat={element} key={element.id} />;
-            })}
+          {props.kepekLista.map((element, index) => (
+  <ViziLenyekTabla adat={element} key={element.id || index} />
+))}
+
           </tbody>
         </Table>
       </Container>
