@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAdminContext from '../../contexts/AdminContext';
 
 export default function EsemenyekUrlap() {
@@ -8,15 +8,23 @@ export default function EsemenyekUrlap() {
     const [datum, setDatum] = useState("");
     const [helyszin, setHelyszin] = useState("");
     const [letszam, setLetszam] = useState("");
+    const [minDate, setMinDate] = useState(""); 
+
+    useEffect(() => {
+        const holnap = new Date();
+        holnap.setDate(holnap.getDate() + 1);
+        const holnapiDatum = holnap.toISOString().split('T')[0];
+        setMinDate(holnapiDatum);
+    }, []);
 
 function kuld(event) {
     event.preventDefault();
         let adat = {
         esemeny_neve: esemeny_neve,
         leiras:leiras,
-        datum: setDatum,
-        helyszin:setHelyszin,
-        letszam:setLetszam
+        datum: datum,
+        helyszin:helyszin,
+        letszam:letszam
     };
     console.log(adat);
     postAdat(adat, "/api/esemeny-add");
@@ -52,6 +60,7 @@ function kuld(event) {
                 setDatum(event.target.value); 
                 }}
                 placeholder="esemény dátuma"
+                min={minDate}
             />
             </div>
             <div>
