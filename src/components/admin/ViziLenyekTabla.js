@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
-import useAdminContext from "../../contexts/AdminContext";
+import { AdminContext } from "../../contexts/AdminContext";
 
 export default function ViziLenyekTabla(props) {
   const { kepekLista, setKepekLista, putAdat, deleteAdat } =
-    useContext(useAdminContext);
+    useContext(AdminContext);
 
   const torles = async (id) => {
     try {

@@ -16,6 +16,7 @@ export default function ViziLenyekTablazat(props) {
                 <th>Ritkasági szinte</th>
                 <th>Leírása</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

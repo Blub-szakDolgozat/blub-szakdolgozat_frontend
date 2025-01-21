@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import useAdminContext, { FileProvider } from "../../contexts/AdminContext";
+import useAdminContext, { AdminContext, FileProvider } from "../../contexts/AdminContext";
 import '../../App.css';
 import ViziLenyekTablazat from "./ViziLenyekTablazat";
 
 
 export default function ViziLenyekUrlap() {
-  const {kepekLista}=useContext(useAdminContext)
+  const {kepekLista}=useContext(AdminContext)
   const { postAdat, errors } = useAdminContext();
   const [nev, setNev] = useState("");
   const [fajta, setFajta] = useState("");
@@ -139,9 +139,7 @@ export default function ViziLenyekUrlap() {
           value="Küld"
         />
       </form>
-      <FileProvider>
       <ViziLenyekTablazat kepekLista={kepekLista} />
-      </FileProvider>
     </div>
   );
 }
