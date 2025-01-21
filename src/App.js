@@ -9,6 +9,7 @@ import AkvariumPublic from './components/public/AkvariumPublic';
 import ProfileKep from './components/ProfilKep';
 import NapiSorsolas from './components/public/NapiSorsolas';
 import Profil from './pages/Profil';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function Buborekok() {
   const bubbles = Array.from({ length: 20 }, (_, index) => (
@@ -65,6 +66,7 @@ function App() {
       </div>
     </div>
   );
+
 }
 
 export default App;
