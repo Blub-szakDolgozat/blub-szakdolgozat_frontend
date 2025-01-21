@@ -22,7 +22,7 @@ function Halak() {
         </div>
       </div>
 
-      <div className="fish" style={{ animationDelay: '3s' }}>
+      <div className="fish2" style={{ animationDelay: '4s' }}>
         <div className="fish-body2">
           <div className="fish-eye"></div>
           <div className="fish-tail2"></div>
