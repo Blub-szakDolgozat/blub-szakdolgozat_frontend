@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './Layout.css';
 import ProfileKep from '../components/ProfilKep';
-import '../App.css';
+import './Ocean.css';
 
 function Buborekok() {
   const bubbles = Array.from({ length: 20 }, (_, index) => (
@@ -20,8 +20,15 @@ function Halak() {
           <div className="fish-tail"></div>
         </div>
       </div>
+
       <div className="fish" style={{ animationDelay: '3s' }}>
-        <div className="fish-body">
+        <div className="fish-body2">
+          <div className="fish-eye"></div>
+          <div className="fish-tail"></div>
+        </div>
+      </div>
+      <div className="fish" style={{ animationDelay: '6s' }}>
+        <div className="fish-body3">
           <div className="fish-eye"></div>
           <div className="fish-tail"></div>
         </div>
