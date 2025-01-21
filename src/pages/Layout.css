@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   padding: 10px 20px;
   color: white;
   position: relative;
@@ -19,7 +19,7 @@
 }
 
 .hamburger .line {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 95, 236);
   height: 3px;
   width: 100%;
   border-radius: 2px;
@@ -27,18 +27,21 @@
 }
 
 .dropdown-menu {
-  display: none; 
-  flex-direction: row; /* Gombok egymás mellé rendezése */
-  gap: 10px; /* Gombok közötti távolság */
+  display: none;
+  flex-direction: row;
+  /* Gombok egymás mellé rendezése */
+  gap: 10px;
+  /* Gombok közötti távolság */
   position: absolute;
   left: 100px;
   top: 40px;
-  transform: translateY(-50%); 
-  background-color: transparent; 
+  transform: translateY(-50%);
+  background-color: transparent;
 }
 
 .dropdown-menu.open {
-  display: flex; /* Menüt megjeleníti, amikor a hamburger nyitva van */
+  display: flex;
+  /* Menüt megjeleníti, amikor a hamburger nyitva van */
 }
 
 

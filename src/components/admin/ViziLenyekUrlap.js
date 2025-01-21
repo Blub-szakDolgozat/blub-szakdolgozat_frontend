@@ -1,23 +1,25 @@
-import React, { useState } from "react";
-import useAdminContext from "../../contexts/AdminContext";
-import '../../App.css';
-
+import React, { useContext, useState } from "react";
+import useAdminContext, {
+  AdminContext,
+} from "../../contexts/AdminContext";
+import "../../App.css";
+import ViziLenyekTablazat from "./ViziLenyekTablazat";
 
 export default function ViziLenyekUrlap() {
+  const { kepekLista } = useContext(AdminContext);
   const { postAdat, errors } = useAdminContext();
   const [nev, setNev] = useState("");
   const [fajta, setFajta] = useState("");
   const [ritkasagi_szint, setRitkasagiszint] = useState("");
   const [leiras, setLeiras] = useState("");
   const [file, setFile] = useState(null);
-  
 
   function kuld(event) {
     event.preventDefault();
     let adat = {
-        nev: nev,
+      nev: nev,
       fajta: fajta,
-      ritkasagi_szint:ritkasagi_szint,
+      ritkasagi_szint: ritkasagi_szint,
       leiras: leiras,
       kep: file,
     };
@@ -29,7 +31,6 @@ export default function ViziLenyekUrlap() {
   return (
     <div className="container">
       <form onSubmit={kuld}>
-
         <div className="mb-3">
           <label htmlFor="nev" className="form-label">
             A vízi lény neve:
@@ -39,27 +40,25 @@ export default function ViziLenyekUrlap() {
             className="form-control"
             id="nev"
             onChange={(event) => {
-              setNev(event.target.value); 
+              setNev(event.target.value);
             }}
             placeholder="a vizi lény neve"
           />
         </div>
         <div>
-          {errors.nev && (
-            <span className="text-danger">{errors.nev[0]}</span>
-          )}
+          {errors.nev && <span className="text-danger">{errors.nev[0]}</span>}
         </div>
 
         <div className="mb-3">
           <label htmlFor="fajta" className="form-label">
-          A vízi lény fajtája:
+            A vízi lény fajtája:
           </label>
           <input
             type="text"
             className="form-control"
             id="fajta"
             onChange={(event) => {
-              setFajta(event.target.value); 
+              setFajta(event.target.value);
             }}
             placeholder="a vízi lény fajtája"
           />
@@ -72,14 +71,14 @@ export default function ViziLenyekUrlap() {
 
         <div className="mb-3">
           <label htmlFor="ritkasagi_szint" className="form-label">
-          A vízi lény ritkasági szintje:
+            A vízi lény ritkasági szintje:
           </label>
           <input
             type="text"
             className="form-control"
             id="ritkasagi_szint"
             onChange={(event) => {
-              setRitkasagiszint(event.target.value); 
+              setRitkasagiszint(event.target.value);
             }}
             placeholder="⭐"
           />
@@ -90,7 +89,6 @@ export default function ViziLenyekUrlap() {
           )}
         </div>
 
-
         <div className="mb-3">
           <label htmlFor="leiras" className="form-label">
             A vízi lény leírása:
@@ -100,7 +98,7 @@ export default function ViziLenyekUrlap() {
             className="form-control"
             id="leiras"
             onChange={(event) => {
-              setLeiras(event.target.value); 
+              setLeiras(event.target.value);
             }}
             placeholder="a vízi lény leírása"
           />
@@ -120,7 +118,7 @@ export default function ViziLenyekUrlap() {
             accept="image/png, image/jpeg"
             className="form-control"
             onChange={(event) => {
-              setFile(event.target.files[0]); 
+              setFile(event.target.files[0]);
             }}
             id="fileNev"
             placeholder="Válasszon fájlt..."
@@ -137,6 +135,7 @@ export default function ViziLenyekUrlap() {
           value="Küld"
         />
       </form>
+      <ViziLenyekTablazat kepekLista={kepekLista} />
     </div>
   );
 }

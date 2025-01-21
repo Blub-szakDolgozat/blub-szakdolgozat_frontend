@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import './Sorsolas.css';
+import React, { useState } from "react";
+import "./Sorsolas.css";
 
 export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
-//Alap szerkezet
+  //Alap szerkezet
   const handleSorsolas = () => {
-    const nyeremenyek = ['Autó', 'Laptop', 'Társasjáték', 'Pénz'];
-    const randomNyeremeny = nyeremenyek[Math.floor(Math.random() * nyeremenyek.length)];
+    const nyeremenyek = ["Autó", "Laptop", "Társasjáték", "Pénz"];
+    const randomNyeremeny =
+      nyeremenyek[Math.floor(Math.random() * nyeremenyek.length)];
     setNyeremeny(randomNyeremeny);
   };
   return (

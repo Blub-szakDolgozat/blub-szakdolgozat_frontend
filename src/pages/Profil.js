@@ -1,13 +1,21 @@
-import React, { useContext, useState } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { AuthContext } from '../contexts/AuthContext'; // Kijelentkezéshez
-import "../App.css";
+import React, { useContext, useState, useEffect } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { AuthContext } from "../contexts/AuthContext"; // AuthContext importálása
+import { useNavigate } from "react-router-dom"; // Navigációhoz
+import ProfileKep from "../components/ProfilKep";
 
 export default function Profil() {
-  const { logout } = useContext(AuthContext); // AuthContextből kijelentkezés
-  const [ProfilKep, setProfilKep] = useState(null); // Profilkép tárolása
-  const [userName, setUserName] = useState('Felhasználó neve'); // Felhasználói név
+  const { logout, isLoggedIn } = useContext(AuthContext); // Bejelentkezett státusz és kijelentkezés
+  const [profilKep, setProfilKep] = useState(null); // Profilkép állapot
   const [selectedImage, setSelectedImage] = useState(null); // Kiválasztott kép
+  const [userName, setUserName] = useState("Felhasználó neve"); // Felhasználói név
+  const navigate = useNavigate(); // useNavigate hook
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/bejelentkezes"); // Ha nem vagyunk bejelentkezve, navigáljunk a bejelentkezési oldalra
+    }
+  }, [isLoggedIn, navigate]); // Ha `isLoggedIn` változik, akkor fut le a navigálás
 
   // Képváltoztatás kezelése
   const handleImageChange = (e) => {
@@ -25,16 +33,18 @@ export default function Profil() {
   const handleSave = () => {
     if (selectedImage) {
       setProfilKep(selectedImage); // Beállítjuk a profilképet a kiválasztott képre
-      alert('Profilkép mentve!'); // Üzenet a mentésről
+      alert("Profilkép mentve!"); // Üzenet a mentésről
     } else {
-      alert('Kérlek válassz egy képet!'); // Ha nem választott képet
+      alert("Kérlek válassz egy képet!"); // Ha nem választott képet
     }
   };
 
   // Kijelentkezés funkció
   const handleLogout = () => {
     logout(); // Kijelentkezés hívása az AuthContextből
-    alert("Sikeresen kijelentkeztél!"); // Kijelentkezés üzenet
+    alert('Sikeresen kijelentkeztél!'); // Kijelentkezés üzenet
+    console.log("Kijeletkezés sikeres!");
+    navigate('/bejelentkezes'); // Navigálás a bejelentkezési oldalra
   };
 
   return (
@@ -44,17 +54,8 @@ export default function Profil() {
           <h2>Profil</h2>
           <div className="profile-section mt-4">
             <div className="image-container">
-              {/* Ha van kiválasztott kép, akkor azt jelenítjük meg */}
-              {ProfilKep ? (
-                <img
-                  src={ProfilKep}
-                  alt="Profilkép"
-                  className="rounded-circle profile-image"
-                />
-              ) : (
-                // Ha nincs profilkép, akkor alap profil ikont jelenítünk meg
-                <i className="fas fa-user-circle fa-5x profile-image-placeholder"></i>
-              )}
+              {/* A kiválasztott profilkép vagy alapértelmezett kép */}
+              <ProfileKep profilePic={profilKep} />
 
               <Form.Group controlId="profileImageUpload" className="mt-3">
                 <Form.Label className="btn btn-secondary">

@@ -1,13 +1,17 @@
 /* A tartalom szövegeknek középre helyezése */
 .sorsolas-container {
   display: flex;
-  flex-direction: column; /* Az elemek oszlopban legyenek elrendezve */
-  align-items: center; /* Középre igazítja az elemeket vízszintesen */
-margin: 30px;
-  text-align: center; /* A szövegek középre igazítása */
+  flex-direction: column;
+  /* Az elemek oszlopban legyenek elrendezve */
+  align-items: center;
+  /* Középre igazítja az elemeket vízszintesen */
+  margin: 30px;
+  text-align: center;
+  /* A szövegek középre igazítása */
 }
 
-.sorsolas-container p, .sorsolas-container h1 {
+.sorsolas-container p,
+.sorsolas-container h1 {
   margin: 10px 0;
 }
 
@@ -23,9 +27,11 @@ margin: 30px;
 
 .nyeremeny-kartya h3 {
   font-size: 1.5em;
-  color: #28a745; /* Zöld szín a nyereményhez */
+  color: #28a745;
+  /* Zöld szín a nyereményhez */
 }
 
 .btn {
-  margin-top: 20px; /* A gomb és a többi elem közötti távolság */
+  margin-top: 20px;
+  /* A gomb és a többi elem közötti távolság */
 }
