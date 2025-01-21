@@ -8,6 +8,7 @@ export const AuthContext = createContext("");
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Login állapot
 
   // CSRF cookie megszerzése
   const csrf = async () => {
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await myAxios.post("/login", { email, password });
       // Ha sikeres, beállítjuk a felhasználói adatokat és a tokent
       setUser(data.user);
+      setIsLoggedIn(true);
       localStorage.setItem("access_token", data.access_token); // Mentse el a token-t (pl. localStorage-ba)
       navigate("/akvarium"); // Átirányítás a főoldalra vagy más oldalra
     } catch (error) {
@@ -57,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await myAxios.post("/logout");
       setUser(""); // Töröljük a felhasználó adatokat
+      setIsLoggedIn(false); 
       localStorage.removeItem("access_token"); // Töröljük a tárolt tokent
       navigate("/bejelentkezes"); // Bejelentkezéshez vezet
     } catch (error) {
@@ -65,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ regisztracio, login, user, logout }}>
+    <AuthContext.Provider value={{isLoggedIn, regisztracio, login, user, logout }}>
       {children}
     </AuthContext.Provider>
   );
