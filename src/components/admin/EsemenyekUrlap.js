@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useAdminContext from '../../contexts/AdminContext';
 
 export default function EsemenyekUrlap() {
     const { postAdat, errors } = useAdminContext();
@@ -103,7 +104,7 @@ function kuld(event) {
             <input
                 type="number"
                 min={0}
-                max={500}
+                max={Number.MAX_VALUE}
                 className="form-control"
                 id="letszam"
                 onChange={(event) => {
