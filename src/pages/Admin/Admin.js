@@ -15,12 +15,6 @@ export default function Admin() {
           <Navbar.Brand as={Link} to="/cikkekurlap">Cikkek</Navbar.Brand>
         </Container>
       </Navbar>
-      <Container>
-        <Routes>
-          <Route path="/vizilenyekurlap" element={<ViziLenyekUrlap />} />
-          <Route path="/cikkekurlap" element={<CikkekUrlap />} />
-        </Routes>
-      </Container>
     </div>
   );
 }
