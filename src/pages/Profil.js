@@ -42,8 +42,9 @@ export default function Profil() {
   // Kijelentkezés funkció
   const handleLogout = () => {
     logout(); // Kijelentkezés hívása az AuthContextből
-    alert("Sikeresen kijelentkeztél!"); // Kijelentkezés üzenet
-    navigate("/bejelentkezes"); // Navigálás a bejelentkezési oldalra
+    alert('Sikeresen kijelentkeztél!'); // Kijelentkezés üzenet
+    console.log("Kijeletkezés sikeres!");
+    navigate('/bejelentkezes'); // Navigálás a bejelentkezési oldalra
   };
 
   return (
