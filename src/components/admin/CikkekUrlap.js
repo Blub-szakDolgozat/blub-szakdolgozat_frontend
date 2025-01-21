@@ -35,7 +35,7 @@ function kuld(event) {
             </div>
             <div>
             {errors.cim && (
-                <span className="text-danger">{errors.nev[0]}</span>
+                <span className="text-danger">{errors.cim[0]}</span>
             )}
             </div>
 
@@ -75,7 +75,7 @@ function kuld(event) {
           />
         </div>
         <div>
-          {errors.kepek && <span className="text-danger">{errors.kep[0]}</span>}
+          {errors.kepek && <span className="text-danger">{errors.kepek[0]}</span>}
         </div>
 
         <input
