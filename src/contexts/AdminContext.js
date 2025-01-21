@@ -7,15 +7,15 @@ export const FileProvider = ({ children }) => {
   const [errors, setErrors] = useState({});
 
   const getLista = async (vegpont, callBack) => {
-    try{
-        const {data} =await myAxios.get(vegpont);
-        callBack(data);
-    }catch(err){
-        console.log("Hiba történt az adatok lekérésekor.")
-    }finally{
-
+    try {
+      const { data } = await myAxios.get(vegpont);
+      console.log(data); 
+      callBack(data);
+    } catch (err) {
+      console.log("Hiba történt az adatok lekérésekor.");
     }
   };
+  
 
   const postAdat = async ({ ...adat }, vegpont) => {
     try {

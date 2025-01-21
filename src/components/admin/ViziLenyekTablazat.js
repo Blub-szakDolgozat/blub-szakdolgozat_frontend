@@ -1,8 +1,9 @@
 import React from "react";
-import { Container, Row, Table, Col } from "react-bootstrap";
+import { Container, Row, Table } from "react-bootstrap";
 import ViziLenyekTabla from "./ViziLenyekTabla";
 
-export default function Dogak(props) {
+export default function ViziLenyekTablazat(props) {
+
   return (
     <Row>
       <Container className="mt-4">
