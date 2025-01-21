@@ -2,21 +2,20 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
-import '../App.css';
+import "../App.css";
 
 export default function Bejelentkezes({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error] = useState(null);
   const navigate = useNavigate();
-  const {login} =useContext(AuthContext);
-
+  const { login } = useContext(AuthContext);
 
   function handleSubmit(event) {
     event.preventDefault();
     const adat = {
-        email: email,
-        password: password,
+      email: email,
+      password: password,
     };
     console.log("Bejelentkezés sikeres:", adat);
     login(adat);

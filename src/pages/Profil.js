@@ -1,20 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { AuthContext } from '../contexts/AuthContext'; // AuthContext importálása
-import { useNavigate } from 'react-router-dom'; // Navigációhoz
-import ProfileKep from '../components/ProfilKep';
-
+import React, { useContext, useState, useEffect } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { AuthContext } from "../contexts/AuthContext"; // AuthContext importálása
+import { useNavigate } from "react-router-dom"; // Navigációhoz
+import ProfileKep from "../components/ProfilKep";
 
 export default function Profil() {
   const { logout, isLoggedIn } = useContext(AuthContext); // Bejelentkezett státusz és kijelentkezés
   const [profilKep, setProfilKep] = useState(null); // Profilkép állapot
   const [selectedImage, setSelectedImage] = useState(null); // Kiválasztott kép
-  const [userName, setUserName] = useState('Felhasználó neve'); // Felhasználói név
+  const [userName, setUserName] = useState("Felhasználó neve"); // Felhasználói név
   const navigate = useNavigate(); // useNavigate hook
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/bejelentkezes'); // Ha nem vagyunk bejelentkezve, navigáljunk a bejelentkezési oldalra
+      navigate("/bejelentkezes"); // Ha nem vagyunk bejelentkezve, navigáljunk a bejelentkezési oldalra
     }
   }, [isLoggedIn, navigate]); // Ha `isLoggedIn` változik, akkor fut le a navigálás
 
@@ -34,18 +33,23 @@ export default function Profil() {
   const handleSave = () => {
     if (selectedImage) {
       setProfilKep(selectedImage); // Beállítjuk a profilképet a kiválasztott képre
-      alert('Profilkép mentve!'); // Üzenet a mentésről
+      alert("Profilkép mentve!"); // Üzenet a mentésről
     } else {
-      alert('Kérlek válassz egy képet!'); // Ha nem választott képet
+      alert("Kérlek válassz egy képet!"); // Ha nem választott képet
     }
   };
 
   // Kijelentkezés funkció
   const handleLogout = () => {
     logout(); // Kijelentkezés hívása az AuthContextből
+<<<<<<< HEAD
     alert('Sikeresen kijelentkeztél!'); // Kijelentkezés üzenet
     console.log("Kijeletkezés sikeres!");
     navigate('/bejelentkezes'); // Navigálás a bejelentkezési oldalra
+=======
+    alert("Sikeresen kijelentkeztél!"); // Kijelentkezés üzenet
+    navigate("/bejelentkezes"); // Navigálás a bejelentkezési oldalra
+>>>>>>> d0563dc09c7964b756fb401fc34621626c7eb095
   };
 
   return (
