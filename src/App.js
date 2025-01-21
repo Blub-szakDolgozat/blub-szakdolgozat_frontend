@@ -9,6 +9,7 @@ import AkvariumPublic from './components/public/AkvariumPublic';
 import ProfileKep from './components/ProfilKep';
 import NapiSorsolas from './components/public/NapiSorsolas';
 import Profil from './pages/Profil';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   const handleProfileClick = () => {
@@ -72,6 +73,7 @@ function App() {
       
     </div>
   );
+
 }
 
 export default App;
