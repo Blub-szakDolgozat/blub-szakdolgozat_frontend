@@ -52,7 +52,7 @@ export const FileProvider = ({ children }) => {
 
 const putAdat =async(vegpont, id, adat)=>{
     try{
-      const response = await myAxios.put(`${vegpont}/${id}, adat`);
+      const response = await myAxios.put(`${vegpont}/${id}`, adat);
         console.log("Sikeres módosítás:", response.data)
 
         setKepekLista((prevKepekLista)=>
