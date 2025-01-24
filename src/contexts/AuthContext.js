@@ -37,7 +37,10 @@ export const AuthProvider = ({ children }) => {
       const { data } = await myAxios.post("/login", { email, password });
       setUser(data.user);
       setIsLoggedIn(true);
-      setUserProfilePic(data.user.profilePic || null); // Profilkép inicializálása, ha elérhető
+      const storedProfilePic = localStorage.getItem("userProfilePic");
+      setUserProfilePic(
+        storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
+      );
       localStorage.setItem("access_token", data.access_token);
       navigate("/akvarium");
     } catch (error) {
@@ -53,7 +56,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await myAxios.get("/user");
       setUser(data);
-      setUserProfilePic(data.profilePic || "https://www.w3schools.com/howto/img_avatar.png"); // Profilkép beállítása
+      const storedProfilePic = localStorage.getItem("userProfilePic");
+      setUserProfilePic(
+        storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
+      );
     } catch (error) {
       console.log(
         "Felhasználó lekérdezési hiba:",
@@ -70,6 +76,7 @@ export const AuthProvider = ({ children }) => {
       setUser("");
       setIsLoggedIn(false);
       setUserProfilePic(null); // Profilkép alaphelyzetbe állítása
+      localStorage.removeItem("userProfilePic");
       localStorage.removeItem("access_token");
       navigate("/bejelentkezes");
     } catch (error) {
@@ -77,27 +84,34 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Profilkép frissítése
-  const updateProfilePic = (newProfilePic) => {
-    setUserProfilePic(newProfilePic);
-
-  };
-
-  useEffect(() => {
-    // Itt töltheted be a felhasználói adatokat, például API hívásból
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('/api/user'); // Példa API hívás
-        const data = await response.json();
-        setUser(data.user);
-        setUserProfilePic(data.profilePic || 'https://www.w3schools.com/howto/img_avatar.png'); // Ha nincs profilkép, akkor az alapértelmezett képet használjuk
-      } catch (error) {
-        console.error('Error fetching user data:', error);
+    // Profilkép frissítése
+    const updateProfilePic = (newProfilePic) => {
+      setUserProfilePic(newProfilePic);
+      localStorage.setItem("userProfilePic", newProfilePic);
+    };
+  
+    // Fájl feltöltése és base64-re konvertálás
+    const handleFileUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64Image = reader.result; // Base64 kép
+          updateProfilePic(base64Image); // Frissítés
+        };
+        reader.readAsDataURL(file);
       }
     };
-
-    fetchUserData();
-  }, []);
+  
+    // Profilkép betöltése az alkalmazás indításakor
+    useEffect(() => {
+      const storedProfilePic = localStorage.getItem("userProfilePic");
+      if (storedProfilePic) {
+        setUserProfilePic(storedProfilePic);
+      } else {
+        setUserProfilePic("https://www.w3schools.com/howto/img_avatar.png"); // Alapértelmezett profilkép
+      }
+    }, []);
 
   return (
     <AuthContext.Provider
@@ -109,6 +123,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         userProfilePic,
         updateProfilePic,
+        handleFileUpload
       }}
     >
       {children}
