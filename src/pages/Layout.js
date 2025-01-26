@@ -122,6 +122,9 @@ const Layout = () => {
             <Link to="/sorsolas" className="nav-link">
               Napi Sorsolás
             </Link>
+            <Link to="/videok" className="nav-link">
+              Videók
+            </Link>
           </nav>
 
           {/* Tartalom */}

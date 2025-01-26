@@ -11,6 +11,7 @@ import ViziLenyekUrlap from "./components/admin/ViziLenyekUrlap";
 import CikkekUrlap from "./components/admin/CikkekUrlap";
 import EsemenyekUrlap from "./components/admin/EsemenyekUrlap";
 import VideokUrlap from "./components/admin/VideokUrlap";
+import Videok from "./components/public/Videok";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="*" element={<NoPage />} />
             <Route path="/akvarium" element={<Akvarium />} />
             <Route path="/sorsolas" element={<NapiSorsolas />} />
+            <Route path="/videok" element={<Videok />} />
             <Route path="/profil" element={<Profil />} />
           </Route>
         </Routes>

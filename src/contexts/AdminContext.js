@@ -69,7 +69,7 @@ const putAdat =async(vegpont, id, adat)=>{
   }, []);
 
   return (
-    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors }}>
+    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
       {children}
     </AdminContext.Provider>
   );
