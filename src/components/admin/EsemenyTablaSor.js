@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Button } from "react-bootstrap";
-import { AdminContext } from "../../contexts/AdminContext";
+import React, { useContext } from 'react'
+import { AdminContext } from '../../contexts/AdminContext';
 
-export default function VideoTablaSor(props) {
-    const { videokLista, setVideokLista, putAdat, deleteAdat } =
+export default function EsemenyTablaSor() {
+    const { esemenyekLista, setEsemenyekLista, putAdat, deleteAdat } =
     useContext(AdminContext);
  
   const torles = async (id) => {
     try {
-      await deleteAdat("/api/video-torol", id);
-      const frissVideokLista = videokLista.filter((item) => item.video_id !== id);
-      setVideokLista(frissVideokLista);
+      await deleteAdat("/api/esemeny-torol", id);
+      const frissEsemenyekLista = videokLista.filter((item) => item.video_id !== id);
+      setVideokLista(frissEsemenyekLista);
     } catch (err) {
       console.error("Hiba történt a törlés során:", err);
     }
