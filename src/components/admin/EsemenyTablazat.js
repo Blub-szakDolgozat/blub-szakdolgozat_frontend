@@ -9,7 +9,7 @@ export default function EsemenyTablazat(props) {
             <Table className="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th>Név</th>
+                  <th>Esemény Neve</th>
                   <th>Leírás</th>
                   <th>Dátum</th>
                   <th>Helyszín</th>
