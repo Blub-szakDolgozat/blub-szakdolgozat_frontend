@@ -10,9 +10,9 @@ export default function CikkekTablazat(props) {
         <thead>
           <tr>
             <th>Cím</th>
-            <th>Nyitókép</th>
-            <th>Link</th>
-            <th>Hossz</th>
+            <th>Képek</th>
+            <th>Leírás</th>
+            <th>Publikálva</th>
           </tr>
         </thead>
         <tbody>
