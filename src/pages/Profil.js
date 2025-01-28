@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import { AuthContext } from "../contexts/AuthContext"; // AuthContext importálása
-import { useNavigate } from "react-router-dom"; // Navigációhoz
-import ProfileKep from "../components/ProfilKep";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-// Elérhető alapértelmezett profilképek
 const DEFAULT_PROFILE_PICS = [
   "https://www.w3schools.com/howto/img_avatar.png",
   "https://www.w3schools.com/howto/img_avatar2.png",
@@ -13,32 +11,30 @@ const DEFAULT_PROFILE_PICS = [
 ];
 
 export default function Profil() {
-  const { logout, isLoggedIn, userProfilePic, updateProfilePic } = useContext(AuthContext); // Bejelentkezett státusz, profilkép, és funkciók
-  const [selectedImage, setSelectedImage] = useState(userProfilePic || "https://www.w3schools.com/howto/img_avatar.png"); // Kiválasztott kép
+  const { logout, isLoggedIn, userProfilePic, updateProfilePic } = useContext(AuthContext);
+  const [selectedImage, setSelectedImage] = useState(userProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/bejelentkezes"); // Ha nem vagyunk bejelentkezve, navigáljunk a bejelentkezési oldalra
+      navigate("/bejelentkezes");
     }
   }, [isLoggedIn, navigate]);
 
-  // Kép feltöltése
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result); // Átmenetileg megjeleníti a feltöltött képet
+        setSelectedImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Profilkép mentése
   const handleSave = () => {
     if (selectedImage) {
-      updateProfilePic(selectedImage); // Profilkép mentése az AuthContext-ben
+      updateProfilePic(selectedImage);
       alert("Profilkép mentve!");
     } else {
       alert("Kérlek válassz egy képet!");
@@ -50,6 +46,19 @@ export default function Profil() {
       <Row className="justify-content-center">
         <Col md={6} className="text-center">
           <div className="profile-section mt-4">
+            {/* Kiválasztott kép nagyobb megjelenítése */}
+            <div className="selected-image-container mb-4">
+              <img
+                src={selectedImage}
+                alt="Selected"
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                }}
+              />
+            </div>
+
             <div className="image-container">
               {/* Alapértelmezett profilképek választása */}
               <div className="default-profile-pics mt-3">
@@ -62,6 +71,7 @@ export default function Profil() {
                       style={{
                         margin: "0 10px",
                         cursor: "pointer",
+                        borderRadius: "50%",
                         border: selectedImage === pic ? "3px solid blue" : "none",
                       }}
                     >
