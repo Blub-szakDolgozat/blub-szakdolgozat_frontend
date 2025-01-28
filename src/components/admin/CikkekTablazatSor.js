@@ -22,7 +22,7 @@ export default function VideoTablaSor(props) {
   };
   const szerkesztesMentese = async () => {
     try {
-      await putAdat("/api/cikk", szerkesztCikk.cikk_id, szerkesztCikk);
+      await putAdat("/api/cikkek", szerkesztCikk.cikk_id, szerkesztCikk);
       const szerkesztettLista = cikkLista.map((item) =>
         item.cikk_id === szerkesztCikk.cikk_id ? szerkesztCikk : item
       );
