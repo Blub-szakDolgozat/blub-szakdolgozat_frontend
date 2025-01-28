@@ -79,6 +79,18 @@ const Layout = () => {
       <div className="ocean">
         <Buborekok />
         <Halak />
+        <div className="plants"> 
+            <div className="plant tall"></div> 
+            <div className="plant short"></div> 
+            <div className="plant wide"></div> 
+            <div className="plant"></div> 
+            <div className="plant tall wide"></div> 
+            <div className="plant short"></div> 
+            <div className="plant"></div> 
+            <div className="plant wide"></div> 
+            <div className="plant tall"></div> 
+            <div className="plant short"></div>            
+</div> 
       </div>
       <header className="App-header">
         <ProfileKep onClick={handleProfileClick} />

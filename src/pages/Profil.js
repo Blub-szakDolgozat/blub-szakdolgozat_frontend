@@ -13,6 +13,7 @@ const DEFAULT_PROFILE_PICS = [
 export default function Profil() {
   const { logout, isLoggedIn, userProfilePic, updateProfilePic } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(userProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function Profil() {
   const handleSave = () => {
     if (selectedImage) {
       updateProfilePic(selectedImage);
-      alert("Profilkép mentve!");
+      alert(`Profilkép és felhasználónév mentve! (${username})`);
     } else {
       alert("Kérlek válassz egy képet!");
     }
@@ -71,7 +72,6 @@ export default function Profil() {
                       style={{
                         margin: "0 10px",
                         cursor: "pointer",
-                        borderRadius: "50%",
                         border: selectedImage === pic ? "3px solid blue" : "none",
                       }}
                     >
@@ -97,17 +97,26 @@ export default function Profil() {
               </div>
             </div>
 
-            {/* Kép mentése gomb */}
-            <Button variant="primary" onClick={handleSave} className="mt-3">
-              Mentés
-            </Button>
+            {/* Felhasználónév módosítása */}
+            <Form.Group controlId="username" className="mt-3">
+              <Form.Label>Felhasználói név:</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Írd be a neved..."
+              />
+            </Form.Group>
 
-            <h4 className="mt-3">Felhasználói név: {"Valaki"}</h4>
+            <div className="d-flex justify-content-between align-items-center mt-4">     
+              <Button variant="danger" onClick={logout}>
+                Kijelentkezés
+              </Button>
 
-            {/* Kijelentkezés gomb */}
-            <Button variant="danger" onClick={logout} className="mt-3">
-              Kijelentkezés
-            </Button>
+              <Button variant="primary" onClick={handleSave}>
+                Mentés
+              </Button>
+            </div>
           </div>
         </Col>
       </Row>
