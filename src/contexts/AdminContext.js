@@ -77,14 +77,6 @@ const putAdat =async(vegpont, id, adat)=>{
 
   useEffect(() => {
     getLista("/api/vizilenyek", setKepekLista);
-<<<<<<< HEAD
-    getLista("/api/videok", setVideokLista);
-    getLista("/api/cikkek", setCikkLista)
-  }, []);
-
-  return (
-    <AdminContext.Provider value={{ cikkLista, setCikkLista, kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
-=======
     getLista("/api/videok", setVideokLista)
     getLista("/api/esemenyek", setEsemenyekLista)
     
@@ -92,7 +84,6 @@ const putAdat =async(vegpont, id, adat)=>{
 
   return (
     <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista, setVideokLista, esemenyekLista, setEsemenyekLista }}>
->>>>>>> f2f6175d06aaf3565d480c96ef011cc3a93a7a65
       {children}
     </AdminContext.Provider>
   );
