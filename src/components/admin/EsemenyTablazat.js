@@ -9,11 +9,11 @@ export default function EsemenyTablazat(props) {
             <Table className="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th>Képe</th>
-                  <th>Vízilény Neve</th>
-                  <th>Vízilény Fajtája</th>
-                  <th>Ritkasági szinte</th>
-                  <th>Leírása</th>
+                  <th>Név</th>
+                  <th>Leírás</th>
+                  <th>Dátum</th>
+                  <th>Helyszín</th>
+                  <th>Létszám</th>
                   <th></th>
                   <th></th>
                 </tr>
