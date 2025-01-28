@@ -58,6 +58,11 @@ const putAdat =async(vegpont, id, adat)=>{
         setKepekLista((prevKepekLista)=>
             prevKepekLista.map((item)=>item.id===id?{...item,...adat}:item)
         )
+
+        setVideokLista((prevVideokLista)=>
+          prevVideokLista.map((item)=>item.video_id===id?{...item,...adat}:item)
+      )
+
     }catch(err){
         console.log("Hiba történt az adatok módosításakor!", err)
     }
@@ -69,7 +74,7 @@ const putAdat =async(vegpont, id, adat)=>{
   }, []);
 
   return (
-    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
+    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista, setVideokLista }}>
       {children}
     </AdminContext.Provider>
   );

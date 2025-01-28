@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import useAdminContext from "../../contexts/AdminContext";
+import React, { useContext, useState } from "react";
+import useAdminContext, { AdminContext } from "../../contexts/AdminContext";
+import VideoTablazat from "./VideoTablazat";
 
 
 export default function VideokUrlap() {
+  const { videokLista } = useContext(AdminContext);
   const { postAdat, errors } = useAdminContext();
   const [cim, setCim] = useState("");
   const [file, setFile] = useState(null);
@@ -111,6 +113,7 @@ export default function VideokUrlap() {
           value="Küld"
         />
       </form>
+      <VideoTablazat videokLista={videokLista}/>
     </div>
   );
 }
