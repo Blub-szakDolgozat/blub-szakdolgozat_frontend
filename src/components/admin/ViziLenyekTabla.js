@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { AdminContext } from "../../contexts/AdminContext";
-
+ 
 export default function ViziLenyekTabla(props) {
   const { kepekLista, setKepekLista, putAdat, deleteAdat } =
     useContext(AdminContext);
-
+ 
   const torles = async (id) => {
     try {
       await deleteAdat("/api/vizilenyek-torol", id);
