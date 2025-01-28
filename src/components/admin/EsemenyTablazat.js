@@ -19,7 +19,7 @@ export default function EsemenyTablazat(props) {
                 </tr>
               </thead>
               <tbody>
-              {props.esemenyLista.map((element, index) => (
+              {props.esemenyekLista.map((element, index) => (
               <EsemenyTablaSor adat={element} key={element.esemeny_id || index} />
     ))}
     
