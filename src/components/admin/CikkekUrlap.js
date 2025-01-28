@@ -3,7 +3,7 @@ import useAdminContext from "../../contexts/AdminContext";
 import CikkekTablazat from "./CikkekTablazat";
 
 export default function CikkekUrlap() {
-  const { postAdat, errors } = useAdminContext();
+  const { postAdat, errors,cikkLista } = useAdminContext();
   const [cim, setCim] = useState("");
   const [leiras, setLeiras] = useState("");
   const [file, setFile] = useState(null);
