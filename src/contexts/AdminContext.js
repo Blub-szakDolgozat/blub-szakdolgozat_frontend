@@ -5,6 +5,7 @@ export const AdminContext = createContext("");
 export const FileProvider = ({ children }) => {
   const [kepekLista, setKepekLista] = useState([]);
   const [videokLista, setVideokLista]=useState([]);
+  const [cikkLista, setCikkLista]=useState([]);
 
   const [errors, setErrors] = useState({});
 
@@ -30,6 +31,7 @@ export const FileProvider = ({ children }) => {
           console.log(resp);
           setKepekLista(resp.data);
           setVideokLista(resp.data);
+          setCikkLista(resp.data);
         });
     } catch (error) {
       console.log(error);
@@ -65,11 +67,12 @@ const putAdat =async(vegpont, id, adat)=>{
 
   useEffect(() => {
     getLista("/api/vizilenyek", setKepekLista);
-    getLista("/api/videok", setVideokLista)
+    getLista("/api/videok", setVideokLista);
+    getLista("/api/cikkek", setCikkLista)
   }, []);
 
   return (
-    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
+    <AdminContext.Provider value={{ cikkLista, setCikkLista, kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
       {children}
     </AdminContext.Provider>
   );

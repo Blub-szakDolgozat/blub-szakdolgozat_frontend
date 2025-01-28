@@ -137,6 +137,9 @@ const Layout = () => {
             <Link to="/videok" className="nav-link">
               Videók
             </Link>
+            <Link to="/cikkek" className="nav-link">
+              Cikkek
+            </Link>
           </nav>
 
           {/* Tartalom */}

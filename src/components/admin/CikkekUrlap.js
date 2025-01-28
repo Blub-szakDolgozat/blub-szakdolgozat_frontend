@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAdminContext from "../../contexts/AdminContext";
+import CikkekTablazat from "./CikkekTablazat";
 
 export default function CikkekUrlap() {
   const { postAdat, errors } = useAdminContext();
@@ -87,6 +88,7 @@ export default function CikkekUrlap() {
           value="Küld"
         />
       </form>
+      <CikkekTablazat cikkLista={cikkLista} />
     </div>
   );
 }

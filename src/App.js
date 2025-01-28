@@ -12,6 +12,7 @@ import CikkekUrlap from "./components/admin/CikkekUrlap";
 import EsemenyekUrlap from "./components/admin/EsemenyekUrlap";
 import VideokUrlap from "./components/admin/VideokUrlap";
 import Videok from "./components/public/Videok";
+import Cikkek from "./components/public/Cikkek";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path="/sorsolas" element={<NapiSorsolas />} />
             <Route path="/videok" element={<Videok />} />
             <Route path="/profil" element={<Profil />} />
+            <Route path="/cikkek" element={<Cikkek />} />
           </Route>
         </Routes>
       </div>
