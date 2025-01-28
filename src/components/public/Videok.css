@@ -13,3 +13,21 @@ p{
     font-size: 150%;
     font-weight: bold;
 }
+
+.video-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* alapértelmezett: 1 oszlop telefonon */
+    gap: 16px; /* A videók közötti távolság */
+ }
+ 
+ @media (min-width: 576px) {
+    .video-container {
+       grid-template-columns: repeat(2, 1fr); /* 2 oszlop táblagépen */
+    }
+ }
+ 
+ @media (min-width: 768px) {
+    .video-container {
+       grid-template-columns: repeat(3, 1fr); /* 3 oszlop asztali képernyőn */
+    }
+ }

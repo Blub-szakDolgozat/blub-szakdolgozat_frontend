@@ -13,7 +13,7 @@ export default function Videok() {
             <p>Oldalunkon sok különböző környezetvédelmi oktatóvideó található. A videók számos témát dolgoznak fel, köztük jelentősen felhívják a figyelmet a műanyag szemetelésének következményeire és veszélyeire.</p>
             <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
             
-            <div className='row row-cols-1 row-cols-md-3 g-4'>
+            <div className='video-container'>
                 {videokLista.map((elem, index) => {
                 return <Video obj={elem} key={index}/>;
                 })}
