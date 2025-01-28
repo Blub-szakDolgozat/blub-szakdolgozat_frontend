@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./Layout.css";
 import ProfileKep from "../components/ProfilKep";
 import "./Ocean.css";
+import { Nav } from "react-bootstrap";
 
 function Buborekok() {
   const bubbles = Array.from({ length: 20 }, (_, index) => (
@@ -40,39 +41,22 @@ function Halak() {
   );
 }
 const Layout = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     console.log("Search Query:", searchQuery);
-    // Itt hívhatod meg a keresési funkciót
   };
 
-  const closeMenu = (e) => {
-    // Csak akkor zárja be a menüt, ha a kattintás nem a menü vagy a hamburger ikon területén történt
-    if (
-      !e.target.closest(".dropdown-menu") &&
-      !e.target.closest(".hamburger")
-    ) {
-      setIsMenuOpen(false);
-    }
-  };
+
   const handleProfileClick = () => {
     alert("Profilképre kattintottál!");
   };
-  useEffect(() => {
-    document.addEventListener("click", closeMenu);
-    return () => {
-      document.removeEventListener("click", closeMenu);
-    };
-  }, []);
+
 
   return (
     <div className="App">
@@ -99,7 +83,7 @@ const Layout = () => {
       <div className="App-content">
         <div>
           <nav className="navbar">
-            <div className="hamburger" onClick={toggleMenu}>
+            <div>
               <div className="line"></div>
               <div className="line"></div>
               <div className="line"></div>
@@ -119,28 +103,93 @@ const Layout = () => {
               </form>
             </div>
           </nav>
-          {/* Hamburger ikon */}
           {/* Menü (legördülős) */}
-          <nav className={`dropdown-menu ${isMenuOpen ? "open" : ""}`}>
-            <Link to="/admin" className="nav-link">
-              Admin
-            </Link>
-            <Link to="/bejelentkezes" className="nav-link">
-              Bejelentkezés
-            </Link>
-            <Link to="/akvarium" className="nav-link">
-              Akvárium
-            </Link>
-            <Link to="/sorsolas" className="nav-link">
-              Napi Sorsolás
-            </Link>
-            <Link to="/videok" className="nav-link">
-              Videók
-            </Link>
-            <Link to="/cikkek" className="nav-link">
-              Cikkek
-            </Link>
-          </nav>
+          <Nav style={{ display: "flex", gap: "0" }}>
+              <Nav.Item>
+                <Link
+                  to="/admin"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Admin
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/bejelentkezes"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Bejelentkezés
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/akvarium"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Akvárium
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/sorsolas"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Napi Sorsolás
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/videok"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Videók
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link
+                  to="/cikkek"
+                  className="nav-link"
+                  style={{
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+                  onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+                >
+                  Cikkek
+                </Link>
+              </Nav.Item>
+            </Nav>
 
           {/* Tartalom */}
           <div className="content">

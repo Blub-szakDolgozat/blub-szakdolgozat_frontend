@@ -20,9 +20,9 @@ export default function Admin() {
           <Link
             to="/admin/cikkekurlap"
             className="nav-link"
-            style={{ fontWeight: "bold", textDecoration: "none" }} // Félkövér és link aláhúzás eltávolítása
-            onMouseOver={(e) => (e.target.style.textDecoration = "underline")} // Hover: aláhúzás
-            onMouseOut={(e) => (e.target.style.textDecoration = "none")} // Hover elhagyáskor: aláhúzás eltávolítása
+            style={{ fontWeight: "bold", textDecoration: "none" }} 
+            onMouseOver={(e) => (e.target.style.textDecoration = "underline")} 
+            onMouseOut={(e) => (e.target.style.textDecoration = "none")} 
           >
             Cikkek
           </Link>

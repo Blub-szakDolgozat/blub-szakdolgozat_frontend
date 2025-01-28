@@ -5,7 +5,7 @@ import EsemenyTablaSor from './EsemenyTablaSor';
 export default function EsemenyTablazat(props) {
     return (
         <Row>
-          <Container className="mt-4">
+          <Container className="mt-4 table-responsive">
             <Table className="table table-striped table-bordered">
               <thead>
                 <tr>

@@ -5,7 +5,7 @@ export default function CikkekTablazat(props) {
  
   return (
     <div>
-      <div>
+      <div className="table-responsive">
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>

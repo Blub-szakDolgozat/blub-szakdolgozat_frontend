@@ -5,7 +5,7 @@ import { Container, Row, Table } from 'react-bootstrap';
 export default function VideoTablazat(props) {
     return (
         <Row>
-          <Container className="mt-4">
+          <Container className="mt-4 table-responsive">
             <Table className="table table-striped table-bordered">
               <thead>
                 <tr>
