@@ -5,11 +5,8 @@ export const AdminContext = createContext("");
 export const FileProvider = ({ children }) => {
   const [kepekLista, setKepekLista] = useState([]);
   const [videokLista, setVideokLista]=useState([]);
-<<<<<<< HEAD
   const [cikkLista, setCikkLista]=useState([]);
-=======
   const [esemenyekLista, setEsemenyekLista]=useState([]);
->>>>>>> f2f6175d06aaf3565d480c96ef011cc3a93a7a65
 
   const [errors, setErrors] = useState({});
 
