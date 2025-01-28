@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Table } from 'react-bootstrap';
+import EsemenyTablaSor from './EsemenyTablaSor';
 
 export default function EsemenyTablazat(props) {
     return (
