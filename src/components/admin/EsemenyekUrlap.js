@@ -3,7 +3,7 @@ import useAdminContext, { AdminContext } from "../../contexts/AdminContext";
 import EsemenyTablazat from "./EsemenyTablazat";
 
 export default function EsemenyekUrlap() {
-  const { esemenyLista } = useContext(AdminContext);
+  const { esemenyekLista } = useContext(AdminContext);
   const { postAdat, errors } = useAdminContext();
   const [esemeny_neve, setEsemenyNeve] = useState("");
   const [leiras, setLeiras] = useState("");
@@ -144,7 +144,7 @@ export default function EsemenyekUrlap() {
           value="Küld"
         />
       </form>
-      <EsemenyTablazat esemenyLista={esemenyLista} />
+      <EsemenyTablazat esemenyekLista={esemenyekLista} />
     </div>
   );
 }
