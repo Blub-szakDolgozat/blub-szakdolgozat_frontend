@@ -5,7 +5,7 @@ export default function CikkekTablazat(props) {
  
   return (
     <div>
-      <div>
+      <div className="table-responsive">
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>
@@ -13,6 +13,8 @@ export default function CikkekTablazat(props) {
             <th>Képek</th>
             <th>Leírás</th>
             <th>Publikálva</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

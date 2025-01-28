@@ -5,7 +5,7 @@ import ViziLenyekTabla from "./ViziLenyekTabla";
 export default function ViziLenyekTablazat(props) {
   return (
     <Row>
-      <Container className="mt-4">
+      <Container className="mt-4 table-responsive">
         <Table className="table table-striped table-bordered">
           <thead>
             <tr>
