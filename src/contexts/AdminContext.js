@@ -65,6 +65,10 @@ const putAdat =async(vegpont, id, adat)=>{
         setVideokLista((prevVideokLista)=>
           prevVideokLista.map((item)=>item.video_id===id?{...item,...adat}:item)
       )
+      
+      setCikkLista((prevCikkLista)=>
+        prevCikkLista.map((item)=>item.cikk_id===id?{...item,...adat}:item)
+    )
 
       setEsemenyekLista((prevEsemenyekLista)=>
         prevEsemenyekLista.map((item)=>item.esemeny_id===id?{...item,...adat}:item)
@@ -79,11 +83,13 @@ const putAdat =async(vegpont, id, adat)=>{
     getLista("/api/vizilenyek", setKepekLista);
     getLista("/api/videok", setVideokLista)
     getLista("/api/esemenyek", setEsemenyekLista)
+    getLista("/api/cikkek", setCikkLista)
+
     
   }, []);
 
   return (
-    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista, setVideokLista, esemenyekLista, setEsemenyekLista }}>
+    <AdminContext.Provider value={{ cikkLista, setCikkLista, kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista, setVideokLista, esemenyekLista, setEsemenyekLista }}>
       {children}
     </AdminContext.Provider>
   );
