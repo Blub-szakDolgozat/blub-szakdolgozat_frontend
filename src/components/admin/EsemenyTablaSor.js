@@ -1,31 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { AdminContext } from '../../contexts/AdminContext';
+import { Button } from 'react-bootstrap';
 
-export default function EsemenyTablaSor() {
+export default function EsemenyTablaSor(props) {
     const { esemenyekLista, setEsemenyekLista, putAdat, deleteAdat } =
     useContext(AdminContext);
  
   const torles = async (id) => {
     try {
       await deleteAdat("/api/esemeny-torol", id);
-      const frissEsemenyekLista = videokLista.filter((item) => item.video_id !== id);
-      setVideokLista(frissEsemenyekLista);
+      const frissEsemenyekLista = esemenyekLista.filter((item) => item.esemeny_id !== id);
+      setEsemenyekLista(frissEsemenyekLista);
     } catch (err) {
       console.error("Hiba történt a törlés során:", err);
     }
   };
   const [szerkesztes, setSzerkeszt] = useState(false);
-  const [szerkesztVideo, setSzerkesztVideo] = useState(props.adat);
+  const [szerkesztEsemeny, setSzerkesztEsemeny] = useState(props.adat);
   const szerkesztGomb = () => {
     setSzerkeszt(true);
   };
   const szerkesztesMentese = async () => {
     try {
-      await putAdat("/api/videok", szerkesztVideo.video_id, szerkesztVideo);
-      const szerkesztettLista = videokLista.map((item) =>
-        item.video_id === szerkesztVideo.video_id ? szerkesztVideo : item
+      await putAdat("/api/esemenyek", szerkesztEsemeny.esemeny_id, szerkesztEsemeny);
+      const szerkesztettLista = esemenyekLista.map((item) =>
+        item.esemeny_id === szerkesztEsemeny.esemeny_id ? szerkesztEsemeny : item
       );
-      setVideokLista(szerkesztettLista);
+      setEsemenyekLista(szerkesztettLista);
       setSzerkeszt(false);
     } catch (err) {
       console.error("Hiba történt módosítás mentésekor", err);
@@ -33,7 +34,7 @@ export default function EsemenyTablaSor() {
   };
   const szerkesztesValtoztatasa = (elem) => {
     const { name, value } = elem.target;
-    setSzerkesztVideo((elozo) => ({
+    setSzerkesztEsemeny((elozo) => ({
       ...elozo,
       [name]: value,
     }));
@@ -44,48 +45,60 @@ export default function EsemenyTablaSor() {
         {szerkesztes ? (
           <input
             type="text"
-            name="nyitokep"
-            value={szerkesztVideo.nyitokep}
+            name="esemeny_neve"
+            value={szerkesztEsemeny.esemeny_neve}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.nyitokep
+          props.adat.esemeny_neve
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="text"
-            name="cim"
-            value={szerkesztVideo.cim}
+            name="leiras"
+            value={szerkesztEsemeny.leiras}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.cim
+          props.adat.leiras
+        )}
+      </td>
+      <td>
+        {szerkesztes ? (
+          <input
+            type="date"
+            name="datum"
+            value={szerkesztEsemeny.datum}
+            onChange={szerkesztesValtoztatasa}
+          />
+        ) : (
+          props.adat.datum
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="text"
-            name="link"
-            value={szerkesztVideo.link}
+            name="helyszin"
+            value={szerkesztEsemeny.helyszin}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.link
+          props.adat.helyszin
         )}
       </td>
       <td>
         {szerkesztes ? (
           <input
             type="number"
-            name="hossz"
-            value={szerkesztVideo.hossz}
+            name="letszam"
+            value={szerkesztEsemeny.letszam}
             onChange={szerkesztesValtoztatasa}
           />
         ) : (
-          props.adat.hossz
+          props.adat.letszam
         )}
       </td>
     
