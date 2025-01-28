@@ -1,7 +1,7 @@
 import React from 'react'
 import CikkekTablazatSor from './CikkekTablazatSor'
 
-export default function CikkekTablazat() {
+export default function CikkekTablazat(props) {
  
   return (
     <div>
@@ -16,9 +16,9 @@ export default function CikkekTablazat() {
           </tr>
         </thead>
         <tbody>
-          {lista.map((elem, index)=>{
-            return <CikkekTablazatSor obj={elem} key={index}/>
-          })}
+        {props.cikkLista.map((element, index) => (
+              <CikkekTablazatSor adat={element} key={element.cikk_id || index} />
+    ))}
         </tbody>
       </table>
     </div>
