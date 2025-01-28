@@ -13,6 +13,8 @@ export default function CikkekTablazat(props) {
             <th>Képek</th>
             <th>Leírás</th>
             <th>Publikálva</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
