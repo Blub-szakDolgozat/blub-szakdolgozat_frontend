@@ -5,6 +5,7 @@ export const AdminContext = createContext("");
 export const FileProvider = ({ children }) => {
   const [kepekLista, setKepekLista] = useState([]);
   const [videokLista, setVideokLista]=useState([]);
+  const [esemenyekLista, setEsemenyekLista]=useState([]);
 
   const [errors, setErrors] = useState({});
 
@@ -58,6 +59,15 @@ const putAdat =async(vegpont, id, adat)=>{
         setKepekLista((prevKepekLista)=>
             prevKepekLista.map((item)=>item.vizi_leny_id===id?{...item,...adat}:item)
         )
+
+        setVideokLista((prevVideokLista)=>
+          prevVideokLista.map((item)=>item.video_id===id?{...item,...adat}:item)
+      )
+
+      setEsemenyekLista((prevEsemenyekLista)=>
+        prevEsemenyekLista.map((item)=>item.esemeny_id===id?{...item,...adat}:item)
+    )
+
     }catch(err){
         console.log("Hiba történt az adatok módosításakor!", err)
     }
@@ -66,10 +76,12 @@ const putAdat =async(vegpont, id, adat)=>{
   useEffect(() => {
     getLista("/api/vizilenyek", setKepekLista);
     getLista("/api/videok", setVideokLista)
+    getLista("/api/esemenyek", setEsemenyekLista)
+    
   }, []);
 
   return (
-    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista }}>
+    <AdminContext.Provider value={{ kepekLista, setKepekLista, putAdat,deleteAdat, postAdat, errors, videokLista, setVideokLista, esemenyekLista, setEsemenyekLista }}>
       {children}
     </AdminContext.Provider>
   );
