@@ -56,7 +56,7 @@ const putAdat =async(vegpont, id, adat)=>{
         console.log("Sikeres módosítás:", response.data)
 
         setKepekLista((prevKepekLista)=>
-            prevKepekLista.map((item)=>item.id===id?{...item,...adat}:item)
+            prevKepekLista.map((item)=>item.vizi_leny_id===id?{...item,...adat}:item)
         )
     }catch(err){
         console.log("Hiba történt az adatok módosításakor!", err)

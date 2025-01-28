@@ -9,7 +9,7 @@ export default function ViziLenyekTabla(props) {
   const torles = async (id) => {
     try {
       await deleteAdat("/api/vizilenyek-torol", id);
-      const frissKepekLista = kepekLista.filter((item) => item.id !== id);
+      const frissKepekLista = kepekLista.filter((item) => item.vizi_leny_id !== id);
       setKepekLista(frissKepekLista);
     } catch (err) {
       console.error("Hiba történt a törlés során:", err);
@@ -22,9 +22,9 @@ export default function ViziLenyekTabla(props) {
   };
   const szerkesztesMentese = async () => {
     try {
-      await putAdat("/api/vizilenyek", szerkesztVizileny.id, szerkesztVizileny);
+      await putAdat("/api/vizilenyek", szerkesztVizileny.vizi_leny_id, szerkesztVizileny);
       const szerkesztettLista = kepekLista.map((item) =>
-        item.id === szerkesztVizileny.id ? szerkesztVizileny : item
+        item.vizi_leny_id === szerkesztVizileny.vizi_leny_id ? szerkesztVizileny : item
       );
       setKepekLista(szerkesztettLista);
       setSzerkeszt(false);
@@ -113,7 +113,7 @@ export default function ViziLenyekTabla(props) {
         )}
       </td>
       <td>
-        <Button variant="outline-danger" onClick={() => torles(props.adat.id)}>
+        <Button variant="outline-danger" onClick={() => torles(props.adat.vizi_leny_id)}>
           ❌
         </Button>
       </td>
