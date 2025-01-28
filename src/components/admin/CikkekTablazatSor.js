@@ -80,7 +80,7 @@ export default function VideoTablaSor(props) {
       <td>
         {szerkesztes ? (
           <input
-            type="number"
+            type="date"
             name="publikalva"
             value={szerkesztCikk.publikalva}
             onChange={szerkesztesValtoztatasa}
