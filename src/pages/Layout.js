@@ -207,6 +207,20 @@ function Halak() {
       Cikkek
     </Link>
   </Nav.Item>
+  <Nav.Item>
+    <Link
+      to="/esemenyek"
+      className="nav-link"
+      style={{
+        fontWeight: "bold",
+        textDecoration: "none",
+      }}
+      onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
+      onMouseOut={(e) => (e.target.style.textDecoration = "none")}
+    >
+      Események
+    </Link>
+  </Nav.Item>
 </Nav>
 
 
