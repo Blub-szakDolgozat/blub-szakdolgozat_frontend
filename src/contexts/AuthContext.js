@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { myAxios } from "./MyAxios";
 
@@ -113,6 +113,25 @@ export const AuthProvider = ({ children }) => {
       }
     }, []);
 
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const response = await fetch('/user'); // A backend automatikusan ellenőrzi a CSRF cookie-t
+          if (!response.ok) {
+            throw new Error('Felhasználói adatok lekérése nem sikerült');
+          }
+          const data = await response.json();
+          setUser(data); // A válasz tartalma (felhasználói adatok)
+        } catch (error) {
+          console.error('Hiba:', error);
+        }
+      };
+    
+      fetchUser();
+    }, []);
+    
+    
+
   return (
     <AuthContext.Provider
       value={{
@@ -130,3 +149,7 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
