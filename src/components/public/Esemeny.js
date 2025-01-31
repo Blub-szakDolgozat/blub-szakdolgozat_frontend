@@ -5,11 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function Esemeny(props) {
 
     const kattintasKezeles = () => {
-        if (props.obj.link) {
-        window.open(props.obj.link, '_blank'); // új ablakban, külön oldalon nyílik meg a videó
-        } else {
-        console.log("A cikkhez nem tartozik link.");
-        }
+        
     };
 
     return (
