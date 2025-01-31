@@ -1,22 +1,34 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { myAxios } from '../../contexts/MyAxios';
 
 export default function Esemeny(props) {
+    console.log("Esemény adatai:", props);
 
-    const kattintasKezeles = () => {
-        
+    const handleReszvetel = async () => {
+        if (props.obj.letszam > 0) {
+            try {
+                const ujLetszam = props.obj.letszam - 1;
+                await myAxios.put(`/api/esemenyek/${props.obj.id}`, { letszam: ujLetszam });
+
+                // Frissítsük az események listáját
+                props.obj.letszam = ujLetszam;
+            } catch (error) {
+                console.error("Hiba történt a résztvevők csökkentésekor!", error);
+            }
+        }
     };
 
+
     return (
-        <div>
-            <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={"http://localhost:8000/" + props.obj.kepek} />
-                <Card.Body>
-                    <Card.Title>{props.obj.cim}</Card.Title>
-                    <Button variant="primary" onClick={kattintasKezeles}>Megnézem</Button>
-                </Card.Body>
-            </Card>
+        <div className="esemeny-container">
+            <div className="esemeny-content">
+            <h2>{props.obj?.esemeny_neve || "Nincs esemény neve"}</h2>
+            <p>{props.obj?.leiras ? props.obj.leiras  : "Nincs leírás"}</p> 
+                <p><strong>Időpont:</strong> {props.obj?.datum || "Nincs dátum"}</p>
+                <p><strong>Helyszín:</strong> {props.obj?.helyszin || "Nincs helyszín"}</p>
+                <p><strong>Résztvevők száma:</strong> {props.obj?.letszam || "Nincs adat"} fő</p>
+                <button className="btn-primary" onClick={handleReszvetel}>Feliratkozás</button>
+            </div>
         </div>
-  )
+    )
 }

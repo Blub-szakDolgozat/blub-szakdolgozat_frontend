@@ -5,20 +5,21 @@ import useAdminContext from '../../contexts/AdminContext';
 
 export default function Esemenyek() {
 
-    const { cikkLista } = useAdminContext();
+    const { esemenyekLista } = useAdminContext();
 
     return (
         <div>
             <h1>Események</h1>
-            <p>Oldalunkon sok különböző környezetvédelmi esemény található. A cikkek számos témát dolgoznak fel, köztük jelentősen felhívják a figyelmet a műanyag szemetelésének következményeire és veszélyeire.</p>
-            <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
-            
-            <div className='row row-cols-1 row-cols-md-3 g-4'>
-                {cikkLista.map((elem, index) => {
-                return <Esemeny obj={elem} key={index}/>;
-                })}
+            <p>Oldalunkon különböző környezetvédelmi események találhatók...</p>
+            <div className="esemenyek-lista">
+                {esemenyekLista.length > 0 ? (
+                    esemenyekLista.map((elem, index) => (
+                        <Esemeny obj={elem} key={index} />
+                    ))
+                ) : (
+                    <p>Nincsenek elérhető események.</p>
+                )}
             </div>
-            
         </div>
-  )
+    )
 }
