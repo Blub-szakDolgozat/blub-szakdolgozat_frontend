@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import "./Layout.css";
 import ProfileKep from "../components/ProfilKep";
 import "./Ocean.css";
-import { Button, Modal, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 
 // Buborékok animáció
@@ -237,20 +237,6 @@ function Halak() {
   </Nav.Item>
 </Nav>
 
-{/* Bejelentkezési modal */}
-<Modal show={showLogin} onHide={() => setShowLogin(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Bejelentkezés</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <input id="email" type="text" placeholder="Email" className="form-control mb-2" />
-              <input id="password" type="password" placeholder="Jelszó" className="form-control" />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={() => setShowLogin(false)}>Bezárás</Button>
-              <Button variant="primary" onClick={handleLogin}>Belépés</Button>
-            </Modal.Footer>
-          </Modal>
 
           {/* Tartalom */}
           <div className="content">
