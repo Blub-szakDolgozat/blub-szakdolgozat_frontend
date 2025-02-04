@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const regisztracio = async ({ ...adat }) => {
     await csrf();
     try {
-      await myAxios.post("/register", adat);
+      await myAxios.post("api/register", adat);
       getUser();
       navigate("/bejelentkezes");
     } catch (error) {
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   const login = async ({ email, password }) => {
     await csrf();
     try {
-      const response = await myAxios.post("/login", {
+      const response = await myAxios.post("api/login", {
         email: email,
         password: password,
       });
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("access_token");
     if (token) {
       try {
-        const response = await myAxios.get("/user", {
+        const response = await myAxios.get("api/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await csrf();
     try {
-      await myAxios.post("/logout");
+      await myAxios.post("api/logout");
       setUser(null);
       setIsLoggedIn(false);
       setUserProfilePic(null); // Profilkép alaphelyzetbe állítása
