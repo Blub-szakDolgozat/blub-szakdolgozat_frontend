@@ -1,6 +1,6 @@
 import React from 'react'
 import Esemeny from './Esemeny';
-import './Esemeny.css';
+import './public.css';
 import useAdminContext from '../../contexts/AdminContext';
 
 export default function Esemenyek() {
@@ -9,9 +9,9 @@ export default function Esemenyek() {
 
     return (
         <div>
-            <h1>Események</h1>
+            <h2 className='cim'>Programok</h2>
             <p>Oldalunkon különböző környezetvédelmi események találhatók...</p>
-            <div className="esemenyek-lista">
+            <div className="esemenyek-lista doboz">
                 {esemenyekLista.length > 0 ? (
                     esemenyekLista.map((elem, index) => (
                         <Esemeny obj={elem} key={index} />

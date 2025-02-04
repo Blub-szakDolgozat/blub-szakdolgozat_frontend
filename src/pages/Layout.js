@@ -135,14 +135,20 @@ function Halak() {
   {user ? (
               <>
                 <Nav.Item>
-                  <Link to="#" className="nav-link" onClick={logout}>
+                  <Link to="#" className="nav-link" style={{
+          fontWeight: "bold",
+          textDecoration: "none",
+        }} onClick={logout}>
                     Kijelentkezés
                   </Link>
                 </Nav.Item>
               </>
             ) : (
               <Nav.Item>
-                <Link to="/bejelentkezes" className="nav-link" onClick={() => setShowLogin(true)}>
+                <Link to="/bejelentkezes" className="nav-link"  style={{
+          fontWeight: "bold",
+          textDecoration: "none",
+        }} onClick={() => setShowLogin(true)}>
                   Bejelentkezés
                 </Link>
               </Nav.Item>
@@ -153,7 +159,7 @@ function Halak() {
         to="/admin"
         className="nav-link"
         style={{
-          fontWeight: "bold",
+     
           textDecoration: "none",
         }}
         onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
@@ -170,7 +176,7 @@ function Halak() {
       to="/akvarium"
       className="nav-link"
       style={{
-        fontWeight: "bold",
+        
         textDecoration: "none",
       }}
       onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
@@ -184,7 +190,7 @@ function Halak() {
       to="/sorsolas"
       className="nav-link"
       style={{
-        fontWeight: "bold",
+       
         textDecoration: "none",
       }}
       onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
@@ -198,7 +204,7 @@ function Halak() {
       to="/videok"
       className="nav-link"
       style={{
-        fontWeight: "bold",
+        
         textDecoration: "none",
       }}
       onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
@@ -212,7 +218,7 @@ function Halak() {
       to="/cikkek"
       className="nav-link"
       style={{
-        fontWeight: "bold",
+        
         textDecoration: "none",
       }}
       onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
@@ -226,7 +232,6 @@ function Halak() {
       to="/esemenyek"
       className="nav-link"
       style={{
-        fontWeight: "bold",
         textDecoration: "none",
       }}
       onMouseOver={(e) => (e.target.style.textDecoration = "underline")}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { myAxios } from '../../contexts/MyAxios';
+import './public.css';
 
 export default function Esemeny(props) {
     console.log("Esemény adatai:", props);
@@ -20,14 +21,14 @@ export default function Esemeny(props) {
 
 
     return (
-        <div className="esemeny-container">
-            <div className="esemeny-content">
+        <div className="esemeny-container row">
+            <p className='datum col-12 col-md-2'>{props.obj?.datum || "Nincs dátum"}</p>
+            <div className="esemeny-content col-12 col-md-10">
             <h2>{props.obj?.esemeny_neve || "Nincs esemény neve"}</h2>
             <p>{props.obj?.leiras ? props.obj.leiras  : "Nincs leírás"}</p> 
-                <p><strong>Időpont:</strong> {props.obj?.datum || "Nincs dátum"}</p>
                 <p><strong>Helyszín:</strong> {props.obj?.helyszin || "Nincs helyszín"}</p>
                 <p><strong>Résztvevők száma:</strong> {props.obj?.letszam || "Nincs adat"} fő</p>
-                <button className="btn-primary" onClick={handleReszvetel}>Feliratkozás</button>
+                <button className="feliratkozas" onClick={handleReszvetel}>Feliratkozás</button>
             </div>
         </div>
     )

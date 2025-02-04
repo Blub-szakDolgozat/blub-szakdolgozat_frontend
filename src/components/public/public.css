@@ -1,0 +1,94 @@
+.cim{
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+}
+
+.doboz {
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+
+  .esemenyek-lista p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+
+.feliratkozas {
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: none;
+    background-color: #156894;
+    color: white;
+    cursor: pointer;
+}
+
+.feliratkozas:hover {
+    background-color: #114864; 
+    border-radius: 5px;
+}
+
+.datum{
+    display: flex;
+    align-items: start;
+    font-weight: bolder;
+}
+h2{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+.uzenet{
+    text-align: center;
+    color: #007004;
+    font-family: cursive;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.esemeny-container {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9d7;
+    border-radius: 5px;
+
+}
+.esemeny-container:hover {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f9f9f9d7;
+    border-radius: 5px;
+    box-shadow: rgba(17, 72, 100, 0.4) 15px 15px 1px; /* Átlátszóbb árnyék */
+    box-sizing: border-box;
+}
+
+.esemeny-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.esemeny-content p {
+    margin: 5px 0;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    }
+.datum{
+    font-weight: bolder;
+}

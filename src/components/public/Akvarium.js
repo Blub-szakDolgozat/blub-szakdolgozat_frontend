@@ -37,9 +37,10 @@ const Akvarium = () => {
     <div>
       <h2>Akvárium:</h2>
       <Container>
-        {viziLenyek.map((viziLeny) => (
-          <ViziLenyKartya adat={viziLeny} key={viziLeny.vizi_leny_id} />
-        ))}
+      {viziLenyek.map((viziLeny) => (
+  <ViziLenyKartya adat={viziLeny} key={viziLeny.vizi_leny_id} />
+))}
+
       </Container>
 
       {selectedViziLeny && (
