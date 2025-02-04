@@ -16,18 +16,56 @@ p{
 
 .video-container {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* alapértelmezett: 1 oszlop telefonon */
-    gap: 16px; /* A videók közötti távolság */
+    grid-template-columns: repeat(1, 1fr);
  }
  
  @media (min-width: 576px) {
     .video-container {
-       grid-template-columns: repeat(2, 1fr); /* 2 oszlop táblagépen */
+       grid-template-columns: repeat(2, 1fr);
     }
  }
  
  @media (min-width: 768px) {
     .video-container {
-       grid-template-columns: repeat(3, 1fr); /* 3 oszlop asztali képernyőn */
+       grid-template-columns: repeat(3, 1fr);
     }
  }
+
+ .custom-card {
+   border-radius: 10px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+   transform: scale(1.05);
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card .card-title {
+   font-size: 1.2rem;
+   font-weight: bold;
+}
+
+.custom-card .card-body {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 100%;
+   padding: 15px;
+}
+
+.custom-card .btn {
+   margin-top: auto;
+   width: 100%;
+   padding: 10px;
+   background-color: #007bff;
+   color: white;
+   border-radius: 5px;
+   border: none;
+   transition: background-color 0.3s ease;
+}
+
+.custom-card .btn:hover {
+   background-color: #0056b3;
+}
