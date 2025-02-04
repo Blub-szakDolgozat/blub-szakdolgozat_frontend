@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import "./Layout.css";
 import ProfileKep from "../components/ProfilKep";
 import "./Ocean.css";
-import { Nav } from "react-bootstrap";
+import { Button, Modal, Nav } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 
 // Buborékok animáció
@@ -44,26 +44,38 @@ function Halak() {
 }
 
   const Layout = () => {
-    const { user } = useAuth(); // Felhasználói adat lekérése, jogosultságok ellenőrzése
+    const { user, login, logout } = useAuth(); // 🔹 Auth context használata
     const [searchQuery, setSearchQuery] = useState("");
+    const [showLogin, setShowLogin] = useState(false);
   
-
-  // Keresés változás kezelése
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
-
-  // Keresés submit
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    console.log("Search Query:", searchQuery);
-  };
-
-  // Profilkép kattintás kezelése
-  const handleProfileClick = () => {
-    alert("Profilképre kattintottál!");
-  };
-
+    // Bejelentkezési művelet
+    const handleLogin = async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      if (!email || !password) {
+        console.log("Email vagy jelszó hiányzik!");
+        return;
+      }
+      console.log("Küldendő adatok:", { email, password });
+      await login({ email, password });
+      setShowLogin(false);
+    };
+  
+    // Keresés változás kezelése
+    const handleSearchChange = (event) => {
+      setSearchQuery(event.target.value);
+    };
+  
+    // Keresés submit
+    const handleSearchSubmit = (event) => {
+      event.preventDefault();
+      console.log("Search Query:", searchQuery);
+    };
+  
+    // Profilkép kattintás kezelése
+    const handleProfileClick = () => {
+      alert("Profilképre kattintottál!");
+    };
   
 
   return (
@@ -120,6 +132,21 @@ function Halak() {
           {/* Menü (legördülős) */}
           <Nav style={{ display: "flex", gap: "0" }}>
   {/* Admin fül csak akkor jelenjen meg, ha a felhasználó admin */}
+  {user ? (
+              <>
+                <Nav.Item>
+                  <Link to="#" className="nav-link" onClick={logout}>
+                    Kijelentkezés
+                  </Link>
+                </Nav.Item>
+              </>
+            ) : (
+              <Nav.Item>
+                <Link to="#" className="nav-link" onClick={() => setShowLogin(true)}>
+                  Bejelentkezés
+                </Link>
+              </Nav.Item>
+            )}
   {user?.jogosultsagi_szint === "admin" && (
     <Nav.Item>
       <Link
@@ -137,20 +164,7 @@ function Halak() {
     </Nav.Item>
   )}
   {/* Egyéb menüpontok */}
-  <Nav.Item>
-    <Link
-      to="/bejelentkezes"
-      className="nav-link"
-      style={{
-        fontWeight: "bold",
-        textDecoration: "none",
-      }}
-      onMouseOver={(e) => (e.target.style.textDecoration = "underline")}
-      onMouseOut={(e) => (e.target.style.textDecoration = "none")}
-    >
-      Bejelentkezés
-    </Link>
-  </Nav.Item>
+  
   <Nav.Item>
     <Link
       to="/akvarium"
@@ -223,6 +237,20 @@ function Halak() {
   </Nav.Item>
 </Nav>
 
+{/* Bejelentkezési modal */}
+<Modal show={showLogin} onHide={() => setShowLogin(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Bejelentkezés</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <input id="email" type="text" placeholder="Email" className="form-control mb-2" />
+              <input id="password" type="password" placeholder="Jelszó" className="form-control" />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowLogin(false)}>Bezárás</Button>
+              <Button variant="primary" onClick={handleLogin}>Belépés</Button>
+            </Modal.Footer>
+          </Modal>
 
           {/* Tartalom */}
           <div className="content">
