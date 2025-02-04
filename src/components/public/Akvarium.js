@@ -8,7 +8,7 @@ const Akvarium = () => {
 
     useEffect(() => {
         // API kérés az aktuális felhasználó vizi lényeinek lekérésére
-        axios.get('/api/user-lenyei', { withCredentials: true })  // withCredentials, ha a cookie-kat is küldeni akarjuk
+        axios.get('localhost:8000/api/user-lenyei', { withCredentials: true })  // withCredentials, ha a cookie-kat is küldeni akarjuk
             .then(response => {
                 setViziLenyek(response.data); // Az adatok tárolása a state-ben
                 setLoading(false);
