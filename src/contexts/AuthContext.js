@@ -126,8 +126,8 @@ export const AuthProvider = ({ children }) => {
   // Alkalmazás indításakor ellenőrizzük, hogy érvényes-e a token
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    if (token) {
-      getUser(); // Ha van token, próbáljuk lekérni a felhasználói adatokat
+    if (!user) {
+      getUser() // Ha van token, próbáljuk lekérni a felhasználói adatokat
     } else {
       setIsLoggedIn(false); // Ha nincs token, a felhasználó nincs bejelentkezve
       setUser(null);

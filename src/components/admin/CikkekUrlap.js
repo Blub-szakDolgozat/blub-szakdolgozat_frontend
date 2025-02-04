@@ -5,6 +5,7 @@ import CikkekTablazat from "./CikkekTablazat";
 export default function CikkekUrlap() {
   const { postAdat, errors,cikkLista } = useAdminContext();
   const [cim, setCim] = useState("");
+  const [publikalva, setPublikalva] = useState("");
   const [leiras, setLeiras] = useState("");
   const [file, setFile] = useState(null);
 
@@ -14,6 +15,7 @@ export default function CikkekUrlap() {
       cim: cim,
       kepek: file,
       leiras: leiras,
+      publikalva:publikalva,
     };
     console.log(adat);
     postAdat(adat, "/api/cikk-add");
@@ -78,6 +80,25 @@ export default function CikkekUrlap() {
         <div>
           {errors.kepek && (
             <span className="text-danger">{errors.kepek[0]}</span>
+          )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="datum" className="form-label">
+            Publikálva:
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="datum"
+            onChange={(event) => {
+              setPublikalva(event.target.value);
+            }}
+            placeholder="esemény dátuma"
+          />
+        </div>
+        <div>
+          {errors.publikalva && (
+            <span className="text-danger">{errors.publikalva[0]}</span>
           )}
         </div>
 
