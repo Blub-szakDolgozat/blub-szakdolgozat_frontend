@@ -118,31 +118,19 @@ export const AuthProvider = ({ children }) => {
 
   // Profilkép betöltése az alkalmazás indításakor
   useEffect(() => {
-    getUser();
-    const storedProfilePic = localStorage.getItem("userProfilePic");
-    if (storedProfilePic) {
-      setUserProfilePic(storedProfilePic);
-    } else {
-      setUserProfilePic("https://www.w3schools.com/howto/img_avatar.png"); // Alapértelmezett profilkép
+    const token = localStorage.getItem("access_token");
+  
+    if (token) {
+      getUser();
     }
+  
+    const storedProfilePic = localStorage.getItem("userProfilePic");
+    setUserProfilePic(
+      storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
+    );
+  
   }, []);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("/user"); // A backend automatikusan ellenőrzi a CSRF cookie-t
-        if (!response.ok) {
-          throw new Error("Felhasználói adatok lekérése nem sikerült");
-        }
-        const data = await response.json();
-        setUser(data); // A válasz tartalma (felhasználói adatok)
-      } catch (error) {
-        console.error("Hiba:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  
 
   return (
     <AuthContext.Provider
