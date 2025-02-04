@@ -142,7 +142,7 @@ function Halak() {
               </>
             ) : (
               <Nav.Item>
-                <Link to="#" className="nav-link" onClick={() => setShowLogin(true)}>
+                <Link to="/bejelentkezes" className="nav-link" onClick={() => setShowLogin(true)}>
                   Bejelentkezés
                 </Link>
               </Nav.Item>
