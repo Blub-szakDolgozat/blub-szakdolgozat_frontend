@@ -6,10 +6,11 @@ export const AuthContext = createContext("");
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userProfilePic, setUserProfilePic] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("access_token"));
+  const [userProfilePic, setUserProfilePic] = useState(localStorage.getItem("userProfilePic") || "https://www.w3schools.com/howto/img_avatar.png");
+  
 
   // CSRF cookie megszerzése
   const csrf = async () => {
@@ -38,16 +39,17 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password: password,
       });
-
+  
       const accessToken = response.data.access_token;
       setUser(response.data.user);
       setToken(accessToken);
       setIsLoggedIn(true);
       localStorage.setItem("access_token", accessToken);
-      
+  
+      // Ha van elmentett profilkép, állítsuk be, ha nincs, akkor alapértelmezett
       const storedProfilePic = localStorage.getItem("userProfilePic");
       setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
-
+  
       navigate("/akvarium");
     } catch (error) {
       console.log(
@@ -56,6 +58,7 @@ export const AuthProvider = ({ children }) => {
       );
     }
   };
+  
 
   // Felhasználó adatainak lekérése
   const getUser = async () => {
@@ -98,6 +101,8 @@ export const AuthProvider = ({ children }) => {
       navigate("/bejelentkezes");
     }
   };
+  
+  
 
   // Profilkép frissítése
   const updateProfilePic = (newProfilePic) => {
@@ -117,20 +122,23 @@ export const AuthProvider = ({ children }) => {
       reader.readAsDataURL(file);
     }
   };
-
+  
   // Alkalmazás indításakor ellenőrizzük, hogy érvényes-e a token
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
-      getUser();
+      getUser(); // Ha van token, próbáljuk lekérni a felhasználói adatokat
     } else {
-      setIsLoggedIn(false);
+      setIsLoggedIn(false); // Ha nincs token, a felhasználó nincs bejelentkezve
       setUser(null);
     }
-
+  
+    // Profilkép beállítása, ha van elmentett
     const storedProfilePic = localStorage.getItem("userProfilePic");
     setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
   }, []);
+  
+  
 
   return (
     <AuthContext.Provider
