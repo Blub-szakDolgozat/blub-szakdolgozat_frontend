@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
     await csrf();
     try {
       await myAxios.post("api/register", adat);
-      getUser();
       navigate("/bejelentkezes");
     } catch (error) {
       console.log(
@@ -39,14 +38,16 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password: password,
       });
+
+      const accessToken = response.data.access_token;
       setUser(response.data.user);
-      setToken(response.data.access_token);
-      localStorage.setItem("access_token", response.data.token);
-      getUser();
+      setToken(accessToken);
+      setIsLoggedIn(true);
+      localStorage.setItem("access_token", accessToken);
+      
       const storedProfilePic = localStorage.getItem("userProfilePic");
-      setUserProfilePic(
-        storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
-      );
+      setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
+
       navigate("/akvarium");
     } catch (error) {
       console.log(
@@ -59,25 +60,25 @@ export const AuthProvider = ({ children }) => {
   // Felhasználó adatainak lekérése
   const getUser = async () => {
     const token = localStorage.getItem("access_token");
-    if (token) {
-      try {
-        const response = await myAxios.get("api/user", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log("Felhasználói adat:", response.data);
-        setUser(response.data);
-        const storedProfilePic = localStorage.getItem("userProfilePic");
-        setUserProfilePic(
-          storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
-        );
-      } catch (error) {
-        console.log(
-          "Felhasználó lekérdezési hiba:",
-          error.response ? error.response.data : error.message
-        );
-      }
+    if (!token) return; // Ha nincs token, ne próbáljuk meg lekérni az adatokat
+
+    try {
+      const response = await myAxios.get("api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(response.data);
+      setIsLoggedIn(true);
+      const storedProfilePic = localStorage.getItem("userProfilePic");
+      setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
+    } catch (error) {
+      console.log(
+        "Felhasználó lekérdezési hiba:",
+        error.response ? error.response.data : error.message
+      );
+      logout(); // Ha a kérés sikertelen, automatikusan kijelentkeztetjük a felhasználót
     }
   };
 
@@ -86,14 +87,15 @@ export const AuthProvider = ({ children }) => {
     await csrf();
     try {
       await myAxios.post("api/logout");
+    } catch (error) {
+      console.log(error);
+    } finally {
       setUser(null);
       setIsLoggedIn(false);
-      setUserProfilePic(null); // Profilkép alaphelyzetbe állítása
+      setUserProfilePic(null);
       localStorage.removeItem("userProfilePic");
       localStorage.removeItem("access_token");
       navigate("/bejelentkezes");
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -109,28 +111,26 @@ export const AuthProvider = ({ children }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const base64Image = reader.result; // Base64 kép
-        updateProfilePic(base64Image); // Frissítés
+        const base64Image = reader.result;
+        updateProfilePic(base64Image);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Profilkép betöltése az alkalmazás indításakor
+  // Alkalmazás indításakor ellenőrizzük, hogy érvényes-e a token
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-  
     if (token) {
       getUser();
+    } else {
+      setIsLoggedIn(false);
+      setUser(null);
     }
-  
+
     const storedProfilePic = localStorage.getItem("userProfilePic");
-    setUserProfilePic(
-      storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png"
-    );
-  
+    setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
   }, []);
-  
 
   return (
     <AuthContext.Provider
