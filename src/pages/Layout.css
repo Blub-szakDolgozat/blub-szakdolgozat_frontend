@@ -2,12 +2,10 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
-  color: white;
 }
 
 .nav-link {
   font-family: 'Roboto-Regular', sans-serif;
-  color: rgb(5, 52, 114);
   font-size: 16px;
   padding: 15px;
 }
@@ -16,31 +14,54 @@
   text-decoration: underline;
   background-color: #e9ecef;
   border-radius: 4px;
-  color: #02162b;
 }
 
 .search-container {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .search-input {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #e9ecef62;
+  border-radius: 20px;
+  font-size: 14px;
+  color: white;
 }
 
 .search-button {
-  background-color: #007bff;
-  color: white;
+  background-color: #e9ecef62;
   border: none;
-  padding: 5px 10px;
-  margin-left: 5px;
-  border-radius: 4px;
+  color: rgb(0, 0, 0);
+  padding: 8px 15px;
+  margin-left: 10px;
   cursor: pointer;
+  transition: 0.3s;
+  border-radius: 15px;
 }
 
 .search-button:hover {
-  background-color: #0056b3;
+  background-color: #74bdc8;
+  border-radius: 20px;
+  color: white;
+}
+
+/* Reszponzív kialakítás mobilhoz */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .search-container {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
 }

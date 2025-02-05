@@ -19,14 +19,19 @@
   }
 
 
-.feliratkozas {
+  .feliratkozas {
     text-transform: uppercase;
     padding: 10px 20px;
     border: none;
     background-color: #156894;
     color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: end;
+    margin-left: auto; 
+    margin-top: 10px;
 }
+
 
 .feliratkozas:hover {
     background-color: #114864; 
@@ -35,8 +40,8 @@
 
 .datum{
     display: flex;
+    flex-direction: column;
     align-items: start;
-    font-weight: bolder;
 }
 h2{
     text-align: center;
@@ -66,7 +71,7 @@ p{
     border: 1px solid #ccc;
     padding: 15px;
     margin: 10px 0;
-    background-color: #f9f9f9d7;
+    background-color: #f9f9f9;
     border-radius: 5px;
     box-shadow: rgba(17, 72, 100, 0.4) 15px 15px 1px; /* Átlátszóbb árnyék */
     box-sizing: border-box;
@@ -89,6 +94,3 @@ p{
     border-radius: 3px;
     cursor: pointer;
     }
-.datum{
-    font-weight: bolder;
-}
