@@ -11,6 +11,7 @@ export default function EsemenyekUrlap() {
   const [helyszin, setHelyszin] = useState("");
   const [letszam, setLetszam] = useState("");
   const [minDate, setMinDate] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const holnap = new Date();
@@ -31,6 +32,15 @@ export default function EsemenyekUrlap() {
     console.log(adat);
     postAdat(adat, "/api/esemeny-add");
   }
+
+  // Szűrés a keresett szöveg alapján
+  const filteredEvents = esemenyekLista.filter((esemeny) => {
+    return (
+      esemeny.esemeny_neve.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      esemeny.helyszin.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
+
   return (
     <div className="container">
       <form onSubmit={kuld}>
@@ -144,7 +154,20 @@ export default function EsemenyekUrlap() {
           value="Küld"
         />
       </form>
-      <EsemenyTablazat esemenyekLista={esemenyekLista} />
+
+      {/* Szűrő input hozzáadása */}
+      <div className="mt-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Keresés esemény név vagy helyszín alapján"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* Események listázása szűrt formában */}
+      <EsemenyTablazat esemenyekLista={filteredEvents} />
     </div>
   );
 }
