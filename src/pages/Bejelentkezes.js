@@ -25,6 +25,10 @@ export default function Bejelentkezes({ onLogin }) {
     navigate("/regisztralas");
   };
 
+  const handleForgotPassword = () => {
+    navigate("/elfelejtett-jelszo");  // A megfelelő oldalra navigálás
+  };
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -61,6 +65,11 @@ export default function Bejelentkezes({ onLogin }) {
               Nincs még fiókod?{" "}
               <button onClick={handleClick} className="btn btn-link">
                 Regisztráció
+              </button>
+            </p>
+            <p>
+              <button onClick={handleForgotPassword} className="btn btn-link">
+                Elfelejtett jelszó?
               </button>
             </p>
           </div>
