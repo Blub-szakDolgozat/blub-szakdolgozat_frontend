@@ -90,121 +90,57 @@ const Layout = () => {
         <h1>Blub</h1>
       </header>
       <div className="Fej-content">
-      <Nav>
-            {/* Admin fül csak akkor jelenjen meg, ha a felhasználó admin */}
-            {user ? (
-              <>
-                <Nav.Item>
-                  <Link
-                    to="#"
-                    className="nav-link"
-                    style={{
-                      fontWeight: "bold",
-                      color: "black",
-                    }}
-                    onClick={logout}
-                  >
-                    Kijelentkezés
-                  </Link>
-                </Nav.Item>
-              </>
-            ) : (
+        <Nav>
+          {/* Admin fül csak akkor jelenjen meg, ha a felhasználó admin */}
+          {user ? (
+            <>
               <Nav.Item>
-                <Link
-                  to="/bejelentkezes"
-                  className="nav-link"
-                  style={{
-                    fontWeight: "bold",
-                    color: "black",
-                  }}
-                  onClick={() => setShowLogin(true)}
-                >
-                  Bejelentkezés
+                <Link to="#" className="nav-link" onClick={logout}>
+                  Kijelentkezés
                 </Link>
               </Nav.Item>
-            )}
-            {user?.jogosultsagi_szint === "admin" && (
-              <Nav.Item>
-                <Link
-                  to="/admin"
-                  className="nav-link"
-                  style={{
-                    color: "#47485c", 
-                  }}
-                  onMouseOver={(e) => e.target.style.color = "black"} 
-                  onMouseOut={(e) => e.target.style.color = "#47485c"}  
-                >
-                  Admin
-                </Link>
-              </Nav.Item>
-            )}
-            {/* Egyéb menüpontok */}
+            </>
+          ) : (
+            <Nav.Item>
+              <Link to="/bejelentkezes" className="nav-link" onClick={() => setShowLogin(true)}>
+                Bejelentkezés
+              </Link>
+            </Nav.Item>
+          )}
 
+          {user?.jogosultsagi_szint === "admin" && (
             <Nav.Item>
-              <Link
-                to="/akvarium"
-                className="nav-link"
-                style={{
-                  color: "#47485c", 
-                }}
-                onMouseOver={(e) => e.target.style.color = "black"} 
-                onMouseOut={(e) => e.target.style.color = "#47485c"}  
-              >
-                Akvárium
+              <Link to="/admin" className="nav-link">
+                Admin
               </Link>
             </Nav.Item>
-            <Nav.Item>
-              <Link
-                to="/sorsolas"
-                className="nav-link"
-                style={{
-                  color: "#47485c", 
-                }}
-                onMouseOver={(e) => e.target.style.color = "black"} 
-                onMouseOut={(e) => e.target.style.color = "#47485c"}  
-              >
-                Napi Sorsolás
-              </Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link
-                to="/videok"
-                className="nav-link"
-                style={{
-                  color: "#47485c", 
-                }}
-                onMouseOver={(e) => e.target.style.color = "black"} 
-                onMouseOut={(e) => e.target.style.color = "#47485c"}  
-              >
-                Videók
-              </Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link
-                to="/cikkek"
-                className="nav-link"
-                style={{
-                  color: "#47485c", 
-                }}
-                onMouseOver={(e) => e.target.style.color = "black"} 
-                onMouseOut={(e) => e.target.style.color = "#47485c"}  
-              >
-                Cikkek
-              </Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Link
-                to="/esemenyek"
-                className="nav-link"
-                style={{
-                  color: "#47485c", 
-                }}
-                onMouseOver={(e) => e.target.style.color = "black"} 
-                onMouseOut={(e) => e.target.style.color = "#47485c"}  
-              >
-                Események
-              </Link>
-            </Nav.Item>
+          )}
+
+          <Nav.Item>
+            <Link to="/akvarium" className="nav-link">
+              Akvárium
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/sorsolas" className="nav-link">
+              Napi Sorsolás
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/videok" className="nav-link">
+              Videók
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/cikkek" className="nav-link">
+              Cikkek
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/esemenyek" className="nav-link">
+              Események
+            </Link>
+          </Nav.Item>
             {/* Keresés */}
             <div className="search-container">
               <form onSubmit={handleSearchSubmit}>

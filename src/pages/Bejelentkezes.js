@@ -26,13 +26,13 @@ export default function Bejelentkezes({ onLogin }) {
   };
 
   const handleForgotPassword = () => {
-    navigate("/elfelejtett-jelszo");  // A megfelelő oldalra navigálás
+    navigate("/elfelejtett-jelszo"); // A megfelelő oldalra navigálás
   };
 
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
-        <Col md={6}>
+        <Col xs={6} className="bejelentkezes">
           <h2 className="text-center">Bejelentkezés</h2>
           {error && <p className="text-danger text-center">{error}</p>}
           <Form onSubmit={handleSubmit}>
@@ -60,16 +60,27 @@ export default function Bejelentkezes({ onLogin }) {
               Bejelentkezés
             </Button>
           </Form>
+          <button onClick={handleForgotPassword} className="btn btn-link">
+            Elfelejtett jelszó?
+          </button>
+        </Col>
+        <Col xs={6}>
+          <h2>Hello!</h2>
+          <p>Ha van fiókod kérlek jelentkez be.</p>
+          <img
+            src="/kepek/hal.png"
+            alt="Bejelentkezés illusztráció"
+            className="bejelentkezes-kep"
+            style={{ width: "100%", height: "auto" }} 
+          />
+        </Col>
+        {/* Regisztrációs rész */}
+        <Col xs={12} className="regisztracio">
           <div className="text-center mt-3">
             <p>
               Nincs még fiókod?{" "}
               <button onClick={handleClick} className="btn btn-link">
                 Regisztráció
-              </button>
-            </p>
-            <p>
-              <button onClick={handleForgotPassword} className="btn btn-link">
-                Elfelejtett jelszó?
               </button>
             </p>
           </div>

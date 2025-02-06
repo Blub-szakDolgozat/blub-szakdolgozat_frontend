@@ -1,19 +1,23 @@
-.navbar {
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-}
-
 .nav-link {
-  font-family: 'Roboto-Regular', sans-serif;
-  font-size: 16px;
-  padding: 15px;
+  color: white !important; 
+  font-weight: bold;
+  text-decoration: none; 
+  position: relative;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
-  background-color: #e9ecef;
-  border-radius: 4px;
+  color: white !important; 
+}
+
+.nav-link:hover::after {
+  content: ""; /* Üres tartalom */
+  position: absolute;
+  bottom: 0; /* A csík alul jelenjen meg */
+  left: 0;
+  width: 100%; /* A csík legyen akkora, mint a link */
+  height: 2px; /* A csík magassága */
+  background-color: white; /* Fehér csík */
 }
 
 .search-container {
@@ -28,13 +32,17 @@
   background-color: #e9ecef62;
   border-radius: 20px;
   font-size: 14px;
-  color: white;
 }
+
+.search-input::placeholder {
+  color: #ffffff; 
+}
+
 
 .search-button {
   background-color: #e9ecef62;
   border: none;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   padding: 8px 15px;
   margin-left: 10px;
   cursor: pointer;
