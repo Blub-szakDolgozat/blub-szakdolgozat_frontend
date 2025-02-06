@@ -35,7 +35,7 @@ export default function Regisztralas() {
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
-        <Col md={6}>
+        <Col xs={6} className="regisztralas">
           <h2 className="text-center">Regisztráció</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="felhasznalonev">
@@ -82,6 +82,23 @@ export default function Regisztralas() {
               Regisztráció
             </Button>
           </Form>
+        </Col>
+        <Col xs={6} className="textdoboz">
+          <h2>Üdvözöllek a Blub weboldalán!</h2>
+          <p>
+            Ha még nincs fiókod, kérlek regisztrálj!
+            <br />
+            Bejelentekezni alul a bejelentkezés gombra kattintva lehet. ⇣
+          </p>
+          <img
+            src="/kepek/hal.png"
+            alt="Bejelentkezés illusztráció"
+            className="bejelentkezes-kep"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Col>
+        {/* Bejelentkezes rész */}
+        <Col xs={12} className="login">
           <div className="text-center mt-3">
             <p>
               Már van fiókod?{" "}
