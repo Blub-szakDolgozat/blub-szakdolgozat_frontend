@@ -1,3 +1,10 @@
+ .szovegdoboz{
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+   color: white;
+   background-color: #2a1e4058;
+   padding: 20px;
+ }
  .custom-card {
    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
    transition: transform 0.3s ease, box-shadow 0.3s ease;

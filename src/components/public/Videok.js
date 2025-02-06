@@ -15,6 +15,12 @@ export default function Videok() {
 
     return (
         <Row className="video-container" >
+            <div className='szovegdoboz'>
+            <h1>Videók</h1>
+            <p>Oldalunkon sok különböző környezetvédelmi oktatóvideó található. A videók számos témát dolgoznak fel, köztük jelentősen felhívják a figyelmet a műanyag szemetelésének következményeire és veszélyeire.</p>
+            <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
+            </div>
+
             {/* Kiválasztott videó (bal oldalon) */}
             {selectedVideo && (
                 <Col className='selected-video' style={{ backgroundImage: `url(http://localhost:8000/${selectedVideo.nyitokep})` }} >
