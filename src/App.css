@@ -20,7 +20,16 @@
 .App-header > h1 {
   margin: 10px;
 }
+.textdoboz h2{
+  color: white;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+.textdoboz p{
+  color: white;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
+}
 .bejelentkezes {
   background-color: rgba(41, 40, 66, 0.185);
   padding: 40px;

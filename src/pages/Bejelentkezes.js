@@ -64,9 +64,10 @@ export default function Bejelentkezes({ onLogin }) {
             Elfelejtett jelszó?
           </button>
         </Col>
-        <Col xs={6}>
-          <h2>Hello!</h2>
-          <p>Ha van fiókod kérlek jelentkez be.</p>
+        <Col xs={6} className="textdoboz">
+          <h2>Üdvözöllek a Blub weboldalán!</h2>
+          <p>Ha van már fiókod, kérlek jelentkezz be!<br />
+   Regisztrálni alul a regisztráció gombra kattintva lehet. ⇣</p>
           <img
             src="/kepek/hal.png"
             alt="Bejelentkezés illusztráció"
