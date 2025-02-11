@@ -10,7 +10,7 @@ export default function Esemenyek() {
     return (
         <div>
             <h2 className='cim'>Eseményeink</h2>
-            <p>Oldalunkon különböző környezetvédelmi események találhatók...</p>
+            <p className='alcim'>Oldalunkon különböző környezetvédelmi események találhatók...</p>
             <div className="esemenyek-lista doboz">
                 {esemenyekLista.length > 0 ? (
                     esemenyekLista.map((elem, index) => (

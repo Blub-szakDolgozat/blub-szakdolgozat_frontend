@@ -2,6 +2,13 @@
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    color: white;
+}
+.alcim{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 .doboz {
@@ -44,7 +51,7 @@
     align-items: start;
 }
 h2{
-    text-align: center;
+text-align: center;
 }
 
 p{
