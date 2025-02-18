@@ -13,14 +13,15 @@ export default function Cikkek() {
 
     const closeCikk = () => {
         setSelectedCikk(null);
-    };
+            };
 
     return (
         <div>
+            <div className='szovegdoboz'>
             <h1>Cikkek</h1>
-            <p>Oldalunkon sok különböző környezetvédelmi cikk található</p>
+            <p className='leiras'>Oldalunkon sok különböző környezetvédelmi cikk található</p>
             <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
-
+            </div>
             {/* Cikkek listája */}
             <div className='row row-cols-1 row-cols-md-3 g-4'>
                 {cikkLista.map((elem, index) => (
