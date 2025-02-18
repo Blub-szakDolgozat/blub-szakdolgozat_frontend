@@ -13,7 +13,7 @@ export default function Esemeny(props) {
     useEffect(() => {
         // Ha van esemény ID és a localStorage már tartalmazza, frissítjük az állapotot
         if (eventId) {
-            setIsFeliratkozva(localStorage.getItem(`feliratkozva_${eventId}`) === "true");
+            setIsFeliratkozva(localStorage.getItem(`feliratkozva_${eventId}`) === "");
         }
     }, [eventId]);
 
