@@ -26,11 +26,12 @@ p{
 }
 
 .modal-content {
-    background: rgb(118, 71, 71);
+    background-color: rgb(156, 69, 69)!important;
+    z-index: 1000;
     padding: 20px;
     width: 60%;
     max-width: 500px;
-    border-radius: 10px;
+    border-radius: 10px!important;
     box-shadow: 0px 0px 10px rgba(67, 26, 26, 0.3);
     text-align: center;
 }

@@ -23,6 +23,7 @@ export default function CikkekUrlap() {
 
   return (
     <div className="container">
+      <h1>Cikkek</h1>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="cim" className="form-label">

@@ -30,6 +30,7 @@ export default function ViziLenyekUrlap() {
 
   return (
     <div className="container">
+      <h1>Vízilények</h1>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="nev" className="form-label">

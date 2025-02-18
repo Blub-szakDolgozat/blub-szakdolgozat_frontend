@@ -26,6 +26,7 @@ export default function VideokUrlap() {
 
   return (
     <div className="container">
+      <h1>Videók</h1>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="cim" className="form-label">

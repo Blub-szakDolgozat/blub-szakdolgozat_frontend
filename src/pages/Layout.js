@@ -115,17 +115,21 @@ const Layout = () => {
               </Link>
             </Nav.Item>
           )}
+        {(user?.jogosultsagi_szint === "felhasznalo" || user?.jogosultsagi_szint === "admin") && (
+        <Nav.Item>
+          <Link to="/akvarium" className="nav-link">
+            Akvárium
+          </Link>
+        </Nav.Item>
+          )}
 
-          <Nav.Item>
-            <Link to="/akvarium" className="nav-link">
-              Akvárium
-            </Link>
-          </Nav.Item>
+        {(user?.jogosultsagi_szint === "felhasznalo" || user?.jogosultsagi_szint === "admin") && (
           <Nav.Item>
             <Link to="/sorsolas" className="nav-link">
-              Napi Sorsolás
+             Napi Sorsolás
             </Link>
           </Nav.Item>
+        )}
           <Nav.Item>
             <Link to="/videok" className="nav-link">
               Videók
