@@ -89,7 +89,7 @@
 .video-scroll {
    display: flex;
    flex-wrap: wrap; /* a videók több sorba */
-   justify-content: flex-start; /*videók balra igazítva */
+   justify-content: space-evenly; /*videók balra igazítva */
    gap: 20px;
    padding: 20px 0;
    scroll-snap-type: x mandatory;
