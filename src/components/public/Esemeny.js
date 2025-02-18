@@ -22,22 +22,42 @@ export default function Esemeny(props) {
             console.error("Hiba: Az esemény ID-je hiányzik!", props.obj);
             return;
         }
-
+    
         if (props.obj.letszam > 0 && !isFeliratkozva) {
             try {
-                const ujLetszam = props.obj.letszam - 1;
-                await myAxios.put(`/api/esemenyek/${eventId}`, { letszam: ujLetszam });
-
-                props.obj.letszam = ujLetszam;
-                setIsFeliratkozva(true);
-                localStorage.setItem(`feliratkozva_${eventId}`, "true"); // Állapot mentése
-
+                // Feliratkozás POST kérése
+                const response = await myAxios.post(`/api/esemeny/${eventId}/feliratkozas`);
+    
+                if (response.status === 200) {
+                    // Frissítjük a létszámot és az állapotot
+                    props.obj.letszam -= 1;
+                    setIsFeliratkozva(true);
+                    localStorage.setItem(`feliratkozva_${eventId}`, "true");
+                }
             } catch (error) {
-                console.error("Hiba történt a résztvevők csökkentésekor!", error);
+                console.error("Hiba történt a feliratkozás során!", error);
+                alert("Hiba történt a feliratkozás során. Kérjük, próbáld újra!");
+            }
+        } else if (isFeliratkozva) {
+            try {
+                // Leiratkozás DELETE kérése
+                const response = await myAxios.delete(`/api/esemeny/${eventId}/feliratkozas`);
+    
+                if (response.status === 200) {
+                    // Frissítjük a létszámot és az állapotot
+                    props.obj.letszam += 1;
+                    setIsFeliratkozva(false);
+                    localStorage.setItem(`feliratkozva_${eventId}`, "false");
+                }
+            } catch (error) {
+                console.error("Hiba történt a leiratkozás során!", error);
+                alert("Hiba történt a leiratkozás során. Kérjük, próbáld újra!");
             }
         }
     };
-
+    
+    
+      
     return (
         <div className="esemeny-container row">
             <div className='datum col-12 col-md-2'>
