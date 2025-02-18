@@ -43,6 +43,7 @@ export default function EsemenyekUrlap() {
 
   return (
     <div className="container">
+      <h1>Események</h1>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="esemeny_neve" className="form-label">
