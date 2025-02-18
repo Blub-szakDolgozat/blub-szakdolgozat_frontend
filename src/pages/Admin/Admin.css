@@ -5,11 +5,5 @@
   
   .nav-link.active {
     color: #b8b8e6 !important; 
-    text-decoration: underline; 
   }
-  
-  .nav-link:hover {
-    text-decoration: underline; 
-  }
-  
   
