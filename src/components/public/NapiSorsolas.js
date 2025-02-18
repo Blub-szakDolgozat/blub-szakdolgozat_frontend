@@ -6,30 +6,48 @@ export default function NapiSorsolas() {
 
   const handleSorsolas = async () => {
     setHiba("");
-
+  
     try {
-      // 1. Véletlenszerű vízi lény lekérése a backendből
-      const response = await fetch("/api/random-vizi-leny", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      // 1. CSRF token lekérése
+      const csrfResponse = await fetch("http://localhost:8000/sanctum/csrf-cookie", {
+        method: "GET",
+        credentials: "include", // FONTOS! Sütikhez szükséges
       });
-
-      if (!response.ok) {
-        throw new Error("Nem sikerült lekérni a vízi lényt.");
+  
+      if (!csrfResponse.ok) {
+        throw new Error("CSRF token nem érhető el.");
       }
-
-      const viziLeny = await response.json();
-      setNyeremeny(viziLeny);
-
-      // 2. Vízi lény hozzáadása az akváriumba
-      const addResponse = await fetch("/api/hozzaad-akvariumhoz", {
-        method: "POST",
+  
+      // 2. Véletlenszerű vízi lény lekérése
+      const response = await fetch("http://localhost:8000/api/random-vizi-leny", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        credentials: "include", // Ez biztosítja a süti használatát
+      });
+  
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const errorText = await response.text();
+        throw new Error(`Nem JSON válasz érkezett: ${errorText}`);
+      }
+  
+      const viziLeny = await response.json();
+      setNyeremeny(viziLeny);
+  
+      // 3. Vízi lény hozzáadása az akváriumhoz
+      const addResponse = await fetch("http://localhost:8000/api/akvarium/sorsol-hozzaad", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // A CSRF token most a sütikből jön, nem kell külön beállítani
+        },
+        credentials: "include", // Sütik engedélyezése
         body: JSON.stringify({ vizi_leny_id: viziLeny.vizi_leny_id }),
       });
-
+  
       if (!addResponse.ok) {
         const errMessage = await addResponse.json();
         throw new Error(errMessage.message || "Nem sikerült hozzáadni az akváriumhoz.");
@@ -38,6 +56,10 @@ export default function NapiSorsolas() {
       setHiba(error.message);
     }
   };
+  
+  
+  
+  
 
   return (
     <div className="sorsolas-container">
