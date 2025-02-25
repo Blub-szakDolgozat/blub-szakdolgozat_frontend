@@ -33,68 +33,115 @@ export default function Profil() {
       setTempUsername(user.name || "");
     }
   }, [user]);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUsername(user.name);
+      setEmail(user.email);
+      if (user.profilkep) setSelectedImage(user.profilkep);
+    }
+  }, []);
   
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, {
+          method: 'GET',
+          credentials: 'include',
+        });
+  
+        if (!response.ok) throw new Error("Felhasználó nem található");
+  
+        const data = await response.json();
+        console.log("API válasz:", data); // Ellenőrzéshez
+  
+        setUsername(data.user.name); // Frissíti a felhasználónevet
+        localStorage.setItem('user', JSON.stringify(data.user)); // LocalStorage frissítése
+      } catch (error) {
+        console.error("Hiba a felhasználó lekérésekor:", error);
+      }
+    };
+  
+    fetchUser();
+  }, [user.azonosito]); // A user.azonosito figyelése
+  
+  
+  
+  
+  const getCsrfToken = () => {
+    const match = document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'));
+    return match ? decodeURIComponent(match[2]) : null;
+  };
   
   const handleSave = async () => {
     if (!user || !user.azonosito) {
       console.error("Felhasználói ID nem található.");
-      return; // Ne folytasd a mentést, ha nincs érvényes felhasználó
+      return;
     }
   
     try {
       const updates = {};
   
-      // Ha van új felhasználónév, akkor azt küldjük
-      if (tempUsername) {
-        updates.name = tempUsername;
-      }
+      if (tempUsername) updates.name = tempUsername;
+      if (email) updates.email = email;
+      if (selectedImage !== userProfilePic) updates.profilkep = selectedImage;
   
-      // Ha van új e-mail cím, akkor azt küldjük
-      if (email) {
-        updates.email = email;
-      }
-  
-      // Ha van új jelszó, azt is küldjük
+      // Ha van új jelszó megadva
       if (password) {
-        updates.password = password;
+        try {
+          const passwordResponse = await fetch('http://localhost:8000/api/update-password', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-XSRF-TOKEN': getCsrfToken(),
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+              password: password,
+            }),
+          });
+      
+          const passwordData = await passwordResponse.json();
+      
+          if (!passwordResponse.ok) {
+            console.error("Jelszó frissítés hiba:", passwordData.message);
+            return;
+          }
+      
+          console.log("Jelszó sikeresen megváltoztatva.");
+          setPassword(""); // Töröld a mezőt sikeres mentés után
+        } catch (error) {
+          console.error("Hiba a jelszó frissítésekor:", error);
+        }
       }
+      
+      
   
-      // Ha van új profilkép, azt is küldhetjük
-      if (selectedImage !== userProfilePic) {
-        updates.profilkep = selectedImage;
-      }
-  
-      // Küldjük az adatokat a backend API-ra
-      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
+      // Felhasználói adatok frissítése
+      const userResponse = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-XSRF-TOKEN': getCsrfToken(),
         },
+        credentials: 'include',
         body: JSON.stringify(updates),
       });
   
-      if (!response.ok) {
-        throw new Error("Hiba történt az adatok mentésekor");
-      }
+      const userData = await userResponse.json();
   
-      const data = await response.json();
-      console.log("Adatok sikeresen frissítve:", data);
+      if (!userResponse.ok) throw new Error(userData.message || "Hiba történt az adatok frissítésekor");
   
-      // Frissítjük az állapotokat az új adatokkal
-      if (data.user) {
-        setUsername(data.user.name);
-        setEmail(data.user.email);
-        // Ha frissült a profilkép
-        if (data.user.profilkep) {
-          setSelectedImage(data.user.profilkep);
-        }
-      }
-  
+      setUsername(userData.user.name);
+      setTempUsername(userData.user.name);
+      localStorage.setItem('user', JSON.stringify(userData.user));
+      console.log("Adatok sikeresen frissítve:", userData);
     } catch (error) {
-      console.error("Hiba:", error);
+      console.error("Hiba a mentéskor:", error);
     }
   };
-  
   
   
 
