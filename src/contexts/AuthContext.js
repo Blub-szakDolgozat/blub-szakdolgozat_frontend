@@ -64,26 +64,22 @@ export const AuthProvider = ({ children }) => {
   const getUser = async () => {
     const token = localStorage.getItem("access_token");
     if (!token) return; // Ha nincs token, ne próbáljuk meg lekérni az adatokat
-
+  
     try {
       const response = await myAxios.get("api/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setUser(response.data);
+  
+      setUser(response.data); // FONTOS: Itt állítjuk be a user-t
       setIsLoggedIn(true);
-      const storedProfilePic = localStorage.getItem("userProfilePic");
-      setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
     } catch (error) {
-      console.log(
-        "Felhasználó lekérdezési hiba:",
-        error.response ? error.response.data : error.message
-      );
-      logout(); // Ha a kérés sikertelen, automatikusan kijelentkeztetjük a felhasználót
+      console.log("Felhasználó lekérdezési hiba:", error);
+      logout(); // Ha a kérés sikertelen, kijelentkeztet
     }
   };
+  
 
   // Kijelentkezés
   const logout = async () => {

@@ -14,6 +14,7 @@ export default function Profil() {
   const { logout, isLoggedIn, userProfilePic, updateProfilePic, user, updatePassword } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(userProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
   const [username, setUsername] = useState(user?.username || "");
+  const [tempUsername, setTempUsername] = useState("");
   const [email, setEmail] = useState(user?.email || "");
   const [password, setPassword] = useState("");  // Jelszó mező hozzáadása
   const navigate = useNavigate();
@@ -22,7 +23,80 @@ export default function Profil() {
     if (!isLoggedIn) {
       navigate("/bejelentkezes");
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate]);  // Ha a user nincs bejelentkezve, irányítson át
+  
+  useEffect(() => {
+    console.log("Felhasználó adatai:", user); // Ellenőrizzük a user objektumot
+  
+    if (user) {
+      setUsername(user.name || "Ismeretlen felhasználó"); // Helyesen a `name` kulcsot használjuk
+      setTempUsername(user.name || "");
+    }
+  }, [user]);
+  
+  
+  const handleSave = async () => {
+    if (!user || !user.azonosito) {
+      console.error("Felhasználói ID nem található.");
+      return; // Ne folytasd a mentést, ha nincs érvényes felhasználó
+    }
+  
+    try {
+      const updates = {};
+  
+      // Ha van új felhasználónév, akkor azt küldjük
+      if (tempUsername) {
+        updates.name = tempUsername;
+      }
+  
+      // Ha van új e-mail cím, akkor azt küldjük
+      if (email) {
+        updates.email = email;
+      }
+  
+      // Ha van új jelszó, azt is küldjük
+      if (password) {
+        updates.password = password;
+      }
+  
+      // Ha van új profilkép, azt is küldhetjük
+      if (selectedImage !== userProfilePic) {
+        updates.profilkep = selectedImage;
+      }
+  
+      // Küldjük az adatokat a backend API-ra
+      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updates),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Hiba történt az adatok mentésekor");
+      }
+  
+      const data = await response.json();
+      console.log("Adatok sikeresen frissítve:", data);
+  
+      // Frissítjük az állapotokat az új adatokkal
+      if (data.user) {
+        setUsername(data.user.name);
+        setEmail(data.user.email);
+        // Ha frissült a profilkép
+        if (data.user.profilkep) {
+          setSelectedImage(data.user.profilkep);
+        }
+      }
+  
+    } catch (error) {
+      console.error("Hiba:", error);
+    }
+  };
+  
+  
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -35,15 +109,6 @@ export default function Profil() {
     }
   };
 
-  const handleSave = () => {
-    if (selectedImage && username && email && password) {
-      updateProfilePic(selectedImage);
-      updatePassword(password);  // Jelszó frissítése
-      alert(`Profilkép és adatok mentve! (${username}, ${email})`);
-    } else {
-      alert("Kérlek válassz egy képet, add meg a nevet, emailt és a jelszót!");
-    }
-  };
 
   return (
     <Container className="mt-5">
@@ -106,8 +171,8 @@ export default function Profil() {
                 {/* Felhasználói adatok megjelenítése */}
                 <div className="user-info mt-4">
                   <h4>Profil Információk</h4>
-                  <p><strong>Felhasználónév:</strong> {username}</p>
-                  <p><strong>Email cím:</strong> {email}</p>
+                  <p><strong>Felhasználónév:</strong> {username || "Nincs megadva"}</p>
+                  <p><strong>Email cím:</strong> {email || "Nincs email megadva"}</p>
                 </div>
 
                 {/* Felhasználónév módosítása */}
@@ -115,10 +180,12 @@ export default function Profil() {
                   <Form.Label>Felhasználói név módosítása:</Form.Label>
                   <Form.Control
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={tempUsername}
+                    onChange={(e) => setTempUsername(e.target.value)} // Csak a tempUsername frissül
                     placeholder="Írd be a neved..."
                   />
+
+
                 </Form.Group>
 
                 <Form.Group controlId="email" className="mt-3">
