@@ -18,21 +18,26 @@ export default function Esemeny(props) {
     }, [eventId]);
 
     const handleReszvetel = async () => {
-        if (!eventId) {
-            console.error("Hiba: Az esemény ID-je hiányzik!", props.obj);
-            return;
+        console.log("Event ID:", eventId);  // Ellenőrizzük, hogy mi az eventId értéke
+    
+        // Ellenőrizzük, hogy az esemény ID megfelelő formátumban van
+        if (!eventId || (typeof eventId !== 'number' && typeof eventId !== 'string')) {
+            console.error("Hiba: Az esemény ID-je nem megfelelő formátumban van", eventId);
+            return;  // Ha nem megfelelő formátumban van, akkor leállítjuk a függvényt
         }
+    
+        // Ha eventId szám típusú, nem szükséges konvertálni
+        const formattedEventId = typeof eventId === 'string' ? parseInt(eventId, 10) : eventId;
     
         if (props.obj.letszam > 0 && !isFeliratkozva) {
             try {
-                // Feliratkozás POST kérése
-                const response = await myAxios.post(`/api/esemeny/${eventId}/feliratkozas`);
+                // POST kérés elküldése a megfelelő típusú eventId-vel
+                const response = await myAxios.post(`/api/esemeny/feliratkozas`, { esemeny_id: formattedEventId });
     
                 if (response.status === 200) {
-                    // Frissítjük a létszámot és az állapotot
                     props.obj.letszam -= 1;
                     setIsFeliratkozva(true);
-                    localStorage.setItem(`feliratkozva_${eventId}`, "true");
+                    localStorage.setItem(`feliratkozva_${formattedEventId}`, "true");
                 }
             } catch (error) {
                 console.error("Hiba történt a feliratkozás során!", error);
@@ -41,13 +46,13 @@ export default function Esemeny(props) {
         } else if (isFeliratkozva) {
             try {
                 // Leiratkozás DELETE kérése
-                const response = await myAxios.delete(`/api/esemeny/${eventId}/feliratkozas`);
+                const response = await myAxios.delete(`/api/esemeny/${formattedEventId}/feliratkozas`);
     
                 if (response.status === 200) {
                     // Frissítjük a létszámot és az állapotot
                     props.obj.letszam += 1;
                     setIsFeliratkozva(false);
-                    localStorage.setItem(`feliratkozva_${eventId}`, "false");
+                    localStorage.setItem(`feliratkozva_${formattedEventId}`, "false");
                 }
             } catch (error) {
                 console.error("Hiba történt a leiratkozás során!", error);
