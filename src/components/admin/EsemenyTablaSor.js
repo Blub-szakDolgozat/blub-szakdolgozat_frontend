@@ -114,7 +114,7 @@ export default function EsemenyTablaSor(props) {
         )}
       </td>
       <td>
-        <Button variant="outline-danger" onClick={() => torles(props.adat.video_id)}>
+        <Button variant="outline-danger" onClick={() => torles(props.adat.esemeny_id)}>
           ❌
         </Button>
       </td>
