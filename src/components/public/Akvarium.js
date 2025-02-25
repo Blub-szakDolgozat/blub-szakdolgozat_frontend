@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Container } from 'react-bootstrap';
-import ViziLenyKartya from './ViziLenyKartya';
+import { myAxios } from "../../contexts/MyAxios"; 
+import { Container, Card, Row, Col } from 'react-bootstrap';
+import './Akvarium.css';
+
+const ErrorMessage = ({ error }) => (
+  <div>
+    <p><strong>Hiba történt:</strong> {error}</p>
+    <button onClick={() => window.location.reload()}>Újratöltés</button>
+  </div>
+);
 
 const Akvarium = () => {
   const [viziLenyek, setViziLenyek] = useState([]);
@@ -10,9 +17,14 @@ const Akvarium = () => {
   const [selectedViziLeny, setSelectedViziLeny] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/user-lenyei', { withCredentials: true })
+    // Kérések myAxios-szal
+    myAxios.get('/api/user-lenyei') // A baseURL már benne van a myAxios-ban
       .then(response => {
-        setViziLenyek(response.data);
+        const data = response.data || [];
+        setViziLenyek(data);
+        if (data.length > 0) {
+          setSelectedViziLeny(data[0]);
+        }
         setLoading(false);
       })
       .catch(err => {
@@ -26,32 +38,62 @@ const Akvarium = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorMessage error={error} />;
   }
 
-  const handleCardClick = (viziLeny) => {
-    setSelectedViziLeny(viziLeny);
-  };
-
   return (
-    <div>
-      <h2>Akvárium:</h2>
-      <Container>
-      {viziLenyek.map((viziLeny) => (
-  <ViziLenyKartya adat={viziLeny} key={viziLeny.vizi_leny_id} />
-))}
+    <div className="akvarium-container">
+      <div className='szovegdoboz'>
+        <h1>Akvárium</h1>
+        <p>Fedezd fel a vízi lényeinket! Minden lény egyedi történettel rendelkezik, és fontos szerepet játszik az ökoszisztémában.</p>
+      </div>
 
-      </Container>
+      <Row>
+        {/* Bal oldali kis akvárium doboz a választható kártyákkal */}
+        <Col md={4} className="aquarium-box">
+          <div className="video-scroll">
+            {viziLenyek.map((viziLeny) => (
+               <div 
+               key={viziLeny.vizi_leny_id} // Egyedi key a vizi_leny_id alapján
+               className="video-item"
+               onClick={() => setSelectedViziLeny(viziLeny)}
+             >
+                <Card className="custom-card">
+                  <Card.Img 
+                    variant="top" 
+                    src={`http://localhost:8000/${viziLeny.kep}`} // Közvetlen URL összeállítása
+                    alt={viziLeny.nev}
+                  />
+                  <Card.Body>
+                    <Card.Title>{viziLeny.nev}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </Col>
 
-      {selectedViziLeny && (
-        <div style={{ flex: 1 }}>
-          <h2>{selectedViziLeny.nev}</h2>
-          <p><strong>Fajta:</strong> {selectedViziLeny.fajta}</p>
-          <p><strong>Ritkaság:</strong> {selectedViziLeny.ritkasagi_szint}</p>
-          <p>{selectedViziLeny.leiras}</p>
-          {selectedViziLeny.kep && <img src={`/kepek/${selectedViziLeny.kep}`} alt={selectedViziLeny.nev} />}
-        </div>
-      )}
+        {/* Jobb oldali részletes kártya */}
+        <Col md={8} className="detailed-card">
+          {selectedViziLeny && (
+            <Card className="custom-card detailed">
+              <Card.Img 
+                variant="top" 
+                src={`http://localhost:8000/${selectedViziLeny.kep}`} // Közvetlen URL összeállítása
+                alt={selectedViziLeny.nev}
+              />
+              <Card.Body>
+                <Card.Title>{selectedViziLeny.nev}</Card.Title>
+                <Card.Text>
+                  <strong>Fajta:</strong> {selectedViziLeny.fajta || "Nincs adat"}<br />
+                  <strong>Ritkaság:</strong> {selectedViziLeny.ritkasagi_szint}<br />
+                  {selectedViziLeny.leiras || "Nincs leírás elérhető."}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          )}
+        </Col>
+      </Row>
     </div>
   );
 };
