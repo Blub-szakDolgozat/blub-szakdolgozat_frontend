@@ -40,22 +40,19 @@ export const AuthProvider = ({ children }) => {
         password: password,
       });
   
-      const accessToken = response.data.access_token;
-      setUser(response.data.user);
-      setToken(accessToken);
-      setIsLoggedIn(true);
-      localStorage.setItem("access_token", accessToken);
+      if (response.data && response.data.user) {
+        setUser(response.data.user);
+        setUserProfilePic(response.data.user.profilkep);
+        setIsLoggedIn(true); // 🔹 **Biztosítsd, hogy a bejelentkezési állapot frissül!**
+        
+        localStorage.setItem("access_token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("userProfilePic", response.data.user.profilkep);
   
-      // Ha van elmentett profilkép, állítsuk be, ha nincs, akkor alapértelmezett
-      const storedProfilePic = localStorage.getItem("userProfilePic");
-      setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
-  
-      navigate("/akvarium");
+        navigate("/akvarium"); // 🔹 **Sikeres bejelentkezés után navigáljon a profilra**
+      }
     } catch (error) {
-      console.log(
-        "Bejelentkezési hiba:",
-        error.response ? error.response.data : error.message
-      );
+      console.log("Bejelentkezési hiba:", error);
     }
   };
   
@@ -63,7 +60,11 @@ export const AuthProvider = ({ children }) => {
   // Felhasználó adatainak lekérése
   const getUser = async () => {
     const token = localStorage.getItem("access_token");
-    if (!token) return; // Ha nincs token, ne próbáljuk meg lekérni az adatokat
+    if (!token) {
+      setUser(null);
+      setUserProfilePic(null);
+      return;
+    }
   
     try {
       const response = await myAxios.get("api/user", {
@@ -72,13 +73,50 @@ export const AuthProvider = ({ children }) => {
         },
       });
   
-      setUser(response.data); // FONTOS: Itt állítjuk be a user-t
-      setIsLoggedIn(true);
+      if (!response.data) {
+        console.error("Hibás API válasz, nincs user adat.");
+        setUser(null);
+        setUserProfilePic(null);
+        return;
+      }
+  
+      setUser(response.data);
+      setUserProfilePic(response.data.profilkep); // 🔹 **Profilkép állapot frissítés**
+      
+      // 🔹 **Biztosan mentjük az új adatokat**
+      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("userProfilePic", response.data.profilkep);
+      
+      console.log("Felhasználó betöltve:", response.data);
     } catch (error) {
-      console.log("Felhasználó lekérdezési hiba:", error);
-      logout(); // Ha a kérés sikertelen, kijelentkeztet
+      console.error("Felhasználó lekérdezési hiba:", error);
+      logout();
     }
   };
+  
+  
+  
+  // **ÚJ FÜGGVÉNY: updateUserData**
+  const updateUserData = async () => {
+    try {
+      const response = await myAxios.get("api/user", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+
+      if (response.data) {
+        setUser(response.data);
+        setUserProfilePic(response.data.profilkep); // 🔹 **Profilkép állapot frissítés**
+        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("userProfilePic", response.data.profilkep); // **Frissített profilkép mentése**
+      }
+    } catch (error) {
+      console.error("Hiba a felhasználói adatok frissítésekor:", error);
+    }
+  };
+  
+  
   
 
   // Kijelentkezés
@@ -90,13 +128,20 @@ export const AuthProvider = ({ children }) => {
       console.log(error);
     } finally {
       setUser(null);
-      setIsLoggedIn(false);
       setUserProfilePic(null);
+      setIsLoggedIn(false); // 🔹 **Kijelentkezéskor állítsuk false-ra**
+      
       localStorage.removeItem("userProfilePic");
+      localStorage.removeItem("user");
       localStorage.removeItem("access_token");
+  
+      console.log("Logout sikeres, minden adat törölve.");
       navigate("/bejelentkezes");
     }
   };
+  
+  
+  
   
   
 
@@ -134,6 +179,10 @@ export const AuthProvider = ({ children }) => {
     setUserProfilePic(storedProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
   }, []);
   
+  useEffect(() => {
+    console.log("AuthContext user:", user);
+  }, [user]);
+  
   
 
   return (
@@ -148,6 +197,7 @@ export const AuthProvider = ({ children }) => {
         userProfilePic,
         updateProfilePic,
         handleFileUpload,
+        updateUserData
       }}
     >
       {children}
