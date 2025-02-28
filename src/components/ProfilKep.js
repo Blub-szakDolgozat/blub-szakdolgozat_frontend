@@ -15,9 +15,7 @@ const ProfileKep = () => {
     }
   };
 
-  const imageSrc = userProfilePic // Ha van beállított profilkép, akkor azt jelenítse meg
-    ? userProfilePic // A profilkép URL-t jeleníti meg
-    : "https://www.w3schools.com/howto/img_avatar.png"; // Alapértelmezett profilkép
+  const imageSrc = userProfilePic || "https://www.w3schools.com/howto/img_avatar.png";
 
   return (
     <div

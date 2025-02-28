@@ -11,12 +11,13 @@ const DEFAULT_PROFILE_PICS = [
 ];
 
 export default function Profil() {
-  const { logout, isLoggedIn, userProfilePic, updateProfilePic, user, updatePassword } = useContext(AuthContext);
-  const [selectedImage, setSelectedImage] = useState(userProfilePic || "https://www.w3schools.com/howto/img_avatar.png");
-  const [username, setUsername] = useState(user?.username || "");
+  const { logout, isLoggedIn, user, updateUserData } = useContext(AuthContext);
+  const [selectedImage, setSelectedImage] = useState(user?.profilkep || "https://www.w3schools.com/howto/img_avatar.png");
+  const [username, setUsername] = useState(user?.name || "");
   const [tempUsername, setTempUsername] = useState("");
   const [email, setEmail] = useState(user?.email || "");
-  const [password, setPassword] = useState("");  // Jelszó mező hozzáadása
+  const [tempEmail, setTempEmail] = useState("");
+  const [password, setPassword] = useState("");  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,14 +27,14 @@ export default function Profil() {
   }, [isLoggedIn, navigate]);  // Ha a user nincs bejelentkezve, irányítson át
   
   useEffect(() => {
-    console.log("Felhasználó adatai:", user); // Ellenőrizzük a user objektumot
-  
     if (user) {
-      setUsername(user.name || "Ismeretlen felhasználó"); // Helyesen a `name` kulcsot használjuk
+      setUsername(user.name || "Ismeretlen felhasználó");
       setTempUsername(user.name || "");
+      setEmail(user.email || ""); 
+      setTempEmail(user.email || ""); // 🔹 Email beállítása
     }
   }, [user]);
-
+  
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -45,6 +46,11 @@ export default function Profil() {
   }, []);
   
   useEffect(() => {
+    if (!user || !user.azonosito) {
+      console.error("Nincs bejelentkezett felhasználó vagy hiányzó azonosító.");
+      return;
+    }
+  
     const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, {
@@ -55,17 +61,15 @@ export default function Profil() {
         if (!response.ok) throw new Error("Felhasználó nem található");
   
         const data = await response.json();
-        console.log("API válasz:", data); // Ellenőrzéshez
-  
-        setUsername(data.user.name); // Frissíti a felhasználónevet
-        localStorage.setItem('user', JSON.stringify(data.user)); // LocalStorage frissítése
+        setUsername(data.user.name);
+        localStorage.setItem('user', JSON.stringify(data.user));
       } catch (error) {
         console.error("Hiba a felhasználó lekérésekor:", error);
       }
     };
   
     fetchUser();
-  }, [user.azonosito]); // A user.azonosito figyelése
+  }, [user?.azonosito]); // Ellenőrizzük, hogy van-e user és azonosítója
   
   
   
@@ -82,81 +86,64 @@ export default function Profil() {
     }
   
     try {
-      const updates = {};
+      const updates = {
+        name: tempUsername || username,
+        email: tempEmail || email,
+        profilkep: selectedImage,
+      };
   
-      if (tempUsername) updates.name = tempUsername;
-      if (email) updates.email = email;
-      if (selectedImage !== userProfilePic) updates.profilkep = selectedImage;
-  
-      // Ha van új jelszó megadva
-      if (password) {
-        try {
-          const passwordResponse = await fetch('http://localhost:8000/api/update-password', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-XSRF-TOKEN': getCsrfToken(),
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-              password: password,
-            }),
-          });
-      
-          const passwordData = await passwordResponse.json();
-      
-          if (!passwordResponse.ok) {
-            console.error("Jelszó frissítés hiba:", passwordData.message);
-            return;
-          }
-      
-          console.log("Jelszó sikeresen megváltoztatva.");
-          setPassword(""); // Töröld a mezőt sikeres mentés után
-        } catch (error) {
-          console.error("Hiba a jelszó frissítésekor:", error);
-        }
+      // 🔹 Ha van jelszó megadva, azt is küldjük
+      if (password.trim() !== "") {
+        updates.password = password;
       }
-      
-      
   
-      // Felhasználói adatok frissítése
-      const userResponse = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
-        method: 'POST',
+      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'X-XSRF-TOKEN': getCsrfToken(),
+          "Content-Type": "application/json",
+          "X-XSRF-TOKEN": getCsrfToken(),
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify(updates),
       });
   
-      const userData = await userResponse.json();
+      const data = await response.json();
   
-      if (!userResponse.ok) throw new Error(userData.message || "Hiba történt az adatok frissítésekor");
+      if (!response.ok) {
+        throw new Error(data.message || "Hiba történt az adatok frissítésekor");
+      }
   
-      setUsername(userData.user.name);
-      setTempUsername(userData.user.name);
-      localStorage.setItem('user', JSON.stringify(userData.user));
-      console.log("Adatok sikeresen frissítve:", userData);
+      setUsername(data.user.name);
+      setTempUsername(data.user.name);
+      setEmail(data.user.email);
+      setTempEmail(data.user.email);
+      setSelectedImage(data.user.profilkep);
+  
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("userProfilePic", data.user.profilkep);
+  
+      await updateUserData();
+      console.log("Adatok sikeresen frissítve:", data);
     } catch (error) {
       console.error("Hiba a mentéskor:", error);
     }
   };
   
   
-
+  
+  
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result);
+        setSelectedImage(reader.result); // **Az állapot frissítése azonnal**
       };
       reader.readAsDataURL(file);
     }
   };
-
-
+  
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -239,11 +226,12 @@ export default function Profil() {
                   <Form.Label>Email cím módosítása:</Form.Label>
                   <Form.Control
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={tempEmail} // 🔹 Most már a tempEmail-t használja
+                    onChange={(e) => setTempEmail(e.target.value)} // 🔹 Csak a tempEmail frissül
                     placeholder="Írd be az email címed..."
                   />
                 </Form.Group>
+
 
                 {/* Jelszó módosítása */}
                 <Form.Group controlId="password" className="mt-3">
