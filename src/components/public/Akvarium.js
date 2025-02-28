@@ -6,7 +6,6 @@ import './Akvarium.css';
 const ErrorMessage = ({ error }) => (
   <div>
     <p><strong>Hiba történt:</strong> {error}</p>
-    <button onClick={() => window.location.reload()}>Újratöltés</button>
   </div>
 );
 
