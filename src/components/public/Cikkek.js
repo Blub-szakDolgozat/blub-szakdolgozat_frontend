@@ -18,7 +18,9 @@ export default function Cikkek() {
         <Row className="cikk-container" >
             <div className='szovegdoboz'>
             <h1>Cikkek</h1>
-            <p>Oldalunkon sok különböző környezetvédelmi oktatóvideó található. A videók számos témát dolgoznak fel, köztük jelentősen felhívják a figyelmet a műanyag szemetelésének következményeire és veszélyeire.</p>
+            <p>Jelenlegi ismereteink szerint a Föld az egyetlen bolygó, ahol életet tudunk fenntartani. Ez az egyetlen tény kiemeli a környezetvédelem mérhetetlen fontosságát.</p>
+            <p>Bár az emberiség folyamatosan új lakható területek után kutat az univerzumban, ezek a törekvések igen hosszú távú projektek, amelyek nem helyettesíthetik a Földön fennálló sürgős környezetvédelmi feladatokat és veszélyeket. </p>
+            <p>Ezért, miközben folytatjuk a kozmosz felfedezését, a környezetvédelemre és a Föld megóvására is összpontosítanunk kell, mint a fenntartható jövő zálogára.</p>
             <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
             </div>
 

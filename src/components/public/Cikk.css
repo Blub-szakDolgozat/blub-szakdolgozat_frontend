@@ -99,3 +99,7 @@ p{
     position: relative;
     margin-right: 10px;
  }
+
+ .cikk-info{
+    background-color: rgba(0, 0, 0, 0.600);
+ }
