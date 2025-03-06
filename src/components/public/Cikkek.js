@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Cikk from './Cikk';
 import './Cikk.css';
+import { Col, Row } from 'react-bootstrap';
+
+
 import useAdminContext from '../../contexts/AdminContext';
 
 export default function Cikkek() {
@@ -11,36 +14,32 @@ export default function Cikkek() {
         setSelectedCikk(cikk); // Beállítjuk az aktuálisan kiválasztott cikket
     };
 
-    const closeCikk = () => {
-        setSelectedCikk(null);
-            };
-
     return (
-        <div>
+        <Row className="cikk-container" >
             <div className='szovegdoboz'>
             <h1>Cikkek</h1>
-            <p className='leiras'>Oldalunkon sok különböző környezetvédelmi cikk található</p>
+            <p>Oldalunkon sok különböző környezetvédelmi oktatóvideó található. A videók számos témát dolgoznak fel, köztük jelentősen felhívják a figyelmet a műanyag szemetelésének következményeire és veszélyeire.</p>
             <p className='uzenet'>Csatlakozz a zöldebb jövőhöz!</p>
             </div>
-            {/* Cikkek listája */}
-            <div className='row row-cols-1 row-cols-md-3 g-4'>
-                {cikkLista.map((elem, index) => (
-                    <Cikk obj={elem} key={index} onClick={() => handleCikkClick(elem)} />
-                ))}
-            </div>
 
-            {/* Nagyobb cikk nézet */}
+            {/* Kiválasztott videó (bal oldalon) */}
             {selectedCikk && (
-                <div className="backdrop">
-                    <div className="modal-content">
-                        <button className="close-button" onClick={closeCikk}>✖</button>
-                        <h2>{selectedCikk.cim}</h2>
-                        <img src={`http://localhost:8000/${selectedCikk.kepek}`} alt={selectedCikk.cim} />
-                        <div dangerouslySetInnerHTML={{ __html: selectedCikk.leiras }} />
-                        <p>Publikálva: {selectedCikk.publikalva}</p>
+                <Col className='selected-cikk' style={{ backgroundImage: `url(http://localhost:8000/${selectedCikk.kepek})` }} >
+                    <div className='cikk-info' >
+                        <h2 className='felirat'>{selectedCikk.cim}</h2>
+                        <p className=''>{selectedCikk.leiras}</p>
                     </div>
-                </div>
+                </Col>
             )}
-        </div>
+            
+            {/* Jobb oldali videók lista görgetéssel */}
+            <Col className='cikk-list'>
+                <div className='cikk-scroll'>
+                    {cikkLista.map((elem, index) => (
+                        <Cikk obj={elem} key={index} onSelect={handleCikkClick} />
+                    ))}
+                </div>
+            </Col>
+        </Row>
     );
 }

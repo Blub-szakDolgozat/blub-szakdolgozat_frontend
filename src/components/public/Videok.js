@@ -29,7 +29,7 @@ export default function Videok() {
                         <a className='ikon' href={selectedVideo.link} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
     <FaYoutube size={50} color="red" />
     <span className='szoveg' style={{ marginLeft: '8px' }}>Video megtekintése</span>
-</a>
+                        </a>
 
                     </div>
                 </Col>
