@@ -4,7 +4,6 @@ import NoPage from "./pages/NoPage";
 import Admin from "./pages/Admin/Admin";
 import Public from "./pages/Public";
 import Layout from "./pages/Layout";
-import Akvarium from "./components/public/Akvarium";
 import NapiSorsolas from "./components/public/NapiSorsolas";
 import Profil from "./pages/Profil";
 import ViziLenyekUrlap from "./components/admin/ViziLenyekUrlap";
@@ -14,6 +13,7 @@ import VideokUrlap from "./components/admin/VideokUrlap";
 import Videok from "./components/public/Videok";
 import Cikkek from "./components/public/Cikkek";
 import Esemenyek from "./components/public/Esemenyek";
+import Akvariumok from "./components/public/Akvariumok";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
               <Route path="/admin/videokurlap" element={<VideokUrlap />} />
             </Route>
             <Route path="*" element={<NoPage />} />
-            <Route path="/akvarium" element={<Akvarium />} />
+            <Route path="/akvarium" element={<Akvariumok />} />
             <Route path="/sorsolas" element={<NapiSorsolas />} />
             <Route path="/videok" element={<Videok />} />
             <Route path="/profil" element={<Profil />} />
