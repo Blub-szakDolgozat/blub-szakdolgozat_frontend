@@ -1,15 +1,14 @@
+/* Konténer, amely tartalmazza az összes elemet */
 .akvarium-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse; /* Bal és jobb oldali elrendezés megfordítása */
     padding: 20px;
-    background-color: #1e3d59;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 90%;
     margin: 0 auto;
     overflow: hidden;
 }
 
+/* Fejléc szöveg */
 .szovegdoboz {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -19,31 +18,139 @@
     margin-bottom: 20px;
 }
 
-.aquarium-box {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 15px;
-    overflow-y: auto;
-}
-
-.detailed-card {
-    padding: 15px;
-}
-
-
+/* Kártyák stílusai */
 .custom-card {
     box-shadow: 0 4px 10px rgba(131, 67, 67, 0.1);
-    max-width: 150px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 150px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
+/* Kártya részletes nézete */
 .custom-card.detailed {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
 }
 
+/* Kártya hover hatás */
 .custom-card:hover {
     transform: scale(1.05);
     box-shadow: 1px 8px 20px rgba(0, 0, 0, 0.545);
+}
+
+/* Kártya cím */
+.custom-card .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Kártya tartalom */
+.custom-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 15px;
+}
+
+/* Bal oldali vízi lények lista */
+.akvarium-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* Jobb oldali kiválasztott vízi lény részletek */
+.selected-akvarium {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    position: relative;
+    margin-left: 20px;
+}
+
+/* Overlay a kiválasztott vízi lények háttérképére */
+.akvarium-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+/* Görgethető lista vízi lényekhez */
+.akvarium-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Görgetősáv stílusa */
+.akvarium-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.akvarium-scroll::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.akvarium-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Elemek stílusa a görgetéshez */
+.akvarium-scroll .akvarium-item {
+    flex: 0 0 33%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.akvarium-scroll .akvarium-item:hover {
+    transform: scale(1.05);
+}
+
+/* Tablet nézet */
+@media (max-width: 768px) {
+    .akvarium-scroll .akvarium-item {
+        flex: 0 0 48%;
+    }
+}
+
+/* Mobil nézet */
+@media (max-width: 480px) {
+    .akvarium-scroll {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .akvarium-item {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .akvarium-container {
+        flex-direction: column;
+    }
 }

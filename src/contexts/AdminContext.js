@@ -8,6 +8,8 @@ export const FileProvider = ({ children }) => {
   const [cikkLista, setCikkLista]=useState([]);
   const [esemenyekLista, setEsemenyekLista]=useState([]);
 
+
+
   const [errors, setErrors] = useState({});
 
   const getLista = async (vegpont, callBack) => {
