@@ -3,10 +3,7 @@
     display: flex;
     flex-direction: row-reverse; /* Bal és jobb oldali elrendezés megfordítása */
     padding: 20px;
-    background-color: #1e3d59;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 90%;
     margin: 0 auto;
     overflow: hidden;
 }
