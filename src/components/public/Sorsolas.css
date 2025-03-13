@@ -1,37 +1,13 @@
-/* A tartalom szövegeknek középre helyezése */
-.sorsolas-container {
-  display: flex;
-  flex-direction: column;
-  /* Az elemek oszlopban legyenek elrendezve */
-  align-items: center;
-  /* Középre igazítja az elemeket vízszintesen */
-  margin: 30px;
+.nyeremeny-kartya{
   text-align: center;
-  /* A szövegek középre igazítása */
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
 }
-
-.sorsolas-container p,
-.sorsolas-container h1 {
-  margin: 10px 0;
-}
-
-/* Kártya stílusának finomítása */
-.nyeremeny-kartya {
-  margin-top: 20px;
+.fejresz{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  color: white;
+  background-color: #2a1e4058;
   padding: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.nyeremeny-kartya h3 {
-  font-size: 1.5em;
-  color: #28a745;
-  /* Zöld szín a nyereményhez */
-}
-
-.btn {
-  margin-top: 20px;
-  /* A gomb és a többi elem közötti távolság */
+  margin-bottom: 20px;
 }

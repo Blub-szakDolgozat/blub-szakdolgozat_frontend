@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { myAxios } from "../../contexts/MyAxios"; // Axios példány importálása
+import './Sorsolas.css';
+
 export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
   const [hiba, setHiba] = useState("");
@@ -47,9 +49,10 @@ export default function NapiSorsolas() {
 
   return (
     <div className="sorsolas-container">
+      <div className="fejresz">
       <h2>Napi Sorsolás</h2>
       <p>Kattints a gombra, hogy sorsolj egy vízi lényt az akváriumodba!</p>
-
+      </div>
       <button className="btn btn-primary" onClick={handleSorsolas} disabled={marSorsolt}>
         {marSorsolt ? "Holnap újra próbálhatod!" : "Sorsolás"}
       </button>
@@ -61,6 +64,8 @@ export default function NapiSorsolas() {
           <h3>Nyertél egy {nyeremeny.nev}!</h3>
           <p>Fajta: {nyeremeny.fajta || "Nincs adat"}</p>
           <p>Ritkasági szint: {nyeremeny.ritkasagi_szint || "Nincs adat"}</p>
+          <p>Leiras: {nyeremeny.leiras}</p>
+          <img variant="top" src={"http://localhost:8000/" + nyeremeny.kep} />
         </div>
       )}
     </div>
