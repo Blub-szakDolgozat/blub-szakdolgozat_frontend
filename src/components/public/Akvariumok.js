@@ -6,39 +6,36 @@ import { myAxios } from "../../contexts/MyAxios";
 import { Col, Row } from 'react-bootstrap';
 
 const Akvariumok = () => {
-    const [viziLenyek, setViziLenyek] = useState([]); // Tárolja a vízi lények listáját
-    const [loading, setLoading] = useState(true); // Betöltési állapot
-    const [error, setError] = useState(null); // Hibakezelés
-    const [selectedViziLeny, setSelectedViziLeny] = useState(null); // Kiválasztott vízi lény
+    const [viziLenyek, setViziLenyek] = useState([]); 
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
+    const [selectedViziLeny, setSelectedViziLeny] = useState(null); 
 
 
-    // Adatok lekérése az API-ból
     useEffect(() => {
         myAxios.get('/api/user-lenyei')
           .then(response => {
             const data = response.data || [];
-            setViziLenyek(data); // A kapott adatokat elmentjük a viziLenyek állapotba
-            setLoading(false); // Betöltés befejezve
+            setViziLenyek(data); 
+            setLoading(false); 
           })
           .catch(err => {
-            setError(err.message); // Hiba esetén eltároljuk az üzenetet
-            setLoading(false); // Betöltés befejezve hibával
+            setError(err.message); 
+            setLoading(false); 
           });
       }, []);
-    
-    // Ha még töltődik, megjelenítjük a "Betöltés..." üzenetet
+
     if (loading) {
         return <div>Betöltés...</div>;
     }
 
-    // Ha hiba történt a lekérésnél, kiírjuk a hibát
+   
     if (error) {
         return <div>Hiba történt: {error}</div>;
     }
 
-    // Kattintás esemény kezelése
     const handleAkvariumClick = (akvarium) => {
-        setSelectedViziLeny(akvarium); // Kiválasztott vízi lény frissítése
+        setSelectedViziLeny(akvarium);
     };
 
     return (
