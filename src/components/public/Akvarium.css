@@ -7,7 +7,11 @@
     margin: 0 auto;
     overflow: hidden;
 }
-
+.akvarium-info{
+    background: linear-gradient(to top, #00000041, #000000b7);
+    border-radius: 10px;
+    width: 100%;
+}
 /* Fejléc szöveg */
 .szovegdoboz {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
