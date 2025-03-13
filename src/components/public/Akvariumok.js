@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Akvarium.css';
 import Akvarium from './Akvarium';
 import { myAxios } from "../../contexts/MyAxios";
-import useAdminContext from '../../contexts/AdminContext';
+
 import { Col, Row } from 'react-bootstrap';
 
 const Akvariumok = () => {
@@ -10,7 +10,7 @@ const Akvariumok = () => {
     const [loading, setLoading] = useState(true); // Betöltési állapot
     const [error, setError] = useState(null); // Hibakezelés
     const [selectedViziLeny, setSelectedViziLeny] = useState(null); // Kiválasztott vízi lény
-    const { kepekLista } = useAdminContext();
+
 
     // Adatok lekérése az API-ból
     useEffect(() => {
@@ -63,7 +63,7 @@ const Akvariumok = () => {
             {/* Bal oldali vízi lények lista */}
             <Col className='akvarium-list'>
                 <div className='akvarium-scroll'>
-                    {kepekLista.map((elem, index) => (
+                    {viziLenyek.map((elem, index) => (
                         <Akvarium 
                             obj={elem} 
                             key={index} 
