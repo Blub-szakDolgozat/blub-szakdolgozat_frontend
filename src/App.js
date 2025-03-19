@@ -14,6 +14,7 @@ import Videok from "./components/public/Videok";
 import Cikkek from "./components/public/Cikkek";
 import Esemenyek from "./components/public/Esemenyek";
 import Akvariumok from "./components/public/Akvariumok";
+import Elfelejtettjelszo from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path="/profil" element={<Profil />} />
             <Route path="/cikkek" element={<Cikkek />} />
             <Route path="/esemenyek" element={<Esemenyek />} />
+            <Route path="/elfelejtett-jelszo" element={<Elfelejtettjelszo />} />
           </Route>
         </Routes>
       </div>
