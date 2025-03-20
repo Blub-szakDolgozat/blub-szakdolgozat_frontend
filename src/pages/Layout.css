@@ -1,7 +1,5 @@
 .nav-link {
-  background-image: linear-gradient(to bottom, #ffffff, #a1d0ff);
-  -webkit-background-clip: text;
-  color: transparent;
+  color: white !important; 
   font-weight: bold;
   text-decoration: none; 
   position: relative;
@@ -9,7 +7,7 @@
 }
 
 .nav-link:hover {
- color: white;
+  color: white !important; 
 }
 
 .nav-link:hover::after {
