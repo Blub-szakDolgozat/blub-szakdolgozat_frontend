@@ -4,6 +4,7 @@ import EsemenyTablazat from "./EsemenyTablazat";
 import './Admin.css';
 
 export default function EsemenyekUrlap() {
+  // UseState hook használata a komponensek állapotának változtatására
   const { esemenyekLista } = useContext(AdminContext);
   const { postAdat, errors } = useAdminContext();
   const [esemeny_neve, setEsemenyNeve] = useState("");
@@ -14,6 +15,7 @@ export default function EsemenyekUrlap() {
   const [minDate, setMinDate] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
+  // UseEffect hook arra a beállításra, hogy az esemény dátumát az adott napon csak a holnapi dátumtól lehesssen beállítani 
   useEffect(() => {
     const holnap = new Date();
     holnap.setDate(holnap.getDate() + 1);
@@ -21,6 +23,7 @@ export default function EsemenyekUrlap() {
     setMinDate(holnapiDatum);
   }, []);
 
+  // A kuld függvény az űrlap adatainak elküldésére szolgál
   function kuld(event) {
     event.preventDefault();
     let adat = {
@@ -31,6 +34,9 @@ export default function EsemenyekUrlap() {
       letszam: letszam,
     };
     console.log(adat);
+    // itt hívom meg a postAdat nevű függvényt, amit a AdminContext kontextben írtam meg. 
+    // A postAdat egy aszinkron funkció, melynek köszönhetően küldjük el az adatokat az API végpontra egy post kéréssel. Két paramétere van, az egyik az adat, másik az URL, ahová az adatokat küldük a post kéréssel. 
+    // Ezt a useAdminContext egyéni hook-kal hívom meg a küld függvényben. 
     postAdat(adat, "/api/esemeny-add");
   }
 
@@ -42,6 +48,7 @@ export default function EsemenyekUrlap() {
     );
   });
 
+  // Az űrlap komponens visszatérési részében kialakítom a form-ot, ahol onSubmit eseménykezelővel meghívom a kuld függvényt. Tehát az adatokat elküldi, amikor a Küldés gombra kattintunk.  
   return (
     <div className="container">
       <h1>Események</h1>
