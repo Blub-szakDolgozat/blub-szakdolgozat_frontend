@@ -4,6 +4,7 @@ import useAdminContext, {
 } from "../../contexts/AdminContext";
 import "../../App.css";
 import ViziLenyekTablazat from "./ViziLenyekTablazat";
+import './Admin.css';
 
 export default function ViziLenyekUrlap() {
   const { kepekLista } = useContext(AdminContext);

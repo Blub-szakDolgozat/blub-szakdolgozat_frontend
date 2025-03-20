@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import useAdminContext, { AdminContext } from "../../contexts/AdminContext";
 import VideoTablazat from "./VideoTablazat";
-
+import './Admin.css';
 
 export default function VideokUrlap() {
   const { videokLista } = useContext(AdminContext);
