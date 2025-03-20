@@ -19,41 +19,19 @@
   height: 2px; /* A csík magassága */
   background-color: white; /* Fehér csík */
 }
-
-.search-container {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
+.jobb{
+  text-align: end;
 }
-
-.search-input {
-  padding: 8px 12px;
-  border: none;
-  background-color: #e9ecef62;
-  border-radius: 20px;
-  font-size: 14px;
+.gomb{
+  background-image: linear-gradient(to bottom, #ffffff, #1e90ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  text-decoration: none; 
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-.search-input::placeholder {
-  color: #ffffff; 
-}
-
-
-.search-button {
-  background-color: #e9ecef62;
-  border: none;
-  color: rgb(255, 255, 255);
-  padding: 8px 15px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 15px;
-}
-
-.search-button:hover {
-  background-color: #74bdc8;
-  border-radius: 20px;
-  color: white;
+.gomb:hover{
+  background-image: linear-gradient(to top, #ffffff, #1e90ff);
 }
 
 /* Reszponzív kialakítás mobilhoz */

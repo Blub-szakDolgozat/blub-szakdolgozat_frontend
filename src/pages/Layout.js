@@ -45,7 +45,6 @@ function Halak() {
 
 const Layout = () => {
   const { user, login, logout } = useAuth(); // 🔹 Auth context használata
-  const [searchQuery, setSearchQuery] = useState("");
   const [showLogin, setShowLogin] = useState(false);
 
   // Bejelentkezési művelet
@@ -61,16 +60,8 @@ const Layout = () => {
     setShowLogin(false);
   };
 
-  // Keresés változás kezelése
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
 
-  // Keresés submit
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    console.log("Search Query:", searchQuery);
-  };
+
 
   // Profilkép kattintás kezelése
   const handleProfileClick = () => {
@@ -89,26 +80,9 @@ const Layout = () => {
         <ProfileKep onClick={handleProfileClick} />
         <h1>Blub</h1>
       </header>
-      <div className="Fej-content">
-        <Nav>
-          {/* Admin fül csak akkor jelenjen meg, ha a felhasználó admin */}
-          {user ? (
-            <>
-              <Nav.Item>
-                <Link to="#" className="nav-link" onClick={logout}>
-                  Kijelentkezés
-                </Link>
-              </Nav.Item>
-            </>
-          ) : (
-            <Nav.Item>
-              <Link to="/bejelentkezes" className="nav-link" onClick={() => setShowLogin(true)}>
-                Bejelentkezés
-              </Link>
-            </Nav.Item>
-          )}
-
-          {user?.jogosultsagi_szint === "admin" && (
+      <div className="Fej-content row">
+        <Nav className="col-6">
+        {user?.jogosultsagi_szint === "admin" && (
             <Nav.Item>
               <Link to="/admin" className="nav-link">
                 Admin
@@ -122,7 +96,6 @@ const Layout = () => {
           </Link>
         </Nav.Item>
           )}
-
         {(user?.jogosultsagi_szint === "felhasznalo" || user?.jogosultsagi_szint === "admin") && (
           <Nav.Item>
             <Link to="/sorsolas" className="nav-link">
@@ -145,23 +118,27 @@ const Layout = () => {
               Események
             </Link>
           </Nav.Item>
-            {/* Keresés */}
-            <div className="search-container">
-              <form onSubmit={handleSearchSubmit}>
-                <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Keresés..."
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                />
-                <button type="submit" className="search-button">
-                  Keresés
-                </button>
-              </form>
-            </div>
+           
           </Nav>
+ <nav className="jobb col-6">{/* Admin fül csak akkor jelenjen meg, ha a felhasználó admin */}
+          {user ? (
+            <>
+              <Nav.Item>
+                <Link to="#" className="gomb" onClick={logout}>
+                  Kijelentkezés
+                </Link>
+              </Nav.Item>
+            </>
+          ) : (
+            <Nav.Item>
+              <Link to="/bejelentkezes" className="gomb" onClick={() => setShowLogin(true)}>
+                Bejelentkezés
+              </Link>
+            </Nav.Item>
+          )}
 
+        
+</nav>
       </div>
 
       <div className="App-content">

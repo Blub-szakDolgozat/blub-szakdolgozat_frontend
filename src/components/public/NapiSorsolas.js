@@ -23,7 +23,7 @@ export default function NapiSorsolas() {
 
     try {
       // 1. CSRF token frissítése
-      await myAxios.get("/sanctum/csrf-cookie"); //CSRF token -> egy biztonsági mechanizmus az autentikációs folyamat
+      await myAxios.get("/sanctum/csrf-cookie"); //CSRF token -> egy biztonsági mechanizmus az autentikációs folyamat védelmére
 
       // 2. Véletlenszerű vízi lény lekérése
       const { data } = await myAxios.get("/api/random-vizi-leny");
