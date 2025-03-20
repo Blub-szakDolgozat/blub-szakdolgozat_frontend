@@ -37,7 +37,10 @@ const Akvariumok = () => {
     const handleAkvariumClick = (akvarium) => {
         setSelectedViziLeny(akvarium);
     };
+//A képet dinamikusan a háttérképként állítja be.
 
+//Vízi lények listája: A bal oldalon a vízi lények listája jelenik meg,
+//amelyet a viziLenyek.map() függvénnyel renderel a komponens. Minden egyes vízi lény egy Akvarium komponens segítségével jelenik meg.
     return (
         <Row className="akvarium-container">
             <div className='szovegdoboz'>
@@ -72,5 +75,5 @@ const Akvariumok = () => {
         </Row>
     );
 };
-
+// onSelect -> callback függvény, frissíti az selectedViziLeny állapotot a kiválasztott vízi lény adataival.
 export default Akvariumok;

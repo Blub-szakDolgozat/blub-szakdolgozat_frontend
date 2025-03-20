@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { myAxios } from "../../contexts/MyAxios"; // Axios példány importálása
 import './Sorsolas.css';
 
+// React -> A fő JavavScript könyvtár a komponensalapú UI fejlesztéshez
+// useState -> Egy react hook az állapot kezelésre
+// myAxios -> egyedi Axios pédány a HTTP kérések lebonyolításához
+
 export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
   const [hiba, setHiba] = useState("");
   const [marSorsolt, setMarSorsolt] = useState(false); // Figyeljük, hogy volt-e már sorsolás
 
+  // async -> asyncron hívások kezelésére, hogy a kód ne blokkolja a fő végrehajtási szálat
   const handleSorsolas = async () => {
     if (marSorsolt) {
       setHiba("Már sorsoltál ma! Holnap újra próbálhatod.");
@@ -18,7 +23,7 @@ export default function NapiSorsolas() {
 
     try {
       // 1. CSRF token frissítése
-      await myAxios.get("/sanctum/csrf-cookie");
+      await myAxios.get("/sanctum/csrf-cookie"); //CSRF token -> egy biztonsági mechanizmus az autentikációs folyamat védelmére
 
       // 2. Véletlenszerű vízi lény lekérése
       const { data } = await myAxios.get("/api/random-vizi-leny");
