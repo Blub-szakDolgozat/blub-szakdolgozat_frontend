@@ -45,7 +45,7 @@ export default function ViziLenyekUrlap() {
         <input
           type="text"
           className="form-control"
-          placeholder="Keresés vízi lény név vagy fajta vagy leiras alapján"
+          placeholder="Keresés vízi lény név, fajta vagy leíras alapján"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
