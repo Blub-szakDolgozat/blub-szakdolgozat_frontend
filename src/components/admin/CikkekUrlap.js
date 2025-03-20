@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAdminContext from "../../contexts/AdminContext";
 import CikkekTablazat from "./CikkekTablazat";
+import './Admin.css';
 
 export default function CikkekUrlap() {
   const { postAdat, errors,cikkLista } = useAdminContext();

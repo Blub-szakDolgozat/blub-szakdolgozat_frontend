@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import useAdminContext, { AdminContext } from "../../contexts/AdminContext";
 import EsemenyTablazat from "./EsemenyTablazat";
+import './Admin.css';
 
 export default function EsemenyekUrlap() {
   const { esemenyekLista } = useContext(AdminContext);
