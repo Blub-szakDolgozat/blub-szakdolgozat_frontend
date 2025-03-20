@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { myAxios } from "../../contexts/MyAxios"; // Axios példány importálása
+import { myAxios } from "../../contexts/MyAxios";
 import './Sorsolas.css';
-
-// React -> A fő JavavScript könyvtár a komponensalapú UI fejlesztéshez
-// useState -> Egy react hook az állapot kezelésre
-// myAxios -> egyedi Axios pédány a HTTP kérések lebonyolításához
 
 export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
