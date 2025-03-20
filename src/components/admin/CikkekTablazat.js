@@ -9,8 +9,8 @@ export default function CikkekTablazat(props) {
       <table className='table table-striped table-bordered'>
         <thead>
           <tr>
-            <th>Cím</th>
             <th>Képek</th>
+            <th>Cím</th>
             <th>Leírás</th>
             <th>Publikálva</th>
             <th></th>
