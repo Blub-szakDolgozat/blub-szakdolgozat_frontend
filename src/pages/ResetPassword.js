@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { myAxios } from '../api/axios';
+
 import { useEffect } from 'react';
+import { myAxios } from '../contexts/MyAxios';
 
 
 
