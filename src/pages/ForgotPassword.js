@@ -39,8 +39,8 @@ export default function ForgotPassword() {
     return (
         <div className="loginpage d-flex justify-content-center align-items-center vh-100">
             <div className="login-container p-4 rounded shado bg-light">
-                <h2 className="text-center">Elfelejtett jelszó esetén</h2>
-                <p id="forgotText">Kiküldünk önnek egy emailt, ami segít helyreállítani.</p>
+                <h2 className="text-center">Elfelejtett jelszó</h2>
+                <p id="forgotText">Küldünk egy emailt, ami segít helyreállítani a jelszót.</p>
                 <br />
                 <form id="forgotpasswordForm" onSubmit={handleSubmit}>
                     <div className="input-group mb-3">

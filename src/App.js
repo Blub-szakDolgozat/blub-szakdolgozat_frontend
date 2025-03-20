@@ -15,6 +15,7 @@ import Cikkek from "./components/public/Cikkek";
 import Esemenyek from "./components/public/Esemenyek";
 import Akvariumok from "./components/public/Akvariumok";
 import Elfelejtettjelszo from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/cikkek" element={<Cikkek />} />
             <Route path="/esemenyek" element={<Esemenyek />} />
             <Route path="/elfelejtett-jelszo" element={<Elfelejtettjelszo />} />
+            <Route path="/password-reset" element={<ResetPassword />} />
           </Route>
         </Routes>
       </div>
