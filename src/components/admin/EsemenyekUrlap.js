@@ -45,6 +45,19 @@ export default function EsemenyekUrlap() {
   return (
     <div className="container">
       <h1>Események</h1>
+      
+      {/* Szűrő input hozzáadása */}
+      <div className="mt-4 szures">
+        <p className="text">Szűrés:</p>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Keresés esemény név vagy helyszín alapján"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="esemeny_neve" className="form-label">
@@ -157,16 +170,6 @@ export default function EsemenyekUrlap() {
         />
       </form>
 
-      {/* Szűrő input hozzáadása */}
-      <div className="mt-4">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Keresés esemény név vagy helyszín alapján"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
 
       {/* Események listázása szűrt formában */}
       <EsemenyTablazat esemenyekLista={filteredEvents} />

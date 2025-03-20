@@ -10,6 +10,7 @@ export default function VideokUrlap() {
   const [file, setFile] = useState(null);
   const [link, setLink] = useState("");
   const [hossz, setHossz] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   function kuld(event) {
     event.preventDefault();
@@ -23,10 +24,25 @@ export default function VideokUrlap() {
 
     postAdat(adat, "/api/video-add");
   }
-
+  const filteredVideo = videokLista.filter((video) => {
+    return (
+      video.cim.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
   return (
     <div className="container">
       <h1>Videók</h1>
+       {/* Szűrő input hozzáadása */}
+       <div className="mt-4 szures">
+        <p className="text">Szűrés:</p>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Keresés videó címe alapján"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="cim" className="form-label">
@@ -114,7 +130,7 @@ export default function VideokUrlap() {
           value="Küld"
         />
       </form>
-      <VideoTablazat videokLista={videokLista}/>
+      <VideoTablazat videokLista={filteredVideo}/>
     </div>
   );
 }

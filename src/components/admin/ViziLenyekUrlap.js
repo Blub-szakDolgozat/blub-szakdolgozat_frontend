@@ -14,7 +14,8 @@ export default function ViziLenyekUrlap() {
   const [ritkasagi_szint, setRitkasagiszint] = useState("");
   const [leiras, setLeiras] = useState("");
   const [file, setFile] = useState(null);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  
   function kuld(event) {
     event.preventDefault();
     let adat = {
@@ -28,10 +29,27 @@ export default function ViziLenyekUrlap() {
 
     postAdat(adat, "/api/vizilenyek-add");
   }
-
+  const filteredVizileny = kepekLista.filter((vizileny) => {
+    return (
+      vizileny.nev.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vizileny.fajta.toLowerCase().includes(searchTerm.toLowerCase())||
+      vizileny.leiras.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
   return (
     <div className="container">
       <h1>Vízilények</h1>
+       {/* Szűrő input hozzáadása */}
+       <div className="mt-4 szures">
+        <p className="text">Szűrés:</p>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Keresés vízi lény név vagy fajta vagy leiras alapján"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="nev" className="form-label">
@@ -137,7 +155,7 @@ export default function ViziLenyekUrlap() {
           value="Küld"
         />
       </form>
-      <ViziLenyekTablazat kepekLista={kepekLista} />
+      <ViziLenyekTablazat kepekLista={filteredVizileny} />
     </div>
   );
 }

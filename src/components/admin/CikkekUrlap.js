@@ -9,6 +9,8 @@ export default function CikkekUrlap() {
   const [publikalva, setPublikalva] = useState("");
   const [leiras, setLeiras] = useState("");
   const [file, setFile] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  
 
   function kuld(event) {
     event.preventDefault();
@@ -21,10 +23,26 @@ export default function CikkekUrlap() {
     console.log(adat);
     postAdat(adat, "/api/cikk-add");
   }
-
+  const filteredCikk = cikkLista.filter((cikk) => {
+    return (
+      cikk.cim.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cikk.leiras.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
   return (
     <div className="container">
       <h1>Cikkek</h1>
+       {/* Szűrő input hozzáadása */}
+       <div className="mt-4 szures">
+        <p className="text">Szűrés:</p>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Keresés cikk cím vagy leírás alapján"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <form onSubmit={kuld}>
         <div className="mb-3">
           <label htmlFor="cim" className="form-label">
@@ -111,7 +129,7 @@ export default function CikkekUrlap() {
           value="Küld"
         />
       </form>
-      <CikkekTablazat cikkLista={cikkLista} />
+      <CikkekTablazat cikkLista={filteredCikk} />
     </div>
   );
 }
