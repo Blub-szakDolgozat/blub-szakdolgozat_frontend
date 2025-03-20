@@ -26,10 +26,11 @@ export default function Cikkek() {
 
             {/* Kiválasztott videó (bal oldalon) */}
             {selectedCikk && (
-                <Col className='selected-cikk' style={{ backgroundImage: `url(http://localhost:8000/${selectedCikk.kepek})` }} >
+                <Col className='selected-cikk' >
                     <div className='cikk-info' >
+                        <img className='kep' src={"http://localhost:8000/" + selectedCikk.kepek}/>
                         <h2 className='felirat'>{selectedCikk.cim}</h2>
-                        <p className=''>{selectedCikk.leiras}</p>
+                        <p className='leirastwo'>{selectedCikk.leiras}</p>
                     </div>
                 </Col>
             )}
