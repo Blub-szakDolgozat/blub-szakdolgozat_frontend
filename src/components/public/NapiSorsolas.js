@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { myAxios } from "../../contexts/MyAxios";
+import { myAxios } from "../../contexts/MyAxios"; 
 import './Sorsolas.css';
 
+
+// useState -> Egy react hook az állapot kezelésre
 export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
   const [hiba, setHiba] = useState("");
