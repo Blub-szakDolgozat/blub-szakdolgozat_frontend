@@ -44,7 +44,8 @@ export default function EsemenyekUrlap() {
   const filteredEvents = esemenyekLista.filter((esemeny) => {
     return (
       esemeny.esemeny_neve.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      esemeny.helyszin.toLowerCase().includes(searchTerm.toLowerCase())
+      esemeny.helyszin.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      esemeny.leiras.toLowerCase().includes(searchTerm.toLowerCase()) 
     );
   });
 
@@ -59,7 +60,7 @@ export default function EsemenyekUrlap() {
         <input
           type="text"
           className="form-control"
-          placeholder="Keresés esemény név vagy helyszín alapján"
+          placeholder="Keresés esemény név és leírás vagy helyszín alapján"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
