@@ -31,7 +31,7 @@ export default function Profil() {
       setUsername(user.name || "Ismeretlen felhasználó");
       setTempUsername(user.name || "");
       setEmail(user.email || ""); 
-      setTempEmail(user.email || ""); // 🔹 Email beállítása
+      setTempEmail(user.email || "");
     }
   }, [user]);
   
@@ -53,7 +53,7 @@ export default function Profil() {
   
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, {
+        const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, { //http kérést küld hogy frissitse a a felhasználó adatokat backendből
           method: 'GET',
           credentials: 'include',
         });
@@ -79,7 +79,7 @@ export default function Profil() {
     return match ? decodeURIComponent(match[2]) : null;
   };
   
-  const handleSave = async () => {
+  const handleSave = async () => { // ez felelős a felhasználó adatok mentésére. 
     if (!user || !user.azonosito) {
       console.error("Felhasználói ID nem található.");
       return;
@@ -97,7 +97,7 @@ export default function Profil() {
         updates.password = password;
       }
   
-      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
+      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, { // egy api kérést küld az backend Api felép, az új adatokkal.
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ export default function Profil() {
       setTempEmail(data.user.email);
       setSelectedImage(data.user.profilkep);
   
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data.user)); // ezek tárolják a jövőbeli alkalmazásindításakor, hogy gyorsan hozzáférjen.
       localStorage.setItem("userProfilePic", data.user.profilkep);
   
       await updateUserData();
@@ -133,12 +133,12 @@ export default function Profil() {
   
   
   
-  const handleImageChange = (e) => {
+  const handleImageChange = (e) => { // file input segítségével új profilképet tölthet fel. ez a függvény figyeli a fájlváltozást, és az új képet azonnal megjeleníti.
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result); // **Az állapot frissítése azonnal**
+        setSelectedImage(reader.result); 
       };
       reader.readAsDataURL(file);
     }
@@ -245,7 +245,7 @@ export default function Profil() {
                 </Form.Group>
 
                 <div className="d-flex justify-content-between align-items-center mt-4">
-                  <Button variant="danger" onClick={logout}>
+                  <Button variant="danger" onClick={logout}> 
                     Kijelentkezés
                   </Button>
 

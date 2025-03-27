@@ -24,7 +24,7 @@ const ProfileKep = () => {
         height: "50px",
         borderRadius: "50%",
         position: "relative",
-        cursor: isLoggedIn ? "pointer" : "not-allowed", // Ha be vagy jelentkezve, kattintható
+        cursor: isLoggedIn ? "pointer" : "not-allowed",
         backgroundColor: "#f1f1f1",
         display: "flex",
         alignItems: "center",

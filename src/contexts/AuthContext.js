@@ -6,7 +6,7 @@ export const AuthContext = createContext("");
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // először hamisra állítja a bejeletkezést
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem("access_token"));
   const [userProfilePic, setUserProfilePic] = useState(localStorage.getItem("userProfilePic") || "https://www.w3schools.com/howto/img_avatar.png");
@@ -43,13 +43,13 @@ export const AuthProvider = ({ children }) => {
       if (response.data && response.data.user) {
         setUser(response.data.user);
         setUserProfilePic(response.data.user.profilkep);
-        setIsLoggedIn(true); // 🔹 **Biztosítsd, hogy a bejelentkezési állapot frissül!**
+        setIsLoggedIn(true); // itt meg igazra állítja
         
         localStorage.setItem("access_token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("userProfilePic", response.data.user.profilkep);
   
-        navigate("/akvarium"); // 🔹 **Sikeres bejelentkezés után navigáljon a profilra**
+        navigate("/akvarium"); // Sikeres bejelentkezés után navigáljon a akvariumra**
       }
     } catch (error) {
       console.log("Bejelentkezési hiba:", error);
@@ -129,7 +129,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setUser(null);
       setUserProfilePic(null);
-      setIsLoggedIn(false); // 🔹 **Kijelentkezéskor állítsuk false-ra**
+      setIsLoggedIn(false); // Kijelentkezéskor false
       
       localStorage.removeItem("userProfilePic");
       localStorage.removeItem("user");
