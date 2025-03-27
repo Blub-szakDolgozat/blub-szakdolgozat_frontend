@@ -79,7 +79,7 @@ export default function Profil() {
     return match ? decodeURIComponent(match[2]) : null;
   };
   
-  const handleSave = async () => { // ez felelős a felhasználó adatok mentésére. 
+  const handleSave = async () => {
     if (!user || !user.azonosito) {
       console.error("Felhasználói ID nem található.");
       return;
@@ -89,22 +89,31 @@ export default function Profil() {
       const updates = {
         name: tempUsername || username,
         email: tempEmail || email,
-        profilkep: selectedImage,
       };
   
-      // 🔹 Ha van jelszó megadva, azt is küldjük
       if (password.trim() !== "") {
         updates.password = password;
       }
   
-      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, { // egy api kérést küld az backend Api felép, az új adatokkal.
+      let formData = new FormData();
+      Object.keys(updates).forEach(key => formData.append(key, updates[key]));
+  
+      if (selectedImage.startsWith("data:image")) {
+        // 🔹 Ha a kép base64 formátumú, konvertáljuk fájllá
+        const blob = await fetch(selectedImage).then(res => res.blob());
+        formData.append("profilkep", blob, "profile.jpg");
+      } else {
+        // 🔹 Ha csak egy URL van megadva (nem feltöltött kép), akkor ezt mentjük
+        formData.append("profilkep_url", selectedImage);
+      }
+  
+      const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           "X-XSRF-TOKEN": getCsrfToken(),
         },
         credentials: "include",
-        body: JSON.stringify(updates),
+        body: formData,
       });
   
       const data = await response.json();
@@ -119,7 +128,7 @@ export default function Profil() {
       setTempEmail(data.user.email);
       setSelectedImage(data.user.profilkep);
   
-      localStorage.setItem("user", JSON.stringify(data.user)); // ezek tárolják a jövőbeli alkalmazásindításakor, hogy gyorsan hozzáférjen.
+      localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("userProfilePic", data.user.profilkep);
   
       await updateUserData();
@@ -133,16 +142,18 @@ export default function Profil() {
   
   
   
-  const handleImageChange = (e) => { // file input segítségével új profilképet tölthet fel. ez a függvény figyeli a fájlváltozást, és az új képet azonnal megjeleníti.
+  
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result); 
+        setSelectedImage(reader.result); // 🔹 Data URL megjelenítés
       };
       reader.readAsDataURL(file);
     }
   };
+  
   
   return (
     <Container className="mt-5">
