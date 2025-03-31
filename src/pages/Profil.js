@@ -31,7 +31,7 @@ export default function Profil() {
       setUsername(user.name || "Ismeretlen felhasználó");
       setTempUsername(user.name || "");
       setEmail(user.email || ""); 
-      setTempEmail(user.email || ""); // 🔹 Email beállítása
+      setTempEmail(user.email || "");
     }
   }, [user]);
   
@@ -53,7 +53,7 @@ export default function Profil() {
   
     const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, {
+        const response = await fetch(`http://localhost:8000/api/get-user/${user.azonosito}`, { //http kérést küld hogy frissitse a a felhasználó adatokat backendből
           method: 'GET',
           credentials: 'include',
         });
@@ -89,22 +89,31 @@ export default function Profil() {
       const updates = {
         name: tempUsername || username,
         email: tempEmail || email,
-        profilkep: selectedImage,
       };
   
-      // 🔹 Ha van jelszó megadva, azt is küldjük
       if (password.trim() !== "") {
         updates.password = password;
+      }
+  
+      let formData = new FormData();
+      Object.keys(updates).forEach(key => formData.append(key, updates[key]));
+  
+      if (selectedImage.startsWith("data:image")) {
+        // 🔹 Ha a kép base64 formátumú, konvertáljuk fájllá
+        const blob = await fetch(selectedImage).then(res => res.blob());
+        formData.append("profilkep", blob, "profile.jpg");
+      } else {
+        // 🔹 Ha csak egy URL van megadva (nem feltöltött kép), akkor ezt mentjük
+        formData.append("profilkep_url", selectedImage);
       }
   
       const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           "X-XSRF-TOKEN": getCsrfToken(),
         },
         credentials: "include",
-        body: JSON.stringify(updates),
+        body: formData,
       });
   
       const data = await response.json();
@@ -133,16 +142,18 @@ export default function Profil() {
   
   
   
+  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result); // **Az állapot frissítése azonnal**
+        setSelectedImage(reader.result); // 🔹 Data URL megjelenítés
       };
       reader.readAsDataURL(file);
     }
   };
+  
   
   return (
     <Container className="mt-5">
@@ -245,7 +256,7 @@ export default function Profil() {
                 </Form.Group>
 
                 <div className="d-flex justify-content-between align-items-center mt-4">
-                  <Button variant="danger" onClick={logout}>
+                  <Button variant="danger" onClick={logout}> 
                     Kijelentkezés
                   </Button>
 
