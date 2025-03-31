@@ -4,7 +4,7 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { AuthContext } from "../contexts/AuthContext";
 import "../App.css";
 
-export default function Bejelentkezes({ onLogin }) {
+export default function Bejelentkezes() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error] = useState(null);

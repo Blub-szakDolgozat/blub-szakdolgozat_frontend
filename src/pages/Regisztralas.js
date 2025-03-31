@@ -46,6 +46,8 @@ export default function Regisztralas() {
                 value={name}
                 onChange={(e) => setFelhasznalonev(e.target.value)}
                 required
+                pattern="^[A-ZÁÉÍÓÖŐÚÜŰa-záéíóöőúüű]+(?: [A-ZÁÉÍÓÖŐÚÜŰa-záéíóöőúüű]+)+$"
+                title="A névnek legalább két szóból kell állnia, és nem tartalmazhat számokat vagy speciális karaktereket."
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="email">
@@ -66,6 +68,8 @@ export default function Regisztralas() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
+                title="A jelszónak legalább egy nagybetűt, egy számot és 8 vagy több karaktert kell tartalmaznia."
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="password_confirmation">
@@ -76,6 +80,8 @@ export default function Regisztralas() {
                 value={password_confirmation}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                pattern="(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
+                title="A jelszónak legalább egy nagybetűt, egy számot és 8 vagy több karaktert kell tartalmaznia."
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100">
