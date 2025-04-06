@@ -16,6 +16,7 @@ export default function Profil() {
   const [username, setUsername] = useState(user?.name || "");
   const [tempUsername, setTempUsername] = useState("");
   const [email, setEmail] = useState(user?.email || "");
+  const [profilkep, setProfilkep] = useState(user?.profilkep || "");
   const [tempEmail, setTempEmail] = useState("");
   const [password, setPassword] = useState("");  
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function Profil() {
       setTempUsername(user.name || "");
       setEmail(user.email || ""); 
       setTempEmail(user.email || "");
+      setProfilkep(user.profilkep || "");
     }
   }, [user]);
   
@@ -41,7 +43,8 @@ export default function Profil() {
       const user = JSON.parse(storedUser);
       setUsername(user.name);
       setEmail(user.email);
-      if (user.profilkep) setSelectedImage(user.profilkep);
+      setProfilkep(user.profilkep);
+      setSelectedImage(selectedImage);
     }
   }, []);
   
@@ -84,18 +87,20 @@ export default function Profil() {
       console.error("Felhasználói ID nem található.");
       return;
     }
+
   
     try {
       const updates = {
         name: tempUsername || username,
         email: tempEmail || email,
+        profilkep: selectedImage || profilkep
       };
   
       if (password.trim() !== "") {
         updates.password = password;
       }
   
-      let formData = new FormData();
+      /* let formData = new FormData();
       Object.keys(updates).forEach(key => formData.append(key, updates[key]));
   
       if (selectedImage.startsWith("data:image")) {
@@ -105,15 +110,16 @@ export default function Profil() {
       } else {
         // 🔹 Ha csak egy URL van megadva (nem feltöltött kép), akkor ezt mentjük
         formData.append("profilkep_url", selectedImage);
-      }
+      } */
   
       const response = await fetch(`http://localhost:8000/api/update-user/${user.azonosito}`, {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "X-XSRF-TOKEN": getCsrfToken(),
         },
         credentials: "include",
-        body: formData,
+        body: JSON.stringify(updates),
       });
   
       const data = await response.json();
@@ -126,7 +132,9 @@ export default function Profil() {
       setTempUsername(data.user.name);
       setEmail(data.user.email);
       setTempEmail(data.user.email);
-      setSelectedImage(data.user.profilkep);
+      
+      setProfilkep(selectedImage); 
+    
   
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("userProfilePic", data.user.profilkep);

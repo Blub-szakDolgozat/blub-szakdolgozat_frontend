@@ -8,9 +8,10 @@ import { myAxios } from '../contexts/MyAxios';
 
 
 const ResetPassword = () => {
-    const { token } = useParams();
+    
     const [searchParams] = useSearchParams();
     const email = searchParams.get('email');
+    const token = searchParams.get('token'); // Get token from query instead
 
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,8 +27,26 @@ const ResetPassword = () => {
             
     }, []);
 
+    useEffect(() => {
+        console.log("Token from URL:", token);
+        console.log("Email from query:", email);
+    }, [token, email]);
+
+
+    useEffect(() => {
+        console.log("Token:", token);
+        console.log("Email:", email);
+    }, [token, email]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log('Submitting with:', {
+            token,
+            email,
+            newPassword,
+            confirmPassword
+        });
 
         if (newPassword.length < 8) {
             alert("A jelszónak legalább 8 karakter hosszúnak kell lennie!");
@@ -43,8 +62,8 @@ const ResetPassword = () => {
 
         try {
             const response = await myAxios.post('/api/reset-password', {
-                token,
-                email,
+                token: token,
+                email: email,
                 password: newPassword,
                 password_confirmation: confirmPassword,
             });
