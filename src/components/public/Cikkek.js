@@ -35,13 +35,14 @@ export default function Cikkek() {
                 </Col>
             )}
             
-            {/* Jobb oldali videók lista görgetéssel */}
             <Col className='cikk-list'>
-                <div className='cikk-scroll'>
+                <Row>
                     {cikkLista.map((elem, index) => (
-                        <Cikk obj={elem} key={index} onSelect={handleCikkClick} />
+                        <Col xs={12} md={4} key={index} className="mb-4"> {/* 3 oszlop (12/4=3) */}
+                            <Cikk obj={elem} onSelect={handleCikkClick} />
+                        </Col>
                     ))}
-                </div>
+                </Row>
             </Col>
         </Row>
     );
