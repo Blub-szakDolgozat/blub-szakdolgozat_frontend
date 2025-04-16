@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import { myAxios } from "../../contexts/MyAxios"; 
 import './Sorsolas.css';
 
@@ -8,6 +9,16 @@ export default function NapiSorsolas() {
   const [nyeremeny, setNyeremeny] = useState(null);
   const [hiba, setHiba] = useState("");
   const [marSorsolt, setMarSorsolt] = useState(false); // Figyeljük, hogy volt-e már sorsolás
+
+  useEffect(() => {
+    const lastSorsolasDate = localStorage.getItem("sorsolas_datum");
+    const today = new Date().toISOString().split("T")[0]; // yyyy-mm-dd formátum
+
+    if (lastSorsolasDate === today) {
+      setMarSorsolt(true);
+    }
+  }, []);
+
 
   // async -> asyncron hívások kezelésére, hogy a kód ne blokkolja a fő végrehajtási szálat
   const handleSorsolas = async () => {
@@ -37,6 +48,17 @@ export default function NapiSorsolas() {
       await myAxios.post("/api/akvarium/sorsol-hozzaad", {
         vizi_leny_id: viziLeny.vizi_leny_id,
       });
+
+      const userId = localStorage.getItem("user_id");
+const today = new Date().toISOString().split("T")[0];
+
+if (userId) {
+  const lastSorsolasDate = localStorage.getItem(`sorsolas_datum_${userId}`);
+  if (lastSorsolasDate === today) {
+    setMarSorsolt(true);
+  }
+}
+
 
       setMarSorsolt(true); // Beállítjuk, hogy aznap már volt sorsolás
 
