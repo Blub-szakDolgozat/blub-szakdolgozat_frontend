@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { AdminContext } from "../../contexts/AdminContext";
 
-export default function VideoTablaSor(props) {
+export default function CikkekTablazatSor(props) {
     const { cikkLista, setCikkLista, putAdat, deleteAdat } =
     useContext(AdminContext);
  
